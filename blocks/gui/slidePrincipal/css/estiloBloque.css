@@ -1,0 +1,13 @@
+
+#slidePrincipal{
+
+    background: url(../imagen/sabio.png) no-repeat; 
+    display: block;  
+    height: 400px;
+    overflow: hidden;
+    text-align: center;
+    text-indent: -9999%;
+    width: 300px;
+    margin: 0 auto;
+}
+

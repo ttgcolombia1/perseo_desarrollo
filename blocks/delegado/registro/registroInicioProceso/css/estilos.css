@@ -1,0 +1,46 @@
+@CHARSET "UTF-8";
+
+div.numeroPaso1{	
+	background: url(inicio1.png) no-repeat;
+}
+
+div.numeroPaso2{	
+	background: url(inicio2.png) no-repeat;
+}
+
+div.numeroPaso3{	
+	background: url(inicio3.png) no-repeat;
+}
+
+
+div.numeroPaso1, div.numeroPaso2, div.numeroPaso3{	
+	height:100px;
+	width:90%;
+}
+
+div.paso1, div.paso2, div.paso3{
+	
+	cursor:pointer;
+}
+
+div.contenedorPaso1{
+	
+	border:1px dotted #AAAAAA;
+	width:100%;
+	
+	
+}
+
+div.contenedorPaso2{
+	
+	border:1px dotted #AAAAAA;
+	width:100%;
+	
+	
+}
+
+input.campoTextoFrase
+{
+    border-style: solid;
+    border-width: 1px;
+}

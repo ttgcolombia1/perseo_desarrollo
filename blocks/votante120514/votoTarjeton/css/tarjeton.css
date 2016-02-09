@@ -1,0 +1,87 @@
+        a{
+            text-decoration: none; 
+            color: #000000;
+        }
+        button.votar {
+            color: #000;
+            font-weight: bold;
+            font-size: 150%;
+            text-transform: uppercase;
+        }
+        table.tarjetones {
+            border: 1px solid black;
+            border-spacing: 0;
+            font-family: "Arial",Verdana,Trebuchet MS,Helvetica,sans-serif;
+            font-size: 12px;
+            padding: 10px;
+            width: 840px;
+        }
+
+        element.style {
+            background-repeat: no-repeat;
+        }
+        table.tarjetones td {
+            padding: 7px;
+            width: 200px;
+        }
+        estilo.php
+        .posicionTarjeton {
+            background-color: #FFFFFF;
+            font-family: "Arial",Verdana,Trebuchet MS,Helvetica,sans-serif;
+            font-size: 20px;
+            font-weight: bold;
+            margin-left: 10%;
+            margin-right: 10%;
+            padding: 5px;
+            text-align: center;
+        }
+
+        form {
+            margin-bottom: 0;
+        }
+
+        td.seccion_C_colapsada {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        body, td, th, li {
+            font-family: "Arial",Verdana,Trebuchet MS,Helvetica,sans-serif;
+        }
+
+        span {  
+            text-decoration: none; 
+            color: #000000;
+        }
+        
+        
+.fondoLimpio {
+    background: linear-gradient(to bottom, #FFFFFF 0%, #F3F3F3 50%, #EDEDED 51%, #FFFFFF 100%) repeat scroll 0 0 transparent;
+    border: 1px solid #DDDDDD;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    padding: 2px;
+}
+
+.fondoElegido {
+    background: rgb(252,234,187); /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 73%, rgba(251,223,147,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,234,187,1)), color-stop(73%,rgba(252,205,77,1)), color-stop(100%,rgba(251,223,147,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(252,234,187,1) 0%,rgba(252,205,77,1) 73%,rgba(251,223,147,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(252,234,187,1) 0%,rgba(252,205,77,1) 73%,rgba(251,223,147,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, rgba(252,234,187,1) 0%,rgba(252,205,77,1) 73%,rgba(251,223,147,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom, rgba(252,234,187,1) 0%,rgba(252,205,77,1) 73%,rgba(251,223,147,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', endColorstr='#fbdf93',GradientType=0 ); /* IE6-9 */
+    border: 1px solid #DDDDDD;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;    
+    padding: 2px;
+    font-weight: bold;
+}  
+
+#divListadoElecciones{
+    
+    margin:10px;
+    
+    
+}

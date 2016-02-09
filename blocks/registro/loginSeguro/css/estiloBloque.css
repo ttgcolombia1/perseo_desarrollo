@@ -1,0 +1,22 @@
+.errorLogin {
+	width: 100%;
+	float: left;
+	margin: 0px auto;
+	border-collapse: collapse;
+	border-width: 0px;
+	border-style: solid;
+	border-color: #000000;
+	border-spacing: 0px;
+	padding: 10px 5px 10px 5px;
+        color: #d00;
+        background-color: #FFF;
+        display:block;
+        alignment-adjust: central;
+}
+
+#datos
+{
+    margin: 0 auto;
+    vertical-align: central;
+    alignment-adjust: central;
+}
