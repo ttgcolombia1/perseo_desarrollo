@@ -94,7 +94,7 @@ if (! isset ( $GLOBALS ["autorizado"] )) {
                                                                         break;
 
                                                                 case '5' :
-                                                                        $this->funcion->redireccionar ( "indexSoporte", $registro [0] );
+                                                                        $this->funcion->redireccionar ( "indexSalas", $registro [0] );
                                                                         break;
                                                             }
                                                         }
