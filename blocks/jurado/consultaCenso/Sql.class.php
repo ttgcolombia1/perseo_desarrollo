@@ -60,15 +60,14 @@ class SqlConsultaCenso extends sql {
             	
                 break;
 
-            case "actualizarCenso":
+            case "actualizarContrasena":
                 
-                $cadena_sql = "UPDATE censo SET ";
-                $cadena_sql .= ", censo_fecha_actualizacion='" . date("d-M-Y  h:i:s A") . "',    
-                               censo_clave= md5('" . $_REQUEST["clave"] . "') " . "
-                             WHERE censo_id_registro=" . $_REQUEST['idRegistro'];
+                $cadena_sql = "UPDATE evoto_censo SET ";
+                $cadena_sql .= " clave= SHA1(MD5('".$variable['contrasena']."')), ";
+                $cadena_sql .= " expira_clave='".$variable['expiracion']."' ";
+                $cadena_sql .= " WHERE identificacion=". $_REQUEST['idUsuario'];
+                
                 break;
-
-
 
 
             case "iniciarTransaccion":

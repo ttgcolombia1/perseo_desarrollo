@@ -49,7 +49,6 @@ class FronteraConsultaCenso {
 
         $this->ruta = $this->miConfigurador->getVariableConfiguracion("rutaBloque");
 
-
         $this->miFormulario = new formularioHtml();
 
         if (isset($_REQUEST['opcion'])) {
@@ -77,6 +76,9 @@ class FronteraConsultaCenso {
                 case "mostrarMensajeRegistro":
                     include_once($this->ruta . "formulario/frmMostrarMensajeRegistro.php");
                     break;
+                case "mostrarMensajeContrasena":
+                  	include_once($this->ruta . "formulario/frmMostrarMensajeContrasena.php");
+                   	break;
             }
         } else {
 

@@ -41,7 +41,16 @@ class FuncionConsultaCenso {
     function consultarCenso() {
         include_once($this->ruta . "/funcion/consultarCenso.php");
     }
-
+    
+    function cambiarContrasena() {
+    	include_once($this->ruta . "/funcion/cambiarContrasena.php");
+    }
+    
+    function resumen()
+    {
+    	include_once($this->ruta."/funcion/resumenContrasena.php");
+    }
+    
     function procesarAjax() {
         include_once($this->ruta . "/funcion/procesarAjax.php");
     }
@@ -61,16 +70,18 @@ class FuncionConsultaCenso {
     }
     
     function action() {
-        
-        
+       
         if (isset($_REQUEST["procesarAjax"])) {
             $this->procesarAjax();
         } else {
-            if ($_REQUEST["opcion"] == "consultaCenso") {
-                $this->consultarCenso();
-            }else if($_REQUEST["opcion"] == "nuevo"){
-                $this->redireccionar("","nuevo");
-            }
+            if ($_REQUEST["opcion"] == "consultaCenso") 
+               {$this->consultarCenso();}
+            elseif ($_REQUEST["opcion"] == "cambiarContrasena") 
+               {$this->cambiarContrasena();}
+            elseif ($_REQUEST["opcion"] == "resumen")
+               {$this->resumen();}
+            else if($_REQUEST["opcion"] == "nuevo")
+               {$this->redireccionar("","nuevo");}
         }
         
         

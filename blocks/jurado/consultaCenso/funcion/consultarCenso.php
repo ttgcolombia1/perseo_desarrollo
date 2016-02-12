@@ -3,7 +3,7 @@
 $conexion = "estructura";
 $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 $parametros['idUsuario']=$_REQUEST["idUsuario"];
-$cadena_sql = $this->cadena_sql = $this->sql->cadena_sql("consultarVotante", $parametros);
+$cadena_sql =  $this->sql->cadena_sql("consultarVotante", $parametros);
 $resultado = $esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
 //var_dump($resultado);
 

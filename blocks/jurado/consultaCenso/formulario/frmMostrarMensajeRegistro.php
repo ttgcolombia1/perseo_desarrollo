@@ -36,7 +36,7 @@ $resultadoProcesos = $esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
 	//$atributos["mensaje"] = $this->lenguaje->getCadena($esteCampo);
 	$atributos["mensaje"] = "Identificación: ".$resultadoProcesos[0]['identificacion']."";
 	$atributos["mensaje"] .="<br>Nombre        : ".$resultadoProcesos[0]['nombre']."";
-	
+	$atributos["mensaje"] .= "<br>Identificación 2: ".$resultadoProcesos[0]['segunda_identificacion']."";
 	
 	echo $this->miFormulario->campoMensaje($atributos);
 	unset($atributos);
@@ -86,18 +86,14 @@ $resultadoProcesos = $esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
 
 	//------------------Fin Division -------------------------
 	echo $this->miFormulario->division("fin");
-	 
-$valorCodificado = "pagina=index";
 
-//if ($resultado != null) {
-//    $valorCodificado.="&action=" . $esteBloque["nombre"];
-//}
-//$valorCodificado.="&opcion=actualizarNoRegistrado";// Se comentarea para que no actualicen los datos
-$valorCodificado.="&bloque=" . $esteBloque["id_bloque"];
-$valorCodificado.="&bloqueGrupo=" . $esteBloque["grupo"];
-$valorCodificado.="&idRegistro=" . $datos['censo_id_registro'];
-$valorCodificado.="&idUsuario=" . $_REQUEST['idUsuario'];
-$valorCodificado = $this->miConfigurador->fabricaConexiones->crypto->codificar($valorCodificado);
+	$valorCodificado="pagina=index";
+	$valorCodificado.="&action=".$esteBloque["nombre"];
+	$valorCodificado.="&opcion=cambiarContrasena";
+	$valorCodificado.="&bloque=".$esteBloque["id_bloque"];
+	$valorCodificado.="&bloqueGrupo=".$esteBloque["grupo"];	
+    $valorCodificado.="&idUsuario=" . $resultadoProcesos[0]['identificacion'];
+	$valorCodificado = $this->miConfigurador->fabricaConexiones->crypto->codificar($valorCodificado);
 
 
 //------------------Division para las pestañas-------------------------
@@ -160,6 +156,16 @@ $atributos["tipo"] = "hidden";
 $atributos["obligatorio"] = false;
 $atributos["etiqueta"] = "";
 $atributos["valor"] = $valorCodificado;
+echo $this->miFormulario->campoCuadroTexto($atributos);
+unset($atributos);
+
+//-------------Control cuadroTexto con campos ocultos-----------------------
+//Para pasar variables entre formularios o enviar datos para validar sesiones
+$atributos["id"] = "opcion"; //No cambiar este nombre
+$atributos["tipo"] = "hidden";
+$atributos["obligatorio"] = false;
+$atributos["etiqueta"] = "";
+$atributos["valor"] = "cambiarContrasena";
 echo $this->miFormulario->campoCuadroTexto($atributos);
 unset($atributos);
 
