@@ -38,10 +38,19 @@ if (! isset ( $GLOBALS ["autorizado"] )) {
 				
 			}
 			
+			//verifica que la contraseña del votante no este expirada
+			$segundos_hora=strtotime(date('Y-m-d H:i:s'));
 			
+			if($registro[0] ['expira_clave']>0 && $tipoUsuario=='votante')
+				{ if($segundos_hora<=$registro[0] ['expira_clave'])
+					  {$paso='S';}
+				  else{$paso='N';}
+				}
+			else{$paso='S';}
+						
 			if($registro){
 				
-				if ($registro [0] ['clave'] == $variable ["clave"]) {
+				if ($registro [0] ['clave'] == $variable ["clave"] && $paso=='S') {
 					
 					// 1. Crear una sesión de trabajo
 					$estaSesion = $this->miSesion->crearSesion ( $registro [0] ["id_usuario"] );

@@ -115,23 +115,7 @@ $atributos["id"] = "botones";
 $atributos["estilo"] = "marcoBotones";
 echo $this->miFormulario->division("inicio", $atributos);
 
-if (isset($fechaVoto) && $fechaVoto!= '') {
-
-//-------------Control Boton-----------------------
-//    $esteCampo = "botonActualizar"; // Se comentarea para que no actualicen los datos
-    $esteCampo = "botonVolver"; // Se pone el voton para que vuelva
-    $atributos["id"] = $esteCampo;
-    $atributos["tabIndex"] = $tab++;
-    $atributos["tipo"] = "boton";
-    $atributos["estilo"] = "";
-    $atributos["verificar"] = "true"; //Se coloca true si se desea verificar el formulario antes de pasarlo al servidor.
-    $atributos["tipoSubmit"] = "jquery"; //Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
-    $atributos["valor"] = $this->lenguaje->getCadena($esteCampo);
-    $atributos["nombreFormulario"] = $nombreFormulario;
-    echo $this->miFormulario->campoBoton($atributos);
-    unset($atributos);
-//-------------Fin Control Boton----------------------
-} else {
+if (!isset($fechaVoto) ||  $fechaVoto== '') {
 
 //-------------Control Boton-----------------------
     $esteCampo = "botonClave";

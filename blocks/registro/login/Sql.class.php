@@ -46,8 +46,9 @@ class SqlLogin extends sql {
 				$cadena_sql .= 'tipo, ';
 				$cadena_sql .= 'estilo, ';
 				$cadena_sql .= 'idioma, ';
-				$cadena_sql .= 'estado ';
-				$cadena_sql .= 'FROM ';
+				$cadena_sql .= 'estado, ';
+				$cadena_sql .= '0 as expira_clave ';
+				$cadena_sql .= ' FROM ';
 				$cadena_sql .= $prefijo . 'usuario ';
 				$cadena_sql .= "WHERE ";
 				$cadena_sql .= "id_usuario = '" . trim ( $variable ["usuario"] ) . "' ";
@@ -87,8 +88,9 @@ class SqlLogin extends sql {
 				$cadena_sql .= 'ideleccion, ';
 				$cadena_sql .= 'clave, ';
 				$cadena_sql .= 'nombre, ';
-				$cadena_sql .= 'idtipo ';
-				$cadena_sql .= 'FROM ';
+				$cadena_sql .= 'idtipo, ';
+				$cadena_sql .= 'expira_clave ';
+				$cadena_sql .= ' FROM ';
 				$cadena_sql .= $prefijo . 'censo ';
 				$cadena_sql .= "WHERE ";
 				$cadena_sql .= "identificacion = '" . trim ( $variable ['usuario'] ) . "' ";
