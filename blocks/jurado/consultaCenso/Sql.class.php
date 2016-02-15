@@ -45,13 +45,17 @@ class SqlConsultaCenso extends sql {
             	$cadena_sql .= "elec.estado, ";
             	$cadena_sql .= "voto.fecha, ";
             	$cadena_sql .= "voto.ip ";
-            	$cadena_sql .= "FROM evoto_censo usu ";
-            	$cadena_sql .= "INNER JOIN evoto_tipoestamento estam  ";
+            	$cadena_sql .= "FROM ";
+               	$cadena_sql .= $prefijo . "censo usu ";
+            	$cadena_sql .= "INNER JOIN ";
+                $cadena_sql .= $prefijo . "tipoestamento estam  ";
             	$cadena_sql .= "   ON estam.idtipo=usu.idtipo ";
-            	$cadena_sql .= "INNER JOIN evoto_eleccion elec  ";
+            	$cadena_sql .= "INNER JOIN ";
+               	$cadena_sql .= $prefijo . "eleccion elec  ";
             	$cadena_sql .= "   ON  elec.ideleccion=usu.ideleccion  ";
             	$cadena_sql .= "   AND estado=1 ";
-            	$cadena_sql .= "LEFT OUTER JOIN evoto_datovoto voto   ";
+            	$cadena_sql .= "LEFT OUTER JOIN ";
+               	$cadena_sql .= $prefijo . "datovoto voto   ";
             	$cadena_sql .= "   ON voto.idusuario=usu.identificacion  ";
             	$cadena_sql .= "   AND voto.ideleccion=usu.ideleccion ";
             	$cadena_sql .= "WHERE ";
@@ -62,13 +66,25 @@ class SqlConsultaCenso extends sql {
 
             case "actualizarContrasena":
                 
-                $cadena_sql = "UPDATE evoto_censo SET ";
+                $cadena_sql = "UPDATE ";
+                $cadena_sql .= $prefijo."censo SET ";
                 $cadena_sql .= " clave= SHA1(MD5('".$variable['contrasena']."')), ";
                 $cadena_sql .= " expira_clave='".$variable['expiracion']."' ";
                 $cadena_sql .= " WHERE identificacion=". $_REQUEST['idUsuario'];
                 
                 break;
-
+			
+            case "registrarEvento" :
+                	$cadena_sql = "INSERT INTO ";
+                	$cadena_sql .= $prefijo . "logger( ";
+                	$cadena_sql .= "id, ";
+                	$cadena_sql .= "evento, ";
+                	$cadena_sql .= "fecha) ";
+                	$cadena_sql .= "VALUES( ";
+                	$cadena_sql .= "NULL, ";
+                	$cadena_sql .= "'" . $variable . "', ";
+                	$cadena_sql .= "'" . time () . "') ";
+                	break;
 
             case "iniciarTransaccion":
                 $cadena_sql = "START TRANSACTION";

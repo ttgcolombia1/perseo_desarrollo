@@ -1,4 +1,5 @@
 <?php
+$this->miSesion=Sesion::singleton();
 
 $key = '';
 $keycar = '';
@@ -33,22 +34,37 @@ $expiraClave=($segundos_horaInicial+$segundos_minutoAnadir);
 $arregloDatos=array('idUsuario' => $_REQUEST["idUsuario"],
 					'contrasena'=>$pass,
 					'vidaClave'=>$vida,
-					'timeClave'=>date('H:i:s',$horaInicial),
+					'timeClave'=>$horaInicial,
 					'expiracion'=>$expiraClave,);
-var_dump($arregloDatos);
+//var_dump($arregloDatos);
 $conexion = "estructura";
 $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 $cadena_sql =  $this->sql->cadena_sql("actualizarContrasena", $arregloDatos);
 $resultado = $esteRecursoDB->ejecutarAcceso($cadena_sql, "");
 
+
 if ($resultado == true) {
+	
+	//se rescatan datos para registro en log de actividades
+	$arregLog = array (
+			'generacionContrasenaExitosa',
+			$_REQUEST["idUsuario"],
+			"Jurado:",
+			$this->miSesion->getSesionUsuarioId(),
+			$_SERVER ['REMOTE_ADDR'],
+			$_SERVER ['HTTP_USER_AGENT']
+	);
+	
+	$argumento = json_encode ( $arregLog );
+	$cadena_sql = $this->sql->cadena_sql ( "registrarEvento", $argumento );
+	$registroAcceso = $esteRecursoDB->ejecutarAcceso ( $cadena_sql, "acceso" );
+	
     $resultado = urlencode(serialize($resultado));
     $resultado = $this->miConfigurador->fabricaConexiones->crypto->codificar($resultado);
     $this->redireccionar("actualizoContrasena",$arregloDatos);
 } else {
-    $this->redireccionar("mostrarMensajeNoRegistro", "");
+    $this->redireccionar("NoActualizoContrasena", $_REQUEST["idUsuario"]);
 }
 
-//blocks/voto/consultaCenso/funcion/cambiarContrasena.php pendiente cambiar la contraseña
 
 ?>

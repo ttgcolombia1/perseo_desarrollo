@@ -79,6 +79,9 @@ class FronteraConsultaCenso {
                 case "mostrarMensajeContrasena":
                   	include_once($this->ruta . "formulario/frmMostrarMensajeContrasena.php");
                    	break;
+                case "mostrarMensajeNoContrasena":
+                	include_once($this->ruta . "formulario/frmMostrarMensajeNoContrasena.php");
+                    break;
             }
         } else {
 

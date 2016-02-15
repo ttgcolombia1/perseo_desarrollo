@@ -23,23 +23,23 @@ else{
 				$variable.="&opcion=mostrarMensaje";
 				$variable.="&mensaje=".$datos["mensaje"];
 				$variable.="&error=".$datos["error"];
-			break;
+				break;
 	
 			case "paginaPrincipal":
 				$variable="pagina=index";
-			break;
+				break;
 	                    
 	        case "mostrarMensajeNoRegistro":
 				$variable="pagina=".$miPaginaActual;
 				$variable.="&opcion=mostrarMensajeNoRegistro";
 				$variable.="&idUsuario=".$datos;
-	        break;
+	     	    break;
 	                    
 	        case "mostrarMensajeRegistro":
 				$variable="pagina=".$miPaginaActual;
 				$variable.="&opcion=mostrarMensajeRegistro";
 				$variable.="&idUsuario=".$datos;
-	        break;
+	        	break;
 	        
 	        case "actualizoContrasena":
 	        	$variable="pagina=".$miPaginaActual;
@@ -53,17 +53,11 @@ else{
 	        		
 	        	break;
 	        
-	        case "noActualizoContrasena":
-	        	$variable="pagina=".$miPaginaActual;
-	        	$variable.="&opcion=mensaje";
-	        	$variable.="&mensaje=errorActualizo";
-	        	if($valor!=""){
-	        		$variable.="&identificacion=".$valor[0];
-	        		$variable.="&nombres=".$valor[1];
-	        		$variable.="&apellidos=".$valor[2];
-	        		$variable.="&correo=".$valor[3];
-	        		$variable.="&telefono=".$valor[4];
-	        	}
+	        case "NoActualizoContrasena":
+	           	$variable="pagina=".$miPaginaActual;
+	        	$variable.="&opcion=mostrarMensajeNoContrasena";
+	        	$variable.="&idUsuario=".$datos;
+	        		
 	        	break;
 	
 		}
