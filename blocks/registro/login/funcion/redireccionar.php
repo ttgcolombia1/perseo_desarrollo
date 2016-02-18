@@ -55,8 +55,8 @@ if(!isset($GLOBALS["autorizado"]))
 			$variable.="&sesionID=".$valor["sesionID"];
 			break;	
 			
-		case "indexSoporte":
-			$variable="pagina=indexSoporte";
+		case "indexSalas":
+			$variable="pagina=indexSalas";
 			$variable.="&redireccionar=true";
 			$variable.="&mensaje=bienvenida";
 			$variable.="&usuario=".$valor["id_usuario"];
