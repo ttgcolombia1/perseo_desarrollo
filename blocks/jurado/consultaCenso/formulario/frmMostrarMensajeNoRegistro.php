@@ -52,7 +52,7 @@ echo $this->miFormulario->division("inicio", $atributos);
     $atributos["tipoSubmit"] = "jquery"; //Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
     $atributos["valor"] = $this->lenguaje->getCadena($esteCampo);
     $atributos["nombreFormulario"] = $nombreFormulario;
-    echo $this->miFormulario->campoBoton($atributos);
+   // echo $this->miFormulario->campoBoton($atributos);
     unset($atributos);
 //-------------Fin Control Boton----------------------
 

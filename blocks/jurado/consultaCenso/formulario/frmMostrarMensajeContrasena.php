@@ -41,11 +41,11 @@ echo $this->miFormulario->formulario("inicio",$atributos);
 	echo $this->miFormulario->division("inicio",$atributos);
 		
             $tipo = 'success';
-            $mensaje = "La contraseña para el usuario ".$_REQUEST['idUsuario']." ha sido generado exitosamente. <br>Puede visualizar los datos en el PDF de Resumen.";
+            //$mensaje = "La contraseña para el usuario ".$_REQUEST['idUsuario']." ha sido generado exitosamente. <br>Puede visualizar los datos en el PDF de Resumen.";
+            $mensaje = "La contraseña para el usuario ".$_REQUEST['idUsuario']." ha sido generado exitosamente. <br>";
             $boton = "continuar";
             
-            $valorCodificado="pagina=gestionUsuarios";
-            $valorCodificado=$cripto->codificar_url($valorCodificado,$directoriourl);
+
             
             $variableResumen = "pagina=consultarCenso"; //pendiente la pagina para modificar parametro                                                        
             $variableResumen.= "&action=".$esteBloque["nombre"];
@@ -76,10 +76,44 @@ echo $this->miFormulario->formulario("inicio",$atributos);
         $atributos["estilo"]="marcoBotones";
         echo $this->miFormulario->division("inicio",$atributos);
         
-        $enlace = "<a href='".$variableResumen."'>";
-        $enlace.="<img src='".$rutaBloque."/images/acroread.png' width='25px'><br>Descargar Resumen ";
+        //$enlace = "<a href='".$variableResumen."'>";
+        $enlace = '<a href="javascript:void(window.open(\''.$variableResumen.'\',\'\',\'width=700,height=450,noresize\'));" rel="nofollow">';
+        $enlace.="<img src='".$rutaBloque."/images/acroread.png' width='25px'><br>Abrir Resumen ";
         $enlace.="</a><br><br>";
-        echo $enlace;
+        //echo $enlace;
+        
+                
+        //echo '<a href="javascript:void(window.open(\''.$variableResumen.'\',\'\',\'width=700,height=450,noresize\'));" rel="nofollow">TEXTO</a>'; 
+        /*
+        echo '<script language=\'JavaScript\' type=\'text/javascript\'>
+        window.open(\''.$variableResumen.'\',\'\',\'width=700,height=450,noresize\');
+        self.focus();
+        </script>';*/
+        
+        
+        
+        
+        echo '        		
+        <script>
+        var window_handle;
+        function open_window()
+        {
+        	window_handle = window.open(\''.$variableResumen.'\',\'\',\'width=700,height=450,noresize\');
+        }
+        function close_window()
+        {
+        	window_handle.close();
+        }
+        </script>
+        <script>
+        open_window();
+        self.focus();
+        window.setInterval(" window_handle.close();", 30000, "JavaScript");
+        </script>';
+        
+          
+        
+        
         //------------------Fin Division para los botones-------------------------
         echo $this->miFormulario->division("fin");
         
@@ -91,6 +125,12 @@ echo $this->miFormulario->formulario("inicio",$atributos);
 	echo $this->miFormulario->division("inicio",$atributos);
 	
 	//-------------Control Boton-----------------------
+	
+	$valorCodificado="pagina=consultarCenso";
+	$valorCodificado.= "&usuario=" . $miSesion->getSesionUsuarioId();
+	$valorCodificado=$cripto->codificar_url($valorCodificado,$directoriourl);
+	
+	
 	$esteCampo = botonVolver;
 	$atributos["id"]=$esteCampo;
 	$atributos["tabIndex"]=$tab++;
@@ -100,7 +140,7 @@ echo $this->miFormulario->formulario("inicio",$atributos);
 	$atributos["onclick"]="location.replace('".$valorCodificado."');"; //Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
 	$atributos["valor"]=$this->lenguaje->getCadena($esteCampo);
 	$atributos["nombreFormulario"]=$nombreFormulario;
-	//echo $this->miFormulario->campoBoton($atributos);
+	echo $this->miFormulario->campoBoton($atributos);
 	unset($atributos);
 	//-------------Fin Control Boton----------------------
 	
