@@ -7,8 +7,8 @@ if (!isset($GLOBALS["autorizado"])) {
 $ruta=$this->miConfigurador->getVariableConfiguracion('raizDocumento');
 include($ruta.'/classes/html2pdf/html2pdf.class.php');
 
-$directorio=$this->miConfigurador->getVariableConfiguracion("rutaUrlBloque");
-//$directorio=$this->miConfigurador->getVariableConfiguracion("rutaBloque");
+//$directorio=$this->miConfigurador->getVariableConfiguracion("rutaUrlBloque");
+$directorio=$this->miConfigurador->getVariableConfiguracion("rutaBloque");
 
 $contenidoPagina = "<page backtop='30mm' backbottom='10mm' backleft='20mm' backright='20mm'>";
 $contenidoPagina .= "<page_header>
@@ -18,29 +18,42 @@ $contenidoPagina .= "<page_header>
                     <img src='".$directorio."css/images/escudo.jpg'>
                 </td>
                 <td align='center' >
-                    <font size='4px'><b>UNIVERSIDAD DISTRITAL</b></font>
+                    <font size='18px'><b>UNIVERSIDAD DISTRITAL</b></font>
                     <br>
-                    <font size='4px'><b>FRANCISCO JOS&Eacute; DE CALDAS</b></font>
+                    <font size='18px'><b>FRANCISCO JOS&Eacute; DE CALDAS</b></font>
                 </td>
                 <td align='center' >
                     <img src='".$directorio."css/images/sabio.jpg' width='60'>
                 </td>
             </tr>
         </table>
-    </page_header> ";
+    </page_header>
+    <page_footer>
+        <table align='center' width = '100%'>
+            <tr>
+                <td align='center'>
+                    Universidad Distrital Francisco Jos&eacute; de Caldas
+                    <br>
+                    Todos los derechos reservados.
+                    <br>
+                    Carrera 8 N. 40-78 Piso 1 / PBX 3238400 - 3239300
+                    <br>
+                    elecciones@udistrital.edu.co                    
+                </td>
+            </tr>
+        </table>
+    </page_footer>";
     
     $contenidoPagina .= "
         <p class=MsoNormal align=center style='text-align:center'><b style='mso-bidi-font-weight:
-normal'><span style='font-size:12.0pt;mso-bidi-font-size:11.0pt;line-height:
-107%'>GENERACIÓN DE CONTRASEÑA EXITOSA</span></b></p> ";
-    
-   /* $contenidoPagina .= "
+normal'><span style='font-size:18.0pt;mso-bidi-font-size:11.0pt;line-height:
+107%'>GENERACIÓN DE CONTRASEÑA EXITOSA</span></b></p>
+
 <p class=MsoNormal style='text-align:justify'><span style='font-size:12.0pt;
-mso-bidi-font-size:9.0pt;line-height:107%'>La contraseña para el usuario ".$_REQUEST['idUsuario'].", se ha generado con éxito.</span></p>
+mso-bidi-font-size:11.0pt;line-height:107%'>La contraseña para el usuario ".$_REQUEST['idUsuario'].", se ha generado con éxito.</span></p>
 <p class=MsoNormal style='text-align:justify'><span style='font-size:12.0pt;
-mso-bidi-font-size:9.0pt;line-height:107%'>A continuación se relaciona la información de acceso a la plataforma </span></p> ";*/
-    
-    $contenidoPagina .= "
+mso-bidi-font-size:11.0pt;line-height:107%'>A continuación se relaciona la información de acceso a la plataforma </span></p>
+
 <div align=center>
 <table align='center' class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
  style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
@@ -58,7 +71,7 @@ mso-bidi-font-size:9.0pt;line-height:107%'>A continuación se relaciona la infor
   solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
   text-align:center;line-height:normal'><span style='font-size:16.0pt;
-  mso-bidi-font-size:11.0pt'>".$_REQUEST['host']."</span></p>
+  mso-bidi-font-size:14.0pt'>".$_REQUEST['host']."</span></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:1'>
@@ -91,10 +104,9 @@ mso-bidi-font-size:9.0pt;line-height:107%'>A continuación se relaciona la infor
   <td width=236 valign=top style='width:177.25pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-  background:#a9f869;mso-background-themecolor:accent1;mso-background-themetint:		
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
   <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
-  text-align:center;line-height:normal'><span style='font-size:22.0pt;
+  text-align:center;line-height:normal'><span style='font-size:16.0pt;
   mso-bidi-font-size:11.0pt'>".$_REQUEST['contrasena']."</span></p>
   </td>
  </tr>
@@ -136,33 +148,15 @@ mso-bidi-font-size:9.0pt;line-height:107%'>A continuación se relaciona la infor
  </tr>  		
  </table>
 
-</div>    ";
-    
-/*$contenidoPagina .= "
-    <page_footer>
-        <table align='center' width = '100%'>
-            <tr>
-                <td align='center'>
-                    Universidad Distrital Francisco Jos&eacute; de Caldas
-                    <br>
-                    Todos los derechos reservados.
-                    <br>
-                    Carrera 8 N. 40-78 Piso 1 / PBX 3238400 - 3239300
-                    <br>
-                    elecciones@udistrital.edu.co
-                </td>
-            </tr>
-        </table>
-    </page_footer>";*/
+</div>
+
+    ";
     
     $contenidoPagina .= "</page>";
-    echo $contenidoPagina;;
     
-    /*
     //$html2pdf = new HTML2PDF('P','LETTER','es');
     $html2pdf = new HTML2PDF('L','A5','es');
     $res = $html2pdf->WriteHTML($contenidoPagina);
     $html2pdf->Output('resumenClave.pdf','D');
     //$html2pdf->Output('certificado.pdf');
-    */
 ?>
