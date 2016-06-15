@@ -61,7 +61,6 @@ class FuncionvotoTarjeton {
             if ($this->verificarParticipacionEleccion()) {
                 //3. Obtener la llave pública del proceso
                 $llavePublica = $this->obtenerLlavePublica();
-
                 if ($llavePublica) {
                     //4. Obtener el voto
                     $voto = $this->obtenerVoto();

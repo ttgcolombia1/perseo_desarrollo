@@ -306,7 +306,7 @@ $resultadoEleccion = $esteRecursoDB->ejecutarAcceso($this->cadena_sql, "busqueda
             $atributos["etiquetaObligatorio"] = false;
             $atributos["tipo"]="";            
             $atributos["estilo"]="jqueryui";
-            $atributos["anchoEtiqueta"] = 250;
+            $atributos["anchoEtiqueta"] = 300;
             $atributos["validar"]="max[100],min[0],custom[number]";      
             $atributos["evento"]=" OnkeyUp=\"calculoPonderado('".$idEleccion."');\" ";
             if($resultadoEleccion)
@@ -336,7 +336,7 @@ $resultadoEleccion = $esteRecursoDB->ejecutarAcceso($this->cadena_sql, "busqueda
             $atributos["etiquetaObligatorio"] = false;
             $atributos["tipo"]="";
             $atributos["estilo"]="jqueryui";
-            $atributos["anchoEtiqueta"] = 250;
+            $atributos["anchoEtiqueta"] = 300;
             $atributos["validar"]="max[100],min[0],custom[number]";  
             $atributos["evento"]=" OnkeyUp=\"calculoPonderado('".$idEleccion."');\" ";
             if($resultadoEleccion)
@@ -366,7 +366,7 @@ $resultadoEleccion = $esteRecursoDB->ejecutarAcceso($this->cadena_sql, "busqueda
             $atributos["etiquetaObligatorio"] = false;
             $atributos["tipo"]="";
             $atributos["estilo"]="jqueryui";
-            $atributos["anchoEtiqueta"] = 250;
+            $atributos["anchoEtiqueta"] = 300;
             $atributos["validar"]="max[100],min[0],custom[number]";        
             $atributos["evento"]=" OnkeyUp=\"calculoPonderado('".$idEleccion."');\" ";
             if($resultadoEleccion)
@@ -396,7 +396,7 @@ $resultadoEleccion = $esteRecursoDB->ejecutarAcceso($this->cadena_sql, "busqueda
             $atributos["etiquetaObligatorio"] = false;
             $atributos["tipo"]="";
             $atributos["estilo"]="jqueryui";
-            $atributos["anchoEtiqueta"] = 250;
+            $atributos["anchoEtiqueta"] = 300;
             $atributos["validar"]="max[100],min[0],custom[number]";  
             $atributos["evento"]=" OnkeyUp=\"calculoPonderado('".$idEleccion."');\" ";
             if($resultadoEleccion)
@@ -404,6 +404,36 @@ $resultadoEleccion = $esteRecursoDB->ejecutarAcceso($this->cadena_sql, "busqueda
                 if($resultadoEleccion[0]['tiporesultado'] == 2)
                     {
                         $atributos["valor"]=$resultadoEleccion[0]['porcFuncionario'];
+                    }else
+                        {
+                            $atributos["valor"]=0;
+                        }
+            }else
+                {
+                    $atributos["valor"]=0;
+                }
+            echo $this->miFormulario->campoCuadroTexto($atributos);
+            unset($atributos);
+            
+            $esteCampo="resulDocenteVinEspecial".$idEleccion;
+            $atributos["id"]=$esteCampo;
+            $atributos["etiqueta"]="Porcentaje voto Docentes Vinc. Especial: ";
+            $atributos["titulo"]="Digite el valor en porcentaje del voto de Docentes Vinc. Especial ";
+            $atributos["tabIndex"]=$tab++;
+            $atributos["obligatorio"]=true;
+            $atributos["tamanno"]=5;
+            $atributos["columnas"] = 1;
+            $atributos["etiquetaObligatorio"] = false;
+            $atributos["tipo"]="";
+            $atributos["estilo"]="jqueryui";
+            $atributos["anchoEtiqueta"] = 300;
+            $atributos["validar"]="max[100],min[0],custom[number]";  
+            $atributos["evento"]=" OnkeyUp=\"calculoPonderado('".$idEleccion."');\" ";
+            if($resultadoEleccion)
+            {
+                if($resultadoEleccion[0]['tiporesultado'] == 2)
+                    {
+                        $atributos["valor"]=$resultadoEleccion[0]['porcDocenteVinEspecial'];
                     }else
                         {
                             $atributos["valor"]=0;
@@ -427,13 +457,13 @@ $resultadoEleccion = $esteRecursoDB->ejecutarAcceso($this->cadena_sql, "busqueda
             $atributos["deshabilitado"] = true;
             $atributos["tipo"]="";
             $atributos["estilo"]="jqueryui";
-            $atributos["anchoEtiqueta"] = 250;
+            $atributos["anchoEtiqueta"] = 300;
             $atributos["validar"]="maxSize[3],max[100],min[100],custom[number]";
             if($resultadoEleccion)
             {
                 if($resultadoEleccion[0]['tiporesultado'] == 2)
                     {
-                        $atributos["valor"]=$resultadoEleccion[0]['porcEstudiante'] + $resultadoEleccion[0]['porcDocente'] + $resultadoEleccion[0]['porcEgresado'] + $resultadoEleccion[0]['porcFuncionario'];
+                        $atributos["valor"]=$resultadoEleccion[0]['porcEstudiante'] + $resultadoEleccion[0]['porcDocente'] + $resultadoEleccion[0]['porcEgresado'] + $resultadoEleccion[0]['porcFuncionario'] + $resultadoEleccion[0]['porcDocenteVinEspecial'];
                     }else
                         {
                             $atributos["valor"]=0;

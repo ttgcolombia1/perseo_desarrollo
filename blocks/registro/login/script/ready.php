@@ -34,6 +34,22 @@ $(function() {
 	);
 });
 
+ $("#login").validationEngine({
+            promptPosition : "centerRight", 
+            scroll: false
+        });
+
+$(function() {
+    $("#login").submit(function() {
+        var resultado=$("#login").validationEngine("validate");
+        if (resultado) {
+            // console.log(filasGrilla);
+            return true;
+        }
+        return false;
+    });
+});
+
 $(function() {
 	$("button").button().click(function(event) {
 		event.preventDefault();

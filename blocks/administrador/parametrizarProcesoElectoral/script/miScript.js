@@ -71,9 +71,10 @@ function calculoPonderado(eleccion)
         var estudiantes = $( "#resulEstudiantes" + eleccion).val();
         var docentes = $( "#resulDocentes" + eleccion).val();
         var egresados = $( "#resulEgresados" + eleccion).val();
-        var funcionarios = $( "#resulFuncionarios" + eleccion).val(); 
+        var funcionarios = $( "#resulFuncionarios" + eleccion).val();
+        var docvinespecial = $( "#resulDocenteVinEspecial" + eleccion).val();
 
-        var total = parseFloat(estudiantes) + parseFloat(docentes) + parseFloat(egresados) + parseFloat(funcionarios);
+        var total = parseFloat(estudiantes) + parseFloat(docentes) + parseFloat(egresados) + parseFloat(funcionarios) + parseFloat(docvinespecial);
         
         $("#resulSuma"+eleccion).val(total);
     }

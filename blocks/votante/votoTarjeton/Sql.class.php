@@ -34,7 +34,7 @@ class SqlvotoTarjeton extends sql {
 
                 $cadena_sql = "SELECT cen.identificacion, cen.nombre as nombreCenso, cen.ideleccion, cen.idtipo, cen.fechavoto, cen.datovoto, pel.nombre as nombrePel, pel.descripcion, ele.nombre as nombreEle, ele.fechainicio as elefechainicio, ele.fechafin as elefechafin, DATE_FORMAT(ele.fechafin, '%d %M %Y %H:%i:%s')  ";
                 $cadena_sql .= "FROM ".$prefijo."censo cen  ";
-                $cadena_sql .= "JOIN ".$prefijo."eleccion ele ON ele.ideleccion = cen.ideleccion AND ele.tipoestamento = cen.idtipo ";
+                $cadena_sql .= "JOIN ".$prefijo."eleccion ele ON ele.ideleccion = cen.ideleccion AND ele.tipoestamento = cen.idtipo OR ele.tipoestamento=0 ";
                 $cadena_sql .= "JOIN ".$prefijo."tipoestamento tes ON tes.idtipo = cen.idtipo ";
                 $cadena_sql .= "JOIN ".$prefijo."procesoelectoral pel ON pel.idprocesoelectoral = procesoelectoral_idprocesoelectoral  ";
                 $cadena_sql .= " WHERE cen.identificacion = ".$variable;

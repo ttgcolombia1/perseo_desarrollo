@@ -92,12 +92,14 @@ if(!isset($GLOBALS["autorizado"]))
                 $resulDocentes =  $_REQUEST['resulDocentes'.$idEleccion];
                 $resulEgresados =  $_REQUEST['resulEgresados'.$idEleccion];
                 $resulFuncionarios =  $_REQUEST['resulFuncionarios'.$idEleccion];
+                $resulDocenteVinEspecial =  $_REQUEST['resulDocenteVinEspecial'.$idEleccion];
             }else
                 {
                     $resulEstudiantes =  '0';
                     $resulDocentes =  '0';
                     $resulEgresados = '0';
                     $resulFuncionarios =  '0';
+                    $resulDocenteVinEspecial= '0';
                 }        
             
         
@@ -107,7 +109,7 @@ if(!isset($GLOBALS["autorizado"]))
         
         if(!isset($_REQUEST['eleccionParametrizada']))
         {
-            $arregloEleccion = array($proceso, $nombreEleccion, $tipoEstamento, $descripcion, $fechaInicio, $fechaFin, $porTarjeton, $tipoVotacion, 1, count($candidatos), $segundaClave, $idEleccion, $tipoResultados, $resulEstudiantes,$resulDocentes,$resulEgresados,$resulFuncionarios);    
+            $arregloEleccion = array($proceso, $nombreEleccion, $tipoEstamento, $descripcion, $fechaInicio, $fechaFin, $porTarjeton, $tipoVotacion, 1, count($candidatos), $segundaClave, $idEleccion, $tipoResultados, $resulEstudiantes,$resulDocentes,$resulEgresados,$resulFuncionarios,$resulDocenteVinEspecial);    
             
             $this->cadena_sql = $this->sql->cadena_sql("insertarEleccion", $arregloEleccion);
             $resultadoEleccion = $esteRecursoDB->ejecutarAcceso($this->cadena_sql, "acceso");
@@ -116,10 +118,37 @@ if(!isset($GLOBALS["autorizado"]))
         }else
             {
                 $idGuardado = $_REQUEST['eleccionParametrizada'];
-                $arregloEleccion = array($proceso, $nombreEleccion, $tipoEstamento, $descripcion, $fechaInicio, $fechaFin, $porTarjeton, $tipoVotacion, 1, count($candidatos), $segundaClave, $idEleccion, $tipoResultados, $resulEstudiantes,$resulDocentes,$resulEgresados,$resulFuncionarios,$idGuardado);    
+                $arregloEleccion = array($proceso, $nombreEleccion, $tipoEstamento, $descripcion, $fechaInicio, $fechaFin, $porTarjeton, $tipoVotacion, 1, count($candidatos), $segundaClave, $idEleccion, $tipoResultados, $resulEstudiantes,$resulDocentes,$resulEgresados,$resulFuncionarios,$idGuardado,$resulDocenteVinEspecial);    
                 
                 $this->cadena_sql = $this->sql->cadena_sql("actualizarEleccion", $arregloEleccion);
                 $resultadoEleccion = $esteRecursoDB->ejecutarAcceso($this->cadena_sql, "acceso");
+                    
+                    $id_estamentos=array(4,3,1,2,6);
+                    
+                    //echo "MMM".$idEstamento."<br>";
+                    $i=0;
+                    foreach ($_REQUEST as $clave => $valor)
+                    {
+                        //echo $clave ."=>". $valor."<br>";
+                        $cadena = $clave;
+                        $buscar = "resul";
+                        $resultadoValores = strpos($cadena, $buscar);
+
+                        if($resultadoValores !== FALSE)
+                        {
+                            if($clave!='tiporesultados1'){
+                                if($clave!='resulSuma1'){
+                                    $variable['idtipo']=$id_estamentos[$i];
+                                    $variable['ponderado']=$valor;
+                                    
+                                    $this->cadena_sql = $this->sql->cadena_sql("actualizarPorcentajeEstamento", $variable);
+                                    $resultadoPorcentaje = $esteRecursoDB->ejecutarAcceso($this->cadena_sql, "acceso");
+                                $i++;    
+                                }
+                            }
+                            
+                        }
+                    }
             }
         
 
@@ -151,6 +180,7 @@ if(!isset($GLOBALS["autorizado"]))
 
                             $this->cadena_sql = $this->sql->cadena_sql("insertarCandidato", $arregloCandidato);
                             $resultadoCandidato = $esteRecursoDB->ejecutarAcceso($this->cadena_sql, "acceso");
+                            
                         }
                         $this->funcion->redireccionar('inserto',$proceso);
                     }else

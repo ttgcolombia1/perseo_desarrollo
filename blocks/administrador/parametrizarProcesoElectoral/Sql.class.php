@@ -146,7 +146,8 @@ class SqlParametrizarProcesoElectoral extends sql {
                                 $cadena_sql .= " '".$variable[13]."', ";
                                 $cadena_sql .= " '".$variable[14]."', ";
                                 $cadena_sql .= " '".$variable[15]."', ";
-                                $cadena_sql .= " '".$variable[16]."') ";
+                                $cadena_sql .= " '".$variable[16]."', ";
+                                $cadena_sql .= " '".$variable[17]."') ";
                                 
 			break;
                     
@@ -184,7 +185,7 @@ class SqlParametrizarProcesoElectoral extends sql {
                             
 				$cadena_sql = "SELECT ideleccion, nombre, tipoestamento, descripcion, fechainicio, fechafin, ";
                                 $cadena_sql .= " listaTarjeton, tipovotacion, estado, candidatostarjeton, utilizarsegundaclave, eleccionform, tiporesultado, ";
-                                $cadena_sql .= " porcEstudiante, porcDocente, porcEgresado, porcFuncionario ";
+                                $cadena_sql .= " porcEstudiante, porcDocente, porcEgresado, porcFuncionario, porcDocenteVinEspecial ";
                                 $cadena_sql .= " FROM ".$prefijo."eleccion ";
 				$cadena_sql .= " WHERE procesoelectoral_idprocesoelectoral = ".$variable[0];
 				$cadena_sql .= " AND eleccionform = ".$variable[1];
@@ -244,10 +245,20 @@ class SqlParametrizarProcesoElectoral extends sql {
                                 $cadena_sql .= " porcEstudiante = '".$variable[13]."', ";
                                 $cadena_sql .= " porcDocente = '".$variable[14]."', ";
                                 $cadena_sql .= " porcEgresado = '".$variable[15]."', ";
-                                $cadena_sql .= " porcFuncionario = '".$variable[16]."' ";
+                                $cadena_sql .= " porcFuncionario = '".$variable[16]."', ";
+                                $cadena_sql .= " porcDocenteVinEspecial = '".$variable[18]."' ";
                                 $cadena_sql .= " WHERE  ideleccion = ".$variable[17];
                                 
 			break;
+                    
+                    
+                         case "actualizarPorcentajeEstamento":
+                                                        
+				$cadena_sql = "UPDATE ".$prefijo."tipoestamento SET  ";
+                                $cadena_sql .= " ponderado = ".$variable['ponderado']." ";
+                                $cadena_sql .= " WHERE  idtipo = ".$variable['idtipo']." ";
+                                
+                        break;
 				/**
 				 * Clausulas genéricas. se espera que estén en todos los formularios
 				 * que utilicen esta plantilla
@@ -316,6 +327,7 @@ class SqlParametrizarProcesoElectoral extends sql {
 
 
 		}
+                
 		return $cadena_sql;
 
 	}

@@ -19,6 +19,7 @@ echo "<center><h4>SEGUIMIENTO " . date('d M Y') . "</h4></center>";
 $cadena_sql = $this->sql->cadena_sql("usuarioAcceso", '');
 $resultadosAcceso = $esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
 
+//echo $cadena_sql."<br>";
 
 $series1 = '';
 $labels1 = '';

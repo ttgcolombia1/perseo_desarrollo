@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/usr/local/apache/htdocs/voto/blocks/administrador/procesoElectoral/formulario/consultarProcesos.php</file>
+            <file>file:/usr/local/apache/htdocs/voto/blocks/votante/votoTarjeton/Funcion.class.php</file>
+            <file>file:/usr/local/apache/htdocs/voto/blocks/administrador/parametrizarProcesoElectoral/formulario/tabs/tabEleccion.php</file>
+            <file>file:/usr/local/apache/htdocs/voto/blocks/administrador/parametrizarProcesoElectoral/formulario/tabs/tabProceso.php</file>
+            <file>file:/usr/local/apache/htdocs/voto/blocks/votante/votoTarjeton/Sql.class.php</file>
+            <file>file:/usr/local/apache/htdocs/voto/blocks/administrador/parametrizarProcesoElectoral/Sql.class.php</file>
+            <file>file:/usr/local/apache/htdocs/voto/blocks/delegado/registro/registroCierreProceso/formulario/verResultadosEleccion.php</file>
+            <file>file:/usr/local/apache/htdocs/voto/blocks/administrador/parametrizarProcesoElectoral/script/miScript.js</file>
+            <file>file:/usr/local/apache/htdocs/voto/blocks/votante/votoTarjeton/formulario/nuevo.php</file>
+            <file>file:/usr/local/apache/htdocs/voto/blocks/administrador/parametrizarProcesoElectoral/funcion/guardarEleccion.php</file>
+            <file>file:/usr/local/apache/htdocs/voto/blocks/delegado/registro/registroCierreProceso/Sql.class.php</file>
+            <file>file:/usr/local/apache/htdocs/voto/blocks/administrador/parametrizarProcesoElectoral/Lenguaje.class.php</file>
+            <file>file:/usr/local/apache/htdocs/voto/blocks/votante/votoTarjeton/funcion/almacenarVoto/verificarParticipacion.php</file>
+            <file>file:/usr/local/apache/htdocs/voto/blocks/administrador/parametrizarProcesoElectoral/Funcion.class.php</file>
+            <file>file:/usr/local/apache/htdocs/voto/blocks/delegado/registro/registroCierreProceso/css/estilos.css</file>
+            <file>file:/usr/local/apache/htdocs/voto/blocks/delegado/registro/registroCierreProceso/formulario/cerrarPorEleccion.php</file>
+            <file>file:/usr/local/apache/htdocs/voto/index.php</file>
+            <file>file:/usr/local/apache/htdocs/voto/blocks/delegado/registro/registroCierreProceso/formulario/actaCierre.php</file>
+            <file>file:/usr/local/apache/htdocs/voto/blocks/votante/votoTarjeton/funcion/almacenarVoto/guardarVoto.php</file>
+            <file>file:/usr/local/apache/htdocs/voto/blocks/administrador/parametrizarProcesoElectoral/script/Ajax.php</file>
+            <file>file:/usr/local/apache/htdocs/voto/blocks/administrador/parametrizarProcesoElectoral/formulario/parametrizar.php</file>
+        </group>
+    </open-files>
+</project-private>

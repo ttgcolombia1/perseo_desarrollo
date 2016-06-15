@@ -13,6 +13,7 @@ $variable['usuario'] = $_REQUEST['usuario'];
 
 $cadenaSql = $this->sql->cadena_sql("datosVotoRegistrado", $variable);
 $votoAnterior = $esteRecursoDB->ejecutarAcceso($cadenaSql, "busqueda");
+
 if (!$votoAnterior) {
 
     $respuesta=true;    

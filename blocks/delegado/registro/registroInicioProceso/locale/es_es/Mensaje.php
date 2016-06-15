@@ -57,31 +57,31 @@ if(isset($argumentos) && is_array($argumentos)){
                 case 'actainicio':
                     $this->idioma["textoActaInicio"]='<h1 style="text-align: center;"><strong>ACTA DE APERTURA </strong></h1>
                     <h1 style="text-align: center;"><strong>PROCESO ELECTORAL '.strtoupper($argumentos['nombre']).'</strong></h1>
-                    <h2 style="text-align: justify;"><strong>ELECCI&Oacute;N DEL REPRESENTANTE DE </strong>ANTE EL CONSEJO SUPERIOR UNIVERSITARIO DE LA UNIVERSIDAD DISTRITAL FRANCISCO JOSE DE CALDAS.</h2>
+                    <h2 style="text-align: justify;"><strong>ELECCI&Oacute;N DE RECTOR </strong> DE LA UNIVERSIDAD DISTRITAL FRANCISCO JOSE DE CALDAS.</h2>
                     <h2 style="text-align: center;">'.strtoupper($argumentos['fecha']).'</h2>
                     <p style="text-align: justify;">En Bogot&aacute; D.C., a los ('.strtoupper($argumentos['dia']).') d&iacute;as del mes de '.strtoupper($argumentos['mes']).' de '.strtoupper($argumentos['anno']).', mediante el sistema de voto electr&oacute;nico y de urna y tarjet&oacute;n virtual en la modalidad no presencial; siendo las '.strtoupper($argumentos['hora']).', los jurados y los delgados proceden a verificar el estado de las bases de datos del sistema y dan inicio a la jornada prevista, conforme a lo determinado en la Normatividad Electoral establecida para estos procesos electorales.</p>
                     <p style="text-align: justify;">&nbsp;</p>
                     <p style="text-align: justify;">OBSERVACIONES:</p>
-                    <p style="text-align: justify;">_____________________________________________________</p>
-                    <p style="text-align: justify;">_____________________________________________________</p>
-                    <p style="text-align: justify;">_____________________________________________________</p>
-                    <p style="text-align: justify;">_____________________________________________________</p>
-                    <p style="text-align: justify;">_____________________________________________________</p>
-                    <p style="text-align: justify;">_____________________________________________________</p>
-                    <p style="text-align: justify;">_____________________________________________________</p>
+                    <p style="text-align: justify;">fdsfafsafsfdsfdsafdsfasf</p>
+                    <p style="text-align: justify;">.....................................................</p>
+                    <p style="text-align: justify;">.....................................................</p>
+                    <p style="text-align: justify;">.....................................................</p>
+                    <p style="text-align: justify;">.....................................................</p>
+                    <p style="text-align: justify;">.....................................................</p>
+                    <p style="text-align: justify;">.....................................................</p>
                     <p style="text-align: justify;">&nbsp;</p>
                     <p style="text-align: center;"><strong>Jurado.</strong></p>
-                    <p style="text-align: justify;">Nombre: _________________________________ Firma: ________________</p>
+                    <p style="text-align: justify;">Nombre: ................................. Firma: ................</p>
                     <p style="text-align: center;"><strong>Jurado.</strong></p>
-                    <p style="text-align: justify;">Nombre: _________________________________ Firma: ________________</p>
+                    <p style="text-align: justify;">Nombre: ................................. Firma: ................</p>
                     <p style="text-align: center;"><strong>Delgado.</strong></p>
-                    <p style="text-align: justify;">Nombre: _________________________________ Firma: ________________</p>
+                    <p style="text-align: justify;">Nombre: ................................. Firma:.................</p>
                     <p style="text-align: center;"><strong>Delgado.</strong></p>
-                    <p style="text-align: justify;">Nombre: _________________________________ Firma: ________________</p>
+                    <p style="text-align: justify;">Nombre: ................................. Firma: ................</p>
                     <p style="text-align: center;"><strong>Secretario del Consejo Participaci&oacute;n Universitaria Provisional</strong></p>
-                    <p style="text-align: justify;">Nombre: _________________________________ Firma: ________________</p>
+                    <p style="text-align: justify;">Nombre: ................................. Firma: ................</p>
                     <p style="text-align: center;"><strong>Delegado del Consejo Participaci&oacute;n Universitaria Provisional</strong></p>
-                    <p style="text-align: justify;">Nombre: _________________________________ Firma: ________________</p>';
+                    <p style="text-align: justify;">Nombre: ................................. Firma: ................</p>';
 
                     break;
 			

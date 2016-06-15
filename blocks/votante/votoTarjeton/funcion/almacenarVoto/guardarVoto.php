@@ -24,6 +24,7 @@ if ($estamentoVotante) {
     $transaccion[1] = $this->sql->cadena_sql("insertarDatosCenso", $variable);
     $transaccion[2] = $this->sql->cadena_sql("insertarDatosVoto", $variable);
     $registroVoto = $esteRecursoDB->transaccion($transaccion, '');
+    
     if ($registroVoto) {
         $respuesta = true;        
     } else {

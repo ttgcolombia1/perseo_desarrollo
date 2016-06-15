@@ -76,17 +76,19 @@ if($resultadoProcesos)
                                 'tipo'=>'actainicio'
                                 );            
             //-------------Control cuadroTexto-----------------------
-            $esteCampo='textoActa'.$i;
+            $esteCampo='textoActa';
             $atributos["id"]=$esteCampo;
-            $atributos["etiqueta"]="Información del acta de inicio";
+            $atributos["etiqueta"]="Obesvaciones del acta de inicio";
             $atributos["estilo"]="jqueryui";
             $atributos["tabIndex"]=$tab++;
             $atributos["obligatorio"]=true;
             $atributos['columnas']='90';
             $atributos['filas']='25';
-            $atributos['valor']=$this->lenguaje->getCadena("textoActaInicio", $parametros);;
+            //$atributos['valor']=$this->lenguaje->getCadena("textoActaInicio");
             echo $this->miFormulario->campoTextArea($atributos);
             unset($atributos);
+            
+            //echo "Información del acta de inicio";
 
             //------------------Division para los botones-------------------------
             $atributos["id"]="botones";

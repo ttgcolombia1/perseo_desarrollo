@@ -44,7 +44,7 @@ class SqlregistroCierreProceso extends sql {
                     
                         case "tiporesultados":
                             
-				$cadena_sql = "SELECT ideleccion, tiporesultado, porcEstudiante, porcDocente, porcEgresado, porcFuncionario";
+				$cadena_sql = "SELECT ideleccion, tiporesultado, porcEstudiante, porcDocente, porcEgresado, porcFuncionario, porcDocenteVinEspecial";
                                 $cadena_sql .= " FROM ".$prefijo."eleccion ";
                                 $cadena_sql .= " WHERE  ideleccion = ".$variable;                                
                                 
@@ -186,19 +186,76 @@ class SqlregistroCierreProceso extends sql {
 				$cadena_sql.="WHERE lista_idlista = ".$variable;
 				$cadena_sql.=" ORDER BY reglon ";
 				break;    
-                        
-                            case "votacionesPonderada":
+                            
+                        case "tipoEstamentos":
 				$cadena_sql="SELECT ";
-				$cadena_sql.=$prefijo."lista.nombre, ";
-				$cadena_sql.='estamento ';
+				$cadena_sql.=" idtipo, descripcion, ponderado ";
 				$cadena_sql.="FROM ";
-				$cadena_sql.=$prefijo."votodecodificado ";
-				$cadena_sql.=" JOIN ".$prefijo."lista ON  ".$prefijo."lista.idlista = ".$prefijo."votodecodificado.idlista ";
-                                $cadena_sql.="WHERE ideleccion = ".$variable;
-				break;    
+				$cadena_sql.=$prefijo."tipoestamento ";
+				$cadena_sql.="WHERE ponderado > 0 ";
+				$cadena_sql.=" ORDER BY idtipo ";
+				break;        
+                        
+                        case "votacionesPonderada":
+                            $cadena_sql="SELECT ";
+                            $cadena_sql.=$prefijo."lista.idlista as lista, ";
+                            $cadena_sql.=$prefijo."lista.nombre as nombre, ";
+                            $cadena_sql.='estamento, ';
+                            $cadena_sql.='idtipo, ';
+                            $cadena_sql.='COUNT(*) as cuenta, ';
+                            $cadena_sql.='COUNT(*)* (ponderado/100) as ponderado ';
+                            $cadena_sql.="FROM ";
+                            $cadena_sql.=$prefijo."votodecodificado ";
+                            $cadena_sql.=" JOIN ".$prefijo."lista ON  ".$prefijo."lista.idlista = ".$prefijo."votodecodificado.idlista ";
+                            $cadena_sql.=" JOIN ".$prefijo."tipoestamento ON  ".$prefijo."votodecodificado.estamento = ".$prefijo."tipoestamento.idtipo ";
+                            $cadena_sql.="WHERE ideleccion = ".$variable;
+                            $cadena_sql.=" GROUP BY 1,2"; 
+                            break;    
                             ///Revisando
+                        
+                        case "votacionesPorEstamento":
+                           $cadena_sql="SELECT ";
+                            $cadena_sql.=$prefijo."lista.idlista as lista, ";
+                            $cadena_sql.=$prefijo."lista.nombre as nombre, ";
+                            $cadena_sql.='estamento, ';
+                            $cadena_sql.='idtipo, ';
+                            $cadena_sql.='COUNT(*) as cuenta, ';
+                            $cadena_sql.='COUNT(*)* (ponderado/100) as ponderado ';
+                            $cadena_sql.="FROM ";
+                            $cadena_sql.=$prefijo."votodecodificado ";
+                            $cadena_sql.=" JOIN ".$prefijo."lista ON  ".$prefijo."lista.idlista = ".$prefijo."votodecodificado.idlista ";
+                            $cadena_sql.=" JOIN ".$prefijo."tipoestamento ON  ".$prefijo."votodecodificado.estamento = ".$prefijo."tipoestamento.idtipo ";
+                            $cadena_sql.=" WHERE ideleccion = ".$variable['ideleccion'] ;
+                            $cadena_sql.=" AND idtipo = ".$variable['estamento'] ;
+                            $cadena_sql.=" AND ".$prefijo."lista.idlista = ".$variable['plancha'];
+                            $cadena_sql.=" GROUP BY 1,2"; 
+                            break;  
+                        
+                        case "cuentaPorEstamento":
+                           $cadena_sql="SELECT ";
+                            $cadena_sql.=$prefijo."lista.idlista as lista, ";
+                            $cadena_sql.=$prefijo."lista.nombre as nombre, ";
+                            $cadena_sql.='estamento, ';
+                            $cadena_sql.='idtipo, ';
+                            $cadena_sql.='COUNT(*) as cuenta, ';
+                            $cadena_sql.='COUNT(*)* (ponderado/100) as ponderado ';
+                            $cadena_sql.="FROM ";
+                            $cadena_sql.=$prefijo."votodecodificado ";
+                            $cadena_sql.=" JOIN ".$prefijo."lista ON  ".$prefijo."lista.idlista = ".$prefijo."votodecodificado.idlista ";
+                            $cadena_sql.=" JOIN ".$prefijo."tipoestamento ON  ".$prefijo."votodecodificado.estamento = ".$prefijo."tipoestamento.idtipo ";
+                            $cadena_sql.=" WHERE ideleccion = ".$variable['ideleccion'] ;
+                            $cadena_sql.=" AND idtipo = ".$variable['estamento'] ;
+                            //$cadena_sql.=" AND ".$prefijo."lista.idlista = ".$variable['plancha'];
+                            //$cadena_sql.=" GROUP BY 1,2"; 
+                            break;  
                     
-                    
+                        case "totalvotaciones":
+				$cadena_sql="SELECT ";
+				$cadena_sql.='COUNT(*) as total ';
+                                $cadena_sql.="FROM ";
+				$cadena_sql.=$prefijo."votodecodificado ";
+				$cadena_sql.="WHERE ideleccion = ".$variable;
+                                break;        
                         
                         case "datosProceso":
                             
