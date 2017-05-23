@@ -3,6 +3,7 @@
 //if(!isset($_REQUEST["opcion"])||(isset($_REQUEST["opcion"]) && $_REQUEST["opcion"]!="confirmar")){
 
 ?>
+ $("#nombreLista").select2();
 
  $(function() {
     $( "#accordion" )

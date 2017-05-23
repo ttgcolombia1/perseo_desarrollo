@@ -4,7 +4,7 @@ if(!isset($GLOBALS["autorizado"])) {
 	include("../index.php");
 	exit;
 }
-$cadena_sql = $this->sql->cadena_sql("buscarLlaves");
+echo $cadena_sql = $this->sql->cadena_sql("buscarLlaves");
 $resultado = $esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
 if ($resultado) {
 

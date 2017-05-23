@@ -9,10 +9,7 @@
 
 $indice=0;
 
-
-$funcion[$indice++]="jquery.easing.1.3.js";
-$funcion[$indice++]="jquery.animate-colors-min.js";
-$funcion[$indice++]="jquery.skitter.min.js";
+$funcion[$indice++]="jquery.validationEngine-es.js";
 
 
 $rutaBloque=$this->miConfigurador->getVariableConfiguracion("host");
@@ -39,4 +36,3 @@ foreach ($funcion as $clave=>$nombre){
 //include("Ajax.php");
 
 ?>
-

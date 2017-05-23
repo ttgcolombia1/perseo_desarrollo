@@ -5,12 +5,14 @@
  */
 
 // Registrar los archvios js que deben incluirse
-
 $funcion=array();
 $indice=0;
 $funcion[$indice++]="jquery.validationEngine.js";
 $funcion[$indice++]="jquery.validationEngine-es.js";
-$funcion[$indice++]="jquery-te.js";;
+$funcion[$indice++]="jquery-te.js";
+$funcion[$indice++]="progressbar.js";
+$funcion[$indice++]="censo.js";
+
 
 
 $rutaBloque=$this->miConfigurador->getVariableConfiguracion("host");
@@ -33,8 +35,5 @@ foreach ($funcion as $clave=>$nombre){
 	}
 }
 // Procesar las funciones requeridas en ajax
-	include("Ajax.php");
+include("Ajax.php");
 
-
-
-?>

@@ -1,4 +1,4 @@
-<?
+<?php
 function enviar_correo($configuracion)
 {
 

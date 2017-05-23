@@ -62,6 +62,12 @@ class FronteraParametrizarProcesoElectoral{
 				case "consultarProcesos":
 					include_once($this->ruta."/formulario/consultarProcesos.php");
 					break;				
+				case "ajustarFechaProceso":
+					include_once($this->ruta."/formulario/editarProceso.php");
+					break;				
+				case "ajustarCandidato":
+					include_once($this->ruta."/formulario/editarCandidato.php");
+					break;	
 				case "nuevo":
 					include_once($this->ruta."formulario/nuevo.php");
 					break;
@@ -69,14 +75,17 @@ class FronteraParametrizarProcesoElectoral{
 				case "mensaje":
 					include_once($this->ruta."formulario/mensaje.php");
 					break;
-                                    
 				case "parametrizar":
 					include_once($this->ruta."formulario/parametrizar.php");
 					break;	
+
+                                case "consultaParametros":
+                                include_once($this->ruta."formulario/consultarParametros.php");
+                                break;	    
 				
 			}
 		}else{
-			$accion="nuevo";
+
 			include_once($this->ruta."/formulario/nuevo.php");
 		}
 
@@ -88,4 +97,3 @@ class FronteraParametrizarProcesoElectoral{
 
 
 }
-?>

@@ -59,7 +59,7 @@ if ($resultadoTarjeton) {
     $atributos["tabIndex"] = $tab++;
     $atributos["tipo"] = "boton";
     $atributos["estilo"] = '';
-    $atributos['estiloEnLinea'] = 'width:200px; height:100px; font-size:1.5em';
+    $atributos['estiloEnLinea'] = 'width:120px; height:60px; font-size:1.5em';
     $atributos["verificar"] = "true"; //Se coloca true si se desea verificar el formulario antes de pasarlo al servidor.
     $atributos["tipoSubmit"] = "jquery"; //Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
     $atributos["valor"] = $this->lenguaje->getCadena($esteCampo);
@@ -111,13 +111,13 @@ if ($resultadoTarjeton) {
 
             echo "<td width='" . $porcentajeLista . "%'  class='fondoLimpio' id='seleccion" . $idLista . "' onclick='seleccionarTarjeton(this.id,\"" . $voto . "\");'>";
             $idLista++;
-            echo "<center><font size='3'><b>" . $resultadoTarjeton[$i][1] . "</b></font></center>";
+            echo "<center><font size='5'><b>" . $resultadoTarjeton[$i][1] . "</b></font></center>";
             $atributos["id"] = "lista" . $idLista;
             $atributos["estilo"] = "marcoBotones";
             echo $this->miFormulario->division("inicio", $atributos);
 
             echo "<table width='100%'>";
-            echo "<tr>";
+            echo "<tr id='candidatos'>";
 
             for ($n = 0; $n < count($resultadoCandidatos); $n++) {
                 switch ($n) {
@@ -132,12 +132,12 @@ if ($resultadoTarjeton) {
                         break;
                 }
                 echo "<td >
-                                            <br>
-                                            <b>" . $posicCandidato . "</b>
-                                            <br>
-                                            <img src='" . $directorio . $resultadoCandidatos[$n][5] . "' title='" . $resultadoCandidatos[$n][3] . " " . $resultadoCandidatos[$n][4] . "' width='150px'>
-                                            <br>
-                                            " . $resultadoCandidatos[$n][3] . " " . $resultadoCandidatos[$n][4] . "
+                                            
+                                            <p>" . $posicCandidato . "</p>
+                                            
+                                            <img src='" . $directorio . $resultadoCandidatos[$n][5] . "' title='" . $resultadoCandidatos[$n][3] . " " . $resultadoCandidatos[$n][4] . "' height='150px' width='113px'>
+                                            
+                                            <p>" . $resultadoCandidatos[$n][3] . " " . $resultadoCandidatos[$n][4] . "</p>
                                         </td>";
             }
             echo "</tr>";
@@ -166,7 +166,7 @@ $atributos["id"] = $esteCampo;
 $atributos["tabIndex"] = $tab++;
 $atributos["tipo"] = "boton";
 $atributos["estilo"] = "jquery-ui";
-$atributos['estiloEnLinea'] = 'width:200px; height:100px; font-size:1.5em';
+$atributos['estiloEnLinea'] = 'width:120px; height:60px; font-size:1.5em';
 $atributos["verificar"] = "true"; //Se coloca true si se desea verificar el formulario antes de pasarlo al servidor.
 $atributos["tipoSubmit"] = "jquery"; //Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
 $atributos["valor"] = $this->lenguaje->getCadena($esteCampo);

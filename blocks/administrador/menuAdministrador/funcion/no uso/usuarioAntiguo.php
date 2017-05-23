@@ -1,4 +1,4 @@
-<?
+<?php
  function usuarioAntiguo($configuracion,$acceso_db)
 {
         $valor=$_REQUEST['solicitud'];

@@ -36,15 +36,38 @@ class FuncionSubirCenso
 		//Campos que se quieren excluir de la limpieza de código. Formato: nombreCampo1|nombreCampo2|nombreCampo3
 		$excluir="";
 		//$_REQUEST=$this->miInspectorHTML->limpiarPHPHTML($_REQUEST);
-		
+
 			if(isset($_REQUEST["procesarAjax"]))
 			{
 				$this->procesarAjax();
 
 			}else if($_REQUEST["opcion"]=="cargarArchivo")
 			{
-				$this->cargarArchivo(); 
-			}
+				$this->cargarArchivo();
+
+			}else if($_REQUEST["opcion"]=="progresoArchivo")
+			{
+				$this->progresoArchivo();
+			}else if($_REQUEST["opcion"]=="cargarAsync")
+			{
+				$this->cargarAsync();
+			}else if($_REQUEST["opcion"]=="clavesAsync")
+			{
+				$this->clavesAsync();
+			}else if($_REQUEST["opcion"]=="progreso")
+			{
+				$this->progreso();
+			}else if($_REQUEST["opcion"]=="consulta")
+                        {
+                            $this->consulta();
+                        }else if($_REQUEST["opcion"]=="eliminarVotante")
+                        {
+                            $this->eliminarVotante();
+
+                        }else if($_REQUEST["opcion"]=="guardarVotante")
+                        {
+                            $this->guardarVotante();
+                        }
 	}
 
 
@@ -54,7 +77,7 @@ class FuncionSubirCenso
 		$this->miConfigurador=Configurador::singleton();
 
 		$this->miInspectorHTML=InspectorHTML::singleton();
-			
+
 		$this->ruta=$this->miConfigurador->getVariableConfiguracion("rutaBloque");
 
 		$this->miMensaje=Mensaje::singleton();
@@ -75,7 +98,7 @@ class FuncionSubirCenso
 		$this->ruta=$unaRuta;
 		//Incluir las funciones
 	}
-	
+
 	function verificarCampos(){
 		include_once($this->ruta."/funcion/verificarCampos.php");
 		if($this->error==true){
@@ -83,28 +106,54 @@ class FuncionSubirCenso
 		}else{
 			return true;
 		}
-	
-	
+
+
 	}
-	
+
+	function progresoArchivo(){
+		include_once($this->ruta."/funcion/progresoArchivo.php");
+	}
+
+	function cargarAsync(){
+		include_once($this->ruta."/funcion/cargarAsync.php");
+	}
+	function clavesAsync(){
+		include_once($this->ruta."/funcion/clavesAsync.php");
+	}
+	function progreso(){
+		include_once($this->ruta."/funcion/progreso.php");
+	}
 	function cargarArchivo()
 	{
 		include_once($this->ruta."/funcion/cargarArchivo.php");
-	}	
-        
+	}
+
 	function guardarEleccion()
 	{
 		include_once($this->ruta."/funcion/guardarEleccion.php");
-	}	
-	
+	}
+
 	function procesarAjax(){
 		include_once($this->ruta."/funcion/procesarAjax.php");
 	}
-	
+
+    function eliminarVotante(){
+        include_once($this->ruta."/funcion/eliminarVotante.php");
+    }
+
 	function redireccionar($opcion, $valor=""){
 		include_once($this->ruta."/funcion/redireccionar.php");
 	}
-	
+
+    function consulta(){
+        include_once($this->ruta."/funcion/consulta.php");
+    }
+
+    function guardarVotante(){
+        include_once($this->ruta."/funcion/guardarVotante.php");
+    }
+
+
 	/**
 	 * Métodos de acceso
 	 * @param unknown $a
@@ -130,4 +179,4 @@ class FuncionSubirCenso
 	}
 
 }
-?>
+

@@ -6,7 +6,7 @@ if (!isset($GLOBALS["autorizado"])) {
     exit;
 }
 
-ini_set('display_errors', 0);
+//ini_set('display_errors', 0);
 $datos = $this->miConfigurador->fabricaConexiones->crypto->decodificar($_REQUEST['datos']);
 $datos = unserialize(urldecode($datos));
 $datos = $datos[0];
@@ -42,7 +42,7 @@ $resultadoProcesos = $esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
 	unset($atributos);
 	echo $this->miFormulario->campoEspacio();
 
-	echo "<div class='datagrid'><table id='tablaProcesosActivos'>";
+	echo "<div><table id='tablaProcesosActivos'>";
 	echo "<thead>
                 <tr>
                     <th>Elección</th>
@@ -51,8 +51,7 @@ $resultadoProcesos = $esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
                 </tr>
             </thead>
             <tbody>";
-
-	foreach($resultadoProcesos as $key => $value)
+        foreach($resultadoProcesos as $key => $value)
 		{ 
 		 $mostrarHtml = "<tr>";
          $mostrarHtml.= "<td>".$resultadoProcesos[$key][6]."</td>";
@@ -96,12 +95,6 @@ $resultadoProcesos = $esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
 	$valorCodificado = $this->miConfigurador->fabricaConexiones->crypto->codificar($valorCodificado);
 
 
-//------------------Division para las pestañas-------------------------
-$atributos["id"] = "tabs";
-$atributos["estilo"] = "";
-echo $this->miFormulario->division("inicio", $atributos);
-unset($atributos);
-
 //---------------Inicio Formulario (<form>)--------------------------------
 $atributos["id"] = $nombreFormulario;
 $atributos["tipoFormulario"] = "multipart/form-data";
@@ -126,7 +119,8 @@ if (!isset($fechaVoto) ||  $fechaVoto== '') {
     $atributos["tabIndex"] = $tab++;
     $atributos["valor"] = $this->lenguaje->getCadena($esteCampo);
     $atributos["nombreFormulario"] = $nombreFormulario;
-    echo $this->miFormulario->campoBoton($atributos);
+    //Se deshabilita boton, descomentar para habilitar
+    //echo $this->miFormulario->campoBoton($atributos);
     unset($atributos);
 //-------------Fin Control Boton----------------------
 }
@@ -153,10 +147,8 @@ $atributos["valor"] = "cambiarContrasena";
 echo $this->miFormulario->campoCuadroTexto($atributos);
 unset($atributos);
 
-
 //Fin del Formulario
 echo $this->miFormulario->formulario("fin");
 
-//------------------Fin Division para las pestañas-------------------------
-echo $this->miFormulario->division("fin");
+
 ?>

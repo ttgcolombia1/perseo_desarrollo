@@ -1,20 +1,20 @@
-//$(function(){
-//	// Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
-//	
-//        $("#agregar").on('click', function(){
-//                var table = document.getElementById('tablaCandidatos');
-//                var rowCount = table.rows.length;
-//		var nuevoTr = $("#tablaCandidatos tbody tr:eq(0)").clone();
-//                nuevoTr.removeClass('fila-base').appendTo("#tablaCandidatos tbody").attr("id","candidato" + rowCount);
-//	});
-// 
-//	// Evento que selecciona la fila y la elimina 
-//	$(document).on("click",".eliminar",function(){
-//		var parent = $(this).parents().get(0);
-//		$(parent).remove();
-//	});
-//});
+$(function(){
+    $("body").on('click','.eliminar',function(e){
 
+        var r = confirm("Va a eliminar un candidato, esta seguro?");
+        if (r === true) {
+            var id = $(this).next("input").val();
+            var url_eliminar = $("input[name=candidato_url]").val();
+            $.post(url_eliminar, {'documento': id},function(data){
+                console.log(data);
+            });
+
+            $(this).closest("tr").remove();
+        }
+    });
+});
+
+// Evento que selecciona la fila y la elimina
 function agregarfila(idEleccion)
 {
     //$("#agregar" + idEleccion).on('click', function(){
@@ -26,11 +26,7 @@ function agregarfila(idEleccion)
             document.getElementById("marcoDatosCandidatos").style.width="90%"; 
     //});
 
-    // Evento que selecciona la fila y la elimina 
-    $(document).on("click",".eliminar",function(){
-            var parent = $(this).parents().get(0);
-            $(parent).remove();
-    });
+
 }
 
 function agregarfilaLista(idEleccion)

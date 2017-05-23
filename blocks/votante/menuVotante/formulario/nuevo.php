@@ -43,12 +43,7 @@ echo $this->miFormulario->listaNoOrdenada($atributos);
 
 
 // ----------------------División ----------------------------------
-$esteCampo = 'clockDiv';
-$atributos ['id'] = $esteCampo;
-$atributos ['estilo'] = $esteCampo;
-echo $this->miFormulario->division('inicio', $atributos);
-echo $this->miFormulario->division('fin');
-unset($atributos);
+
 
 
 

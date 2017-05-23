@@ -1,6 +1,8 @@
 <?php
 $indice=0;
-$estilo[$indice++]="menuVertical/vertical_menu.css";
+//$estilo[$indice++]="menuVertical/vertical_menu.css";
+$estilo[$indice++]="";
+
 $rutaBloque=$this->miConfigurador->getVariableConfiguracion("host");
 $rutaBloque.=$this->miConfigurador->getVariableConfiguracion("site");
 

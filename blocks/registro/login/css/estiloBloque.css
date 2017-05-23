@@ -16,15 +16,19 @@
 
 #datos
 {
-    margin: 50px auto 100px auto;  
-    padding:20px;
-    background-color: #FCFCFC;
-    float:left;
+
+padding: 20px;
+/* background-color: #f3f8ff; */
+float: left;
+border: 1px solid #dcd8d8;
+border-radius: 10px;
+box-shadow: 1px 1px #f1f1f1;
+margin-top: 160px;
 }
 
 .ancho
 {
     width:80%;
     clear:both;
-    
+
 }

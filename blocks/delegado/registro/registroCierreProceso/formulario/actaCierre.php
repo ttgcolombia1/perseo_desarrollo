@@ -77,22 +77,37 @@ $textoActa = '<p class=MsoNormal align=center style=\'text-align:center\'><a
                         
                         <p class=MsoNormal style=\'text-align:justify\'><span style=\'mso-bookmark:OLE_LINK1\'><span
                         style=\'mso-bookmark:OLE_LINK2\'><span lang=ES-TRAD style=\'font-size:12.0pt;
-                        mso-bidi-font-size:10.0pt; \'>El escrutinio general de la '.$resultadoActa[0]['nombreEleccion'].', dio como resultado los siguientes:<o:p></o:p></span></span></span></p>
+                        mso-bidi-font-size:10.0pt; \'>El escrutinio general de la '.$resultadoActa[0]['nombreEleccion'].', dio los siguientes resultados:<o:p></o:p></span></span></span></p>
 
                         <div align=center>
 
-                        <table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width=560
-                         style=\'width:420.05pt;border-collapse:collapse;border:none;mso-border-alt:
+                        <table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width=350
+                         style=\'width:350.05pt;border-collapse:collapse;border:none;mso-border-alt:
                          solid windowtext .5pt;mso-yfti-tbllook:40;mso-padding-alt:0cm 5.4pt 0cm 5.4pt\'>
                          <tr style=\'mso-yfti-irow:0;mso-yfti-firstrow:yes\'>
-                          <td width=560 valign=top style=\'width:420.05pt;border:solid windowtext 1.0pt;
+                          <td width=300 valign=top style=\'width:420.05pt;border:solid windowtext 1.0pt;
                           mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt\'>
                           <p class=MsoNormal align=center style=\'text-align:center\'><span
                           style=\'mso-bookmark:OLE_LINK1\'><span style=\'mso-bookmark:OLE_LINK2\'><b><span
-                          lang=ES-TRAD style=\'font-size:11.0pt; ;
+                          lang=ES-TRAD style=\'font-size:10.0pt; ;
                           color:black\'>CANDIDATOS A '.strtoupper($resultadoActa[0]['nombreEleccion']).' DE LA UNIVERSIDAD DISTRITAL FRANCISCO JOSE DE CALDAS.<o:p></o:p></span></b></span></span></p>
                           </td>
+                          <td width=100 valign=top style=\'width:420.05pt;border:solid windowtext 1.0pt;
+                          mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt\'>
+                          <p class=MsoNormal align=center style=\'text-align:center\'><span
+                          style=\'mso-bookmark:OLE_LINK1\'><span style=\'mso-bookmark:OLE_LINK2\'><b><span
+                          lang=ES-TRAD style=\'font-size:10.0pt; ;
+                          color:black\'>LISTA<o:p></o:p></span></b></span></span></p>
+                          </td>
+                          <td width=100 valign=top style=\'width:420.05pt;border:solid windowtext 1.0pt;
+                          mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt\'>
+                          <p class=MsoNormal align=center style=\'text-align:center\'><span
+                          style=\'mso-bookmark:OLE_LINK1\'><span style=\'mso-bookmark:OLE_LINK2\'><b><span
+                          lang=ES-TRAD style=\'font-size:10.0pt; ;
+                          color:black\'>VOTOS<o:p></o:p></span></b></span></span></p>
+                          </td>
                           <span style=\'mso-bookmark:OLE_LINK1\'><span style=\'mso-bookmark:OLE_LINK2\'></span></span>
+                          
                          </tr>';
 
 $cadena_sql=$this->sql->cadena_sql("tiporesultados",$_REQUEST['eleccion']);
@@ -123,7 +138,7 @@ if($tiporesultados[0][1] == 1)
     {
         $sumaVotos += $lista[$i]['resultado'];
         $textoActa.='<tr style=\'mso-yfti-irow:2;height:14.15pt\'>
-                              <td width=287 style=\'width:215.55pt;border:solid windowtext 1.0pt;border-top:
+                              <td width=300 style=\'width:215.55pt;border:solid windowtext 1.0pt;border-top:
                               none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
                               padding:0cm 5.4pt 0cm 5.4pt;height:14.15pt\'><span style=\'mso-bookmark:OLE_LINK1\'><span
                               style=\'mso-bookmark:OLE_LINK2\'></span></span>
@@ -132,23 +147,22 @@ if($tiporesultados[0][1] == 1)
                                ;color:black;mso-bidi-font-weight:bold\'>'.$lista[$i]['candidatos'].'</span></span></span></p>
                               </td>
                               <span style=\'mso-bookmark:OLE_LINK1\'><span style=\'mso-bookmark:OLE_LINK2\'></span></span>
-                              <td width=132 style=\'width:98.7pt;border-top:none;border-left:none;
+                              <td width=100 style=\'width:98.7pt;border-top:none;border-left:none;
                               border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
                               mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
                               mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:14.15pt\'>
                               <p class=MsoNormal align=center style=\'text-align:center\'><span
                               style=\'mso-bookmark:OLE_LINK1\'><span style=\'mso-bookmark:OLE_LINK2\'><span
-                              lang=ES-TRAD style=\'font-size:12.0pt; \'>'.$lista[$i]['nombre'].'<o:p></o:p></span></span></span></p>
+                              lang=ES-TRAD style=\'font-size:9.0pt; \'>'.$lista[$i]['nombre'].'<o:p></o:p></span></span></span></p>
                               </td>
                               <span style=\'mso-bookmark:OLE_LINK1\'><span style=\'mso-bookmark:OLE_LINK2\'></span></span>
-                              <td width=141 valign=top style=\'width:105.8pt;border-top:none;border-left:
-                              none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+                              <td width=100 style=\'width:98.7pt;border-top:none;border-left:none;
+                              border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
                               mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-                              mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:14.15pt\'><span
-                              style=\'mso-bookmark:OLE_LINK1\'><span style=\'mso-bookmark:OLE_LINK2\'></span></span>
+                              mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:14.15pt\'>
                               <p class=MsoNormal align=center style=\'text-align:center\'><span
                               style=\'mso-bookmark:OLE_LINK1\'><span style=\'mso-bookmark:OLE_LINK2\'><span
-                              lang=ES-TRAD style=\'font-size:8.0pt; \'>'.$lista[$i]['resultado'].'<o:p>&nbsp;</o:p></span></span></span></p>
+                              lang=ES-TRAD style=\'font-size:9.0pt; \'>'.$lista[$i]['resultado'].'<o:p></o:p></span></span></span></p>
                               </td>
                               <span style=\'mso-bookmark:OLE_LINK1\'><span style=\'mso-bookmark:OLE_LINK2\'></span></span>
                              </tr>';
@@ -182,7 +196,7 @@ else{
         //$textoActa.='</tr>';
         $textoActa.='<tr style=\'mso-yfti-irow:5;mso-yfti-lastrow:yes;height:11.95pt\'>';
         $textoActa.='<td align="center">';
-        $textoActa.='<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width=560
+        $textoActa.='<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width=350
                          style=\'width:420.05pt;border-collapse:collapse;border:none;mso-border-alt:
                          solid windowtext .5pt;mso-yfti-tbllook:480;mso-padding-alt:0cm 5.4pt 0cm 5.4pt\'>';
         $textoActa.='<tr style=\'mso-yfti-irow:1;height:17.45pt\'>';
@@ -197,7 +211,7 @@ else{
         $textoActa.='</td>';
         $textoActa.='</tr>';
         $textoActa.='<tr style=\'mso-yfti-irow:1;height:17.45pt\'>';    
-        $textoActa.='<td width=35 style=\'width:215.55pt;border:solid windowtext 1.0pt;border-top:
+        $textoActa.='<td width=18 style=\'width:75.55pt;border:solid windowtext 1.0pt;border-top:
                           none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
                           background:#D9D9D9;mso-shading:windowtext;mso-pattern:gray-15 auto;
                           padding:0cm 5.4pt 0cm 5.4pt;height:17.45pt\'>
@@ -206,7 +220,7 @@ else{
                           lang=ES-TRAD style=\'font-size:8.0pt; \'>';
                 $textoActa.='No. Plancha';
             $textoActa.='</td>';
-            $textoActa.='<td width=135 style=\'width:215.55pt;border:solid windowtext 1.0pt;border-top:
+            $textoActa.='<td width=125 style=\'width:170.55pt;border:solid windowtext 1.0pt;border-top:
                           none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
                           background:#D9D9D9;mso-shading:windowtext;mso-pattern:gray-15 auto;
                           padding:0cm 5.4pt 0cm 5.4pt;height:17.45pt\'>
@@ -252,7 +266,7 @@ else{
                 $textoActa.=$resultadoTipoEstamentos[$m]['descripcion'];
             $textoActa.='</td>';*/
         }
-            $textoActa.='<td width=35 style=\'width:215.55pt;border:solid windowtext 1.0pt;border-top:
+            $textoActa.='<td width=35 style=\'width:85.55pt;border:solid windowtext 1.0pt;border-top:
                           none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
                           background:#D9D9D9;mso-shading:windowtext;mso-pattern:gray-15 auto;
                           padding:0cm 5.4pt 0cm 5.4pt;height:17.45pt\'>
@@ -267,10 +281,11 @@ else{
             $cadena_sql=$this->sql->cadena_sql("candidatos",$resultadosDecod[$n][0]);
             $resultadosCandidat=$esteRecursoDB->ejecutarAcceso($cadena_sql,"busqueda");
             $textoActa.='<tr style=\'mso-yfti-irow:2;height:14.15pt\'>';
-                $textoActa.='<td>';
+                         
+                $textoActa.='<td width=18 style=\'font-size:7.0pt; color:black\'>';
                     $textoActa.=$resultadosDecod[$n]['nombre'];
                 $textoActa.='</td>';
-                $textoActa.='<td>';
+                $textoActa.='<td width=170 style=\'font-size:7.0pt; color:black\'>';
                     $textoActa.=$resultadosCandidat[0][0].' '.$resultadosCandidat[0][1];
                 $textoActa.='</td>';
                 $variable['plancha']=$resultadosDecod[$n]['lista'];
@@ -288,7 +303,7 @@ else{
                     if($tipoEstamento[$j]){
                         $totales+=$resultadoEstamento[0]['cuenta'];
 
-                        $textoActa.='<td>';
+                        $textoActa.='<td width=25 style=\'font-size:7.0pt; color:black\'>';
                             if($resultadoEstamento[0]['cuenta']!=''){
                                 $textoActa.=$resultadoEstamento[0]['cuenta'];
                             }else{
@@ -297,18 +312,18 @@ else{
                         $textoActa.='</td>';
                     }
                 }
-                $textoActa.='<td>';
+                $textoActa.='<td width=18 style=\'font-size:7.0pt; color:black\'>';
                     $textoActa.=$resultadosDecod[$n]['cuenta'];
                 $textoActa.='</td>';
             $textoActa.='</tr>';
         }
 
             $textoActa.='<tr style=\'mso-yfti-irow:2;height:14.15pt\'>';
-                $textoActa.='<td width=135 colspan=2 valign=top style=\'width:420.05pt;border:solid windowtext 1.0pt;
+                $textoActa.='<td width=125 colspan=2 valign=top style=\'width:125.05pt;border:solid windowtext 1.0pt;
                           mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt\'>
                           <p class=MsoNormal align=center style=\'text-align:center\'><span
                           style=\'mso-bookmark:OLE_LINK1\'><span style=\'mso-bookmark:OLE_LINK2\'><b><span
-                          lang=ES-TRAD style=\'font-size:11.0pt; ;
+                          lang=ES-TRAD style=\'font-size:7.0pt;
                           color:black\'>';
                     $textoActa.="TOTALES";
                 $textoActa.='</td>';
@@ -318,11 +333,19 @@ else{
                 $cuentaEstamento=explode(",",$cuentaEstamentos);
                 for($r=0;$r<count($resultadoTipoEstamentos);$r++)
                 {
-                    $textoActa.='<td>';
+                    $textoActa.='<td width=18 style=\'width:250.05pt;border:solid windowtext 1.0pt;
+                          mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt\'>
+                          <p class=MsoNormal align=center style=\'text-align:center\'><span
+                          style=\'mso-bookmark:OLE_LINK1\'><span style=\'mso-bookmark:OLE_LINK2\'><span
+                          lang=ES-TRAD style=\'font-size:7.0pt; color:black\'>';
                         $textoActa.=$cuentaEstamento[$r];
                     $textoActa.='</td>';
                 }
-                $textoActa.='<td>';
+                $textoActa.='<td width=18 style=\'width:250.05pt;border:solid windowtext 1.0pt;
+                          mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt\'>
+                          <p class=MsoNormal align=center style=\'text-align:center\'><span
+                          style=\'mso-bookmark:OLE_LINK1\'><span style=\'mso-bookmark:OLE_LINK2\'><span
+                          lang=ES-TRAD style=\'font-size:7.0pt; color:black\'>';
                     $textoActa.=$totales;
                 $textoActa.='</td>';
             $textoActa.='</tr>';
@@ -330,11 +353,11 @@ else{
             $pond=explode(',', $ponderacion); 
             
             $textoActa.='<tr style=\'mso-yfti-irow:2;height:14.15pt\'>';
-                $textoActa.='<td width=135 colspan=2 valign=top style=\'width:420.05pt;border:solid windowtext 1.0pt;
+                $textoActa.='<td width=135 colspan=2 style=\'width:320.05pt;border:solid windowtext 1.0pt;
                           mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt\'>
                           <p class=MsoNormal align=center style=\'text-align:center\'><span
                           style=\'mso-bookmark:OLE_LINK1\'><span style=\'mso-bookmark:OLE_LINK2\'><b><span
-                          lang=ES-TRAD style=\'font-size:11.0pt; ;
+                          lang=ES-TRAD style=\'font-size:7.0pt; ;
                           color:black\'>';
                     $textoActa.="PORCENTAJE <br> POR ESTAMENTO";
                 $textoActa.='</td>';
@@ -344,7 +367,11 @@ else{
                 //Resultados de votos por estamento
                 for($r=0;$r<count($resultadoTipoEstamentos);$r++)
                 {
-                    $textoActa.='<td>';
+                    $textoActa.='<td width=18 style=\'width:250.05pt;border:solid windowtext 1.0pt;
+                          mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt\'>
+                          <p class=MsoNormal align=center style=\'text-align:center\'><span
+                          style=\'mso-bookmark:OLE_LINK1\'><span style=\'mso-bookmark:OLE_LINK2\'><span
+                          lang=ES-TRAD style=\'font-size:7.0pt; color:black\'>';
                         //Si el número de votos por estamento es diferente a 0
                         if($cuentaEstamento[$r] > 0){
                             //Calculo el coeficiente
@@ -361,11 +388,11 @@ else{
             $textoActa.='</tr>';
             
             $textoActa.='<tr style=\'mso-yfti-irow:2;height:14.15pt\'>';
-                $textoActa.='<td width=135 colspan=2 valign=top style=\'width:420.05pt;border:solid windowtext 1.0pt;
+                $textoActa.='<td width=135 colspan=2 style=\'width:420.05pt;border:solid windowtext 1.0pt;
                           mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt\'>
                           <p class=MsoNormal align=center style=\'text-align:center\'><span
                           style=\'mso-bookmark:OLE_LINK1\'><span style=\'mso-bookmark:OLE_LINK2\'><b><span
-                          lang=ES-TRAD style=\'font-size:11.0pt; ;
+                          lang=ES-TRAD style=\'font-size:7.0pt; ;
                           color:black\'>';
                     $textoActa.="COEFICIENTES <br> POR ESTAMENTO";
                 $textoActa.='</td>';
@@ -375,7 +402,11 @@ else{
                 //Resultados de votos por estamento
                 for($r=0;$r<count($resultadoTipoEstamentos);$r++)
                 {
-                    $textoActa.='<td>';
+                    $textoActa.='<td width=18 style=\'width:250.05pt;border:solid windowtext 1.0pt;
+                          mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt\'>
+                          <p class=MsoNormal align=center style=\'text-align:center\'><span
+                          style=\'mso-bookmark:OLE_LINK1\'><span style=\'mso-bookmark:OLE_LINK2\'><span
+                          lang=ES-TRAD style=\'font-size:7.0pt; color:black\'>';
                         //Si el número de votos por estamento es diferente a 0
                         if($cuentaEstamento[$r] > 0){
                             //Calculo el coeficiente
@@ -397,7 +428,7 @@ else{
         //Tabla para ponderado
         /*******************************************************/
         //echo '<br>';    
-        $textoActa.='<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width=560
+        $textoActa.='<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width=350
                          style=\'width:420.05pt;border-collapse:collapse;border:none;mso-border-alt:
                          solid windowtext .5pt;mso-yfti-tbllook:480;mso-padding-alt:0cm 5.4pt 0cm 5.4pt\'>';
         $textoActa.='<tr style=\'mso-yfti-irow:1;height:17.45pt\'>';
@@ -412,7 +443,7 @@ else{
         $textoActa.='</td>';
         $textoActa.='</tr>';
 	$textoActa.='<tr style=\'mso-yfti-irow:1;height:17.45pt\'>';
-		$textoActa.='<td width=35 style=\'width:215.55pt;border:solid windowtext 1.0pt;border-top:
+		$textoActa.='<td width=18 style=\'width:75.55pt;border:solid windowtext 1.0pt;border-top:
                           none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
                           background:#D9D9D9;mso-shading:windowtext;mso-pattern:gray-15 auto;
                           padding:0cm 5.4pt 0cm 5.4pt;height:17.45pt\'>
@@ -421,7 +452,7 @@ else{
                           lang=ES-TRAD style=\'font-size:8.0pt; \'>';
                 $textoActa.='No. Plancha';
             $textoActa.='</td>';
-            $textoActa.='<td width=135 style=\'width:215.55pt;border:solid windowtext 1.0pt;border-top:
+            $textoActa.='<td width=125 style=\'width:170.55pt;border:solid windowtext 1.0pt;border-top:
                           none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
                           background:#D9D9D9;mso-shading:windowtext;mso-pattern:gray-15 auto;
                           padding:0cm 5.4pt 0cm 5.4pt;height:17.45pt\'>
@@ -430,6 +461,7 @@ else{
                           lang=ES-TRAD style=\'font-size:8.0pt; \'>';
                 $textoActa.='Candidato';
             $textoActa.='</td>';
+            
         for($m=0;$m<count($resultadoTipoEstamentos);$m++)
         {
             $tipoEstamento .= $resultadoTipoEstamentos[$m]['idtipo']."";   
@@ -444,13 +476,14 @@ else{
                 $textoActa.=$resultadoTipoEstamentos[$m]['descripcion'];
             $textoActa.='</td>';
         }
-            $textoActa.='<td width=35 style=\'width:215.55pt;border:solid windowtext 1.0pt;border-top:
+            $textoActa.='<td width=35 style=\'width:85.55pt;border:solid windowtext 1.0pt;border-top:
                           none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
                           background:#D9D9D9;mso-shading:windowtext;mso-pattern:gray-15 auto;
                           padding:0cm 5.4pt 0cm 5.4pt;height:17.45pt\'>
                           <p class=MsoNormal align=center style=\'text-align:center\'><span
                           style=\'mso-bookmark:OLE_LINK1\'><span style=\'mso-bookmark:OLE_LINK2\'><b><span
                           lang=ES-TRAD style=\'font-size:8.0pt; \'>';
+             
                 $textoActa.='Resultado final';
             $textoActa.='</td>';
 	$textoActa.='<tr>';
@@ -461,10 +494,10 @@ else{
             $cadena_sql=$this->sql->cadena_sql("candidatos",$resultadosDecod[$n][0]);
             $resultadosCandidat=$esteRecursoDB->ejecutarAcceso($cadena_sql,"busqueda");
             $textoActa.='<tr style=\'mso-yfti-irow:2;height:14.15pt\'>';
-                $textoActa.='<td>';
+                $textoActa.='<td width=18 style=\'font-size:7.0pt; color:black\'>';
                     $textoActa.=$resultadosDecod[$n]['nombre'];
                 $textoActa.='</td>';
-                $textoActa.='<td>';
+                $textoActa.='<td width=170 style=\'font-size:7.0pt; color:black\'>';
                     $textoActa.=$resultadosCandidat[0][0].' '.$resultadosCandidat[0][1];
                 $textoActa.='</td>';
                 $variable['plancha']=$resultadosDecod[$n]['lista'];
@@ -480,7 +513,7 @@ else{
                     $cuentaEstamento.=$resultadoCuentaEstamento[0]['cuenta']."";
 
                     if($tipoEstamento[$j]){
-                        $textoActa.='<td>';
+                        $textoActa.='<td width=18 style=\'font-size:7.0pt; color:black\'>';
                         //Si resultado de voto decodificado por estamento es diferente a vacío, asigne 0;
                             if($resultadoEstamento[0]['cuenta']!=''){
                                 //calcula el ponderado de las votaciones decodificadas
@@ -495,7 +528,7 @@ else{
                         $resultadoFinal[$n]=$resultadoFinal[$n]+$ponderado[$j];
                     }
                 }
-                $textoActa.='<td>';
+                $textoActa.='<td width=18 style=\'font-size:7.0pt; color:black\'>';
                     $textoActa.=round($resultadoFinal[$n],4);
                     $res[$n]=array_sum($resultadoFinal);
                 $textoActa.='</td>';
@@ -508,7 +541,7 @@ else{
                           mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt\'>
                           <p class=MsoNormal align=center style=\'text-align:center\'><span
                           style=\'mso-bookmark:OLE_LINK1\'><span style=\'mso-bookmark:OLE_LINK2\'><b><span
-                          lang=ES-TRAD style=\'font-size:11.0pt; ;
+                          lang=ES-TRAD style=\'font-size:7.0pt; ;
                           color:black\'>';
                     $textoActa.="TOTAL <br>PONDERADO";
                 $textoActa.='</td>';
@@ -521,7 +554,7 @@ else{
                     $textoActa.='</td>';
                 }
                 //Calculo la suma de resultado final de todas las planchas
-                $textoActa.='<td>';
+                $textoActa.='<td width=18 style=\'font-size:7.0pt; color:black\'>';
                     $textoActa.=$sumatotal;
                 $textoActa.='</td>';
             $textoActa.='</tr>';
@@ -535,6 +568,7 @@ else{
         $textoActa.='<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width=50
                          style=\'width:40.05pt;border-collapse:collapse;border:none;mso-border-alt:
                          solid windowtext .5pt;mso-yfti-tbllook:40;mso-padding-alt:0cm 5.4pt 0cm 5.4pt\'>';
+        
         $textoActa.='<tr style=\'mso-yfti-irow:1;height:17.45pt\'>';
         $textoActa.='<td width=35 colspan=8 style=\'width:215.55pt;border:solid windowtext 1.0pt;border-top:
                           none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
@@ -543,7 +577,7 @@ else{
                           <p class=MsoNormal align=center style=\'text-align:center\'><span
                           style=\'mso-bookmark:OLE_LINK1\'><span style=\'mso-bookmark:OLE_LINK2\'><b><span
                           lang=ES-TRAD style=\'font-size:8.0pt; \'>';
-        $textoActa.='PORCENTAJE DE PONDERADOS';
+        $textoActa.='<br><br><br><br><br><br>PORCENTAJE DE PONDERADOS';
         $textoActa.='</td>';
         $textoActa.='</tr>';
         //$textoActa.='<caption>Porcentaje de ponderados</caption>';
@@ -583,16 +617,16 @@ else{
             $cadena_sql=$this->sql->cadena_sql("candidatos",$resultadosDecod[$n][0]);
             $resultadosCandidat=$esteRecursoDB->ejecutarAcceso($cadena_sql,"busqueda");
             $textoActa.='<tr style=\'mso-yfti-irow:2;height:14.15pt\'>';
-                $textoActa.='<td>';
+                $textoActa.='<td width=18 style=\'font-size:7.0pt; color:black\'>';
                     $textoActa.=$resultadosDecod[$n]['nombre'];
                     $labels .= "'Lista: ".$resultadosDecod[$n]['nombre']."', ";
                 $textoActa.='</td>';
-                $textoActa.='<td>';
+                $textoActa.='<td width=170 style=\'font-size:7.0pt; color:black\'>';
                     $textoActa.=$resultadosCandidat[0][0].' '.$resultadosCandidat[0][1];
                 $textoActa.='</td>';
                 $variable['plancha']=$resultadosDecod[$n]['lista'];
 
-                $textoActa.='<td>';
+                $textoActa.='<td width=18 style=\'font-size:7.0pt; color:black\'>';
                     //echo round($resultadoFinal[$n],4)."<br>";
                     $rf=round($resultadoFinal[$n],4);
                     $prueba[$cuentaDecod]=$res[$cuentaDecod];
@@ -636,6 +670,11 @@ else{
                         normal\'><span lang=ES-TRAD style=\'font-size:12.0pt;mso-bidi-font-size:10.0pt;
                          \'>Jurado. Nombre: ________________________ <span
                         style=\'mso-tab-count:1\'>        </span>Firma: ________________<o:p></o:p></span></b></p>
+                        
+                         <p class=MsoNormal style=\'text-align:justify\'><b style=\'mso-bidi-font-weight:
+                        normal\'><span lang=ES-TRAD style=\'font-size:12.0pt;mso-bidi-font-size:10.0pt;
+                         \'>Jurado. Nombre: ________________________ <span
+                        style=\'mso-tab-count:1\'>        </span>Firma: ________________<o:p></o:p></span></b></p>
 
                          <p class=MsoNormal style=\'text-align:justify\'><b style=\'mso-bidi-font-weight:
                         normal\'><span lang=ES-TRAD style=\'font-size:12.0pt;mso-bidi-font-size:10.0pt;
@@ -653,18 +692,25 @@ else{
 
                         <p class=MsoNormal align=center style=\'text-align:center\'><b style=\'mso-bidi-font-weight:
                         normal\'><span lang=ES-TRAD style=\'font-size:12.0pt;mso-bidi-font-size:10.0pt;
-                         \'>Secretario del Consejo Participación
-                        Universitaria Provisional<o:p></o:p></span></b></p>
+                         \'>Secretario del Consejo  de Participación  Universitaria<o:p></o:p></span></b></p>
 
                         <p class=MsoNormal style=\'text-align:justify\'><b style=\'mso-bidi-font-weight:
                         normal\'><span lang=ES-TRAD style=\'font-size:12.0pt;mso-bidi-font-size:10.0pt;
                          \'>Nombre: _________________________________ <span
                         style=\'mso-tab-count:1\'>   </span>Firma: ________________ <o:p></o:p></span></b></p>
+                        
+                        <p class=MsoNormal align=center style=\'text-align:center\'><b style=\'mso-bidi-font-weight:
+                        normal\'><span lang=ES-TRAD style=\'font-size:12.0pt;mso-bidi-font-size:10.0pt;
+                         \'>Delegado del Consejo Superior Universitario<o:p></o:p></span></b></p>
+
+                        <p class=MsoNormal style=\'text-align:justify\'><b style=\'mso-bidi-font-weight:
+                        normal\'><span lang=ES-TRAD style=\'font-size:12.0pt;mso-bidi-font-size:10.0pt;
+                         \'>Nombre: _________________________________ <span
+                        style=\'mso-tab-count:1\'>   </span>Firma: ________________ <o:p></o:p></span></b></p>    
 
                         <p class=MsoNormal align=center style=\'text-align:center\'><b style=\'mso-bidi-font-weight:
                         normal\'><span lang=ES-TRAD style=\'font-size:12.0pt;mso-bidi-font-size:10.0pt;
-                         \'>Delegado del Consejo Participación
-                        Universitaria Provisional<o:p></o:p></span></b></p>
+                         \'>Delegado del Consejo de Participación Universitaria Provisional<o:p></o:p></span></b></p>
 
                         <p class=MsoNormal style=\'text-align:justify\'><b style=\'mso-bidi-font-weight:
                         normal\'><span lang=ES-TRAD style=\'font-size:12.0pt;mso-bidi-font-size:10.0pt;

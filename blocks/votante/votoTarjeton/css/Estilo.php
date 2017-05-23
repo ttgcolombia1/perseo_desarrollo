@@ -6,7 +6,6 @@ $indice=0;
 //$estilo[$indice++]="jquery.dataTables_themeroller.css";
 
 $estilo[$indice++]="tarjeton.css";
-$estilo[$indice++]="tablasVoto.css";
 $estilo[$indice++]="contador.css";
 
 

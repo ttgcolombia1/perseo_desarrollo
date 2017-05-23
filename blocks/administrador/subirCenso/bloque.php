@@ -44,7 +44,6 @@ if(class_exists('BloqueSubirCenso') === false){
 
 		var $miSql;
 
-
 		var $miConfigurador;
 
 		public function __construct($esteBloque,$lenguaje="")
@@ -56,8 +55,8 @@ if(class_exists('BloqueSubirCenso') === false){
 
 			$ruta=$this->miConfigurador->getVariableConfiguracion("raizDocumento");
 			$rutaURL=$this->miConfigurador->getVariableConfiguracion("host").$this->miConfigurador->getVariableConfiguracion("site");
-				
-				
+
+
 
 
 			if($esteBloque["grupo"]==""){
@@ -88,13 +87,13 @@ if(class_exists('BloqueSubirCenso') === false){
 
 		public function bloque(){
 
-				
+
 
 			if(isset($_REQUEST['botonCancelar'])&&$_REQUEST['botonCancelar']=="true"){
 				$this->miFuncion->redireccionar("paginaPrincipal");
 			}else{
-					
-					
+
+
 				if(!isset($_REQUEST['action'])){
 
 					$this->miFrontera->setSql($this->miSql);
@@ -137,4 +136,3 @@ $esteBloque->bloque();
 
 
 
-?>

@@ -53,8 +53,10 @@ if(!isset($GLOBALS["autorizado"]))
 	$resultadoEstado = $esteRecursoDB->ejecutarAcceso($this->cadena_sql, "acceso");
 	
         if($resultadoEstado)
-	{	
-            $idProceso=$esteRecursoDB->ultimo_insertado();
+	{   $this->cadena_sql = $this->sql->cadena_sql("buscaProcesoNombre", $arregloDatos);
+	    $resultadoProc = $esteRecursoDB->ejecutarAcceso($this->cadena_sql, "busqueda");
+            //$idProceso=$esteRecursoDB->ultimo_insertado();
+            $idProceso=$resultadoProc[0][0];
             $arregloPasa = array($idProceso,$_REQUEST['nombreProceso']);
             $this->funcion->redireccionar('inserto',$arregloPasa);
 	}else

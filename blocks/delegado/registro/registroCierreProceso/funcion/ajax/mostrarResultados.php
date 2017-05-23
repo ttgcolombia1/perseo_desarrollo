@@ -19,7 +19,7 @@ if($resultadoVotoDecodificado)
 {
 	$cadena_sql=$this->sql->cadena_sql("resultadosDecodificados",''); 
 	$registro=$esteRecursoDB->ejecutarAcceso($cadena_sql,"busqueda");
-	var_dump($registro);
+	//var_dump($registro);
 	
 	
 }else

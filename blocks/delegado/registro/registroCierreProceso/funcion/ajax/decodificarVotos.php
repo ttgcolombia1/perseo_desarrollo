@@ -39,12 +39,17 @@ if($resultado){
     
         $cadena_sql = $this->sql->cadena_sql('llavePrivadaProceso', $_REQUEST['eleccion']);
         $resultadoLlave = $esteRecursoDB->ejecutarAcceso($cadena_sql, 'busqueda');
-	
+	       
         $ubicacionLlavePublica = $resultado[0]['valor'].$resultadoLlave[0][1];
         $ubicacionLlavePrivada = $resultado[1]['valor'].$resultadoLlave[0][1];
-	        
-        $cadena_sql= $this->sql->cadena_sql('cerrarEleccion', $_REQUEST['eleccion']);
-        $registroDecodificado=$esteRecursoDB->ejecutarAcceso($cadena_sql, "acceso");
+        //verifica si la fecha final del proceso es menor a la de la eleccion, para cerrar la eleccion
+        $cadena_sqlPro = $this->sql->cadena_sql('datosProceso', $resultadoLlave[0]['proceso']);
+        $resultadoPro = $esteRecursoDB->ejecutarAcceso($cadena_sqlPro, 'busqueda');
+	if(strtotime($resultadoPro[0]['fechaTermina'])< strtotime($resultadoLlave[0]['fechafin']))
+           {  $parametros=array('eleccion'=>$_REQUEST['eleccion'],'fechafin'=>$resultadoPro[0]['fechaTermina']);
+              $cadena_sql= $this->sql->cadena_sql('cerrarEleccion', $parametros);
+              $registroDecodificado=$esteRecursoDB->ejecutarAcceso($cadena_sql, "acceso");
+           }
         
 	$cadena_sql=$this->sql->cadena_sql('contarVotosDecodificados', $_REQUEST['eleccion']);
 	$registro=$esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");

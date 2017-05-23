@@ -26,15 +26,7 @@ $directorio = $this->miConfigurador->getVariableConfiguracion ( "rutaUrlBloque" 
 $atributosGlobales['seguridad']= $_REQUEST['tiempo'];
 
 // -------------Campo Imagen-----------------------
-$esteCampo = 'imagen';
-$atributos ["id"] = $esteCampo;
-$atributos ['ancho'] = '200px';
-$atributos ['alto'] = '';
-$atributos ['estilo'] = 'campoImagen textoCentrar';
-//$atributos ['estiloImagen'] = '';
-$atributos ['imagen'] = $directorio.'/imagen/condor.png';
-echo $this->miFormulario->campoImagen( $atributos );
-unset ( $atributos );
+
 
 $tab = 1;
 
@@ -51,13 +43,14 @@ echo $this->miFormulario->formulario ( "inicio", $atributos );
 $atributos ["id"] = "datos";
 $atributos ["estilo"] = "jquery centrar ancho";
 echo $this->miFormulario->division ( "inicio", $atributos );
+echo "<h1 style='text-align: center;margin-bottom: 30px;'>Sistema de Votaciones</h1>";
 
 // -------------Control cuadroTexto-----------------------
 $esteCampo = 'usuario';
 $atributos ["id"] = $esteCampo;
 $atributos ["etiqueta"] = $this->lenguaje->getCadena ( $esteCampo );
 $atributos ["anchoEtiqueta"] ='150'; //sobreescribe el ancho predeterminado que es de 120px
-$atributos["estiloEtiqueta"]='textoEnorme textoGris';
+$atributos["estiloEtiqueta"]='textoGris';
 $atributos ["titulo"] = $this->lenguaje->getCadena ( $esteCampo . "Titulo" );
 $atributos ["tabIndex"] = $tab ++;
 $atributos ["obligatorio"] = true;
@@ -75,11 +68,11 @@ $esteCampo = 'clave';
 $atributos ["id"] = $esteCampo;
 $atributos ["etiqueta"] = $this->lenguaje->getCadena ( $esteCampo );
 $atributos ["anchoEtiqueta"] ='150'; //sobreescribe el ancho predeterminado que es de 120px
-$atributos["estiloEtiqueta"]='textoEnorme textoGris';
+$atributos["estiloEtiqueta"]='textoGris';
 $atributos ["titulo"] = $this->lenguaje->getCadena ( $esteCampo . "Titulo" );
 $atributos ["tabIndex"] = $tab ++;
 $atributos ["obligatorio"] = true;
-$atributos ["tamanno"] = "10";
+$atributos ["tamanno"] = "25";
 $atributos ["tipo"] = "password";
 $atributos ["estilo"] = "jqueryui";
 $atributos ["validar"] = "required";
@@ -90,34 +83,38 @@ echo $this->miFormulario->campoCuadroTexto ( $atributos );
 unset ( $atributos );
 // Si existe algun tipo de error en el login aparece el siguiente mensaje
 
-if (isset ( $_REQUEST ['mostrarMensaje'] )) {    
-    
-    
+if (isset ( $_REQUEST ['mostrarMensaje'] )) {
+
         switch($_REQUEST ['mostrarMensaje']){
             case 'usuarioNoValido':
+						$atributos ["mensaje"] =$this->lenguaje->getCadena('error:loginIncorrecto');
+								break;
+						case 'inexistente':
+								$atributos ["mensaje"] =$this->lenguaje->getCadena('error:inexistente');
+										break;
             case 'claveNoValida':
                 $atributos ["mensaje"] =$this->lenguaje->getCadena('error:loginIncorrecto');
                     break;
             case 'cerrarSesion':
                 $atributos ["mensaje"] =$this->lenguaje->getCadena('mensaje:cerrarSesion');
                 break;
-            
+
             case 'sesionExpirada':
                 $atributos ["mensaje"] =$this->lenguaje->getCadena('mensaje:sesionExpirada');
                 break;
-            
+
             case 'segundaIdentificacionNoValida':
                 $atributos ["mensaje"] =$this->lenguaje->getCadena('mensaje:segundaIdentificacionNovalida');
-                
-            
-            
+
+
+
         }
-        
+
         // ------------------Division para los botones-------------------------
 	$atributos ['id'] = 'divMensaje';
 	$atributos ['estilo'] = 'marcoBotones';
 	echo $this->miFormulario->division ( "inicio", $atributos );
-	
+
 	// -------------Control texto-----------------------
 	$esteCampo = 'mostrarMensaje';
 	$atributos ["tamanno"] = '';
@@ -126,11 +123,11 @@ if (isset ( $_REQUEST ['mostrarMensaje'] )) {
 	$atributos ["columnas"] = ''; // El control ocupa 47% del tamaño del formulario
 	echo $this->miFormulario->campoMensaje ( $atributos );
 	unset ( $atributos );
-	
+
 	// ------------------Fin Division para los botones-------------------------
-	echo $this->miFormulario->division ( "fin" ); 
-}       
-    
+	echo $this->miFormulario->division ( "fin" );
+}
+
 
 // ------------------Espacio-------------------------
 $atributos ["id"] = '';
@@ -143,7 +140,7 @@ $atributos ["estilo"] = "marcoBotones";
 echo $this->miFormulario->division ( "inicio", $atributos );
 
 // -------------Control Boton-----------------------
-$esteCampo = "botonAceptar";
+$esteCampo = "botonIngresar";
 $atributos ["id"] = $esteCampo;
 $atributos ["tabIndex"] = $tab ++;
 $atributos ["tipo"] = "boton";

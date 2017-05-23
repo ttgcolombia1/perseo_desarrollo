@@ -21,20 +21,29 @@ class EncriptadorSSL{
 	}
 	
 	function guardarLlave($ruta,$fraseSeguridad,$idProceso){
+                $file=$ruta.'llave'.$idProceso.'.pem';
+                $this->borrarLlave($file);
 		openssl_pkey_export($this->llave,$this->llavePrivada, $fraseSeguridad);                
-		return openssl_pkey_export_to_file($this->llave, $ruta.'llave'.$idProceso.'.pem', $fraseSeguridad);
+		return openssl_pkey_export_to_file($this->llave, $file, $fraseSeguridad);
 	}
 	
 	
 	function guardarLlavePublica($ruta,$idProceso){
-		
+		$file=$ruta.'/llavePublica'.$idProceso.'.pem';
+                $this->borrarLlave($file);
 		// get the public key $keyDetails['key'] from the private key;
 		$keyDetails = openssl_pkey_get_details($this->llave);
-		file_put_contents($ruta.'/llavePublica'.$idProceso.'.pem', $keyDetails['key']);
+                file_put_contents($file, $keyDetails['key']);
 		return true;
-		
 	}
 	
+        function borrarLlave($file){
+            // borra archivos de las llaves;
+            if(is_file($file))
+                {unlink($file);
+                 return true;
+                }
+	}
 	
 	
 	function getLlavePrivada($clave){

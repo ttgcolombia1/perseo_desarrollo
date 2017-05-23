@@ -14,6 +14,7 @@ $funcion[$indice++]="jquery-te.js";;
 $funcion[$indice++]="select2.js";
 $funcion[$indice++]="select2_locale_es.js";
 $funcion[$indice++]="timepicker.js";
+$funcion[$indice++]="tarjeton.js";
 
 
 $rutaBloque=$this->miConfigurador->getVariableConfiguracion("host");
@@ -37,7 +38,3 @@ foreach ($funcion as $clave=>$nombre){
 }
 // Procesar las funciones requeridas en ajax
 //	include("Ajax.php");
-
-
-
-?>

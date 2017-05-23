@@ -15,7 +15,7 @@ $resultadosAcceso = $esteRecursoDB->ejecutarAcceso($cadena_sql, 'acceso');
 
 
 
-echo "<center><h4>SEGUIMIENTO " . date('d M Y') . "</h4></center>";
+echo "<center><h4>Seguimiento del proceso " . date('d M Y') . "</h4></center>";
 $cadena_sql = $this->sql->cadena_sql("usuarioAcceso", '');
 $resultadosAcceso = $esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
 
@@ -25,10 +25,7 @@ $series1 = '';
 $labels1 = '';
 
 if ($resultadosAcceso) {
-
-
     for ($i = 0; $i < count($resultadosAcceso); $i++) {
-        
         if ($resultadosAcceso[$i][0] == date('Y m d')) {
             if (($i + 1) == (count($resultadosAcceso))) {
                 $series1 .= $resultadosAcceso[$i][3];
@@ -58,6 +55,10 @@ if($series1 == "" || $labels1=="")
     <tr>
         <td><div id='chart3'></div></td>
         <td><div id='chart4'></div></td>
+    </tr>
+    <tr>
+        <td><div id='votantesEstamento'></div></td>
+        <td><div id='votantesFaltantes'></div></td>
     </tr>
 </table>
 
@@ -93,11 +94,8 @@ if($series1 == "" || $labels1=="")
 
 <?php
 //Accesos Fallidos
-
 $cadena_sql = $this->sql->cadena_sql("usuarioNoExiste", '');
 $resultadosUsuario = $esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
-
-
 
 $series1 = "";
 $labels1 = "";
@@ -158,13 +156,12 @@ if($series1 == "" || $labels1=="")
 
 <?php
 //Certificados
-
-$cadena_sql = $this->sql->cadena_sql("totalVotaciones", ''); 
+$cadena_sql = $this->sql->cadena_sql("totalVotaciones", '');
 $resultadosCertificados = $esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
-
 
 $series1 = "";
 $labels1 = "";
+$totalVotos = 0;
 
 if ($resultadosCertificados) {
     for ($i = 0; $i < count($resultadosCertificados); $i++) {
@@ -172,10 +169,12 @@ if ($resultadosCertificados) {
             if (($i + 1) == (count($resultadosCertificados))) {
                 $series1 .= $resultadosCertificados[$i][3];
                 $labels1 .= "'" . $resultadosCertificados[$i][2] . "'";
+                
             } else {
                 $series1 .= $resultadosCertificados[$i][3] . ", ";
                 $labels1 .= "'" . $resultadosCertificados[$i][2] . "', ";
             }
+            $totalVotos+=$resultadosCertificados[$i][3];
         }
     }
 } else {
@@ -206,7 +205,7 @@ if($series1 == "" || $labels1=="")
                 renderer: $.jqplot.BarRenderer,
                 pointLabels: {show: true}
             },
-            title: 'Votos Realizados',
+            title: 'Votos Realizados por hora - Total Votos <?php echo $totalVotos ?>',
             axes: {
                 xaxis: {
                     renderer: $.jqplot.CategoryAxisRenderer,
@@ -280,6 +279,6 @@ if($series1 == "" || $labels1=="")
     });
 </script>
 
-
-<?php
-?>
+<?php// include("graficos/totalVotantes.php"); ?>
+<?php include("graficos/totalVotantesFaltantes.php"); ?>
+<?php include("graficos/totalVotantesEstamento.php"); ?>

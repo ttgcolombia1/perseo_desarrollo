@@ -53,7 +53,22 @@ class Sqlbanner extends sql {
                 $cadena_sql.=" imagenBlob";
                 $cadena_sql.=" FROM ".$prefijo."usuario";
                 $cadena_sql.=" WHERE id_usuario='" . $variable . "' ";                
-                break;	
+                break;
+
+            case "voto":
+                $cadena_sql = "select count(*) as conteo evoto_voto";
+                break;
+
+            case "votoCodificado":
+                $cadena_sql = "select count(*) as conteo evoto_votocodificado";
+                break;
+
+            case "censo":
+                $cadena_sql = "select count(*) as conteo evoto_censo";
+                break;
+            case "proceso":
+                $cadena_sql = "select count(*) as conteo evoto_procesoelectoral";
+                break;
         }
 
         return $cadena_sql;

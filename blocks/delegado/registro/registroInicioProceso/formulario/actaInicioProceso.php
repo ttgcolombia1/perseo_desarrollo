@@ -154,5 +154,3 @@ if($resultadoProcesos)
                                 //------------------Fin Division para los botones-------------------------
                                 echo $this->miFormulario->division("fin");
                         }
-
-?>

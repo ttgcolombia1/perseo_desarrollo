@@ -14,7 +14,8 @@ $conexion="estructura";
 $esteRecursoDB=$this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
 $generador=new EncriptadorSSL();
-$ruta='/usr/local/apache/llaves/';
+//$ruta='/usr/local/apache/llaves/';
+$ruta=$this->miConfigurador->getVariableConfiguracion('rutaLlaves');
 
 //$ruta=$this->miConfigurador->getVariableConfiguracion('public_key');
 //1. Crear las Llaves
@@ -39,11 +40,7 @@ if($generador->guardarLlave($ruta,$_REQUEST['fraseSeguridad'.$_REQUEST['procesoE
 
                     $cadena_sql = $this->sql->cadena_sql("guardarLlavePrivada", $_REQUEST['procesoElectoral']);
                     $resultadoGuardar &= $esteRecursoDB->ejecutarAcceso($cadena_sql, "acceso");   
-                    
-                    
-                    
-                    
-                    
+                   
                 }
         }
         
@@ -59,5 +56,3 @@ if($generador->guardarLlave($ruta,$_REQUEST['fraseSeguridad'.$_REQUEST['procesoE
 	
 	$this->funcion->redireccionar('indexDelegadoErrorPaso');
 }
-
-?>

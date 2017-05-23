@@ -1,98 +1,104 @@
 <?php
 include_once("core/manager/Configurador.class.php");
 
-class FronteraProcesoElectoral{
+class FronteraProcesoElectoral
+{
 
-	var $ruta;
-	var $sql;
-	var $funcion;
-	var $lenguaje;
-	var $formulario;
-	
-	var $miConfigurador;
-	
-	function __construct()
-	{
-	
-		$this->miConfigurador=Configurador::singleton();
-	}
+    var $ruta;
+    var $sql;
+    var $funcion;
+    var $lenguaje;
+    var $formulario;
 
-	public function setRuta($unaRuta){
-		$this->ruta=$unaRuta;
-	}
+    var $miConfigurador;
 
-	public function setLenguaje($lenguaje){
-		$this->lenguaje=$lenguaje;
-	}
+    function __construct()
+    {
 
-	public function setFormulario($formulario){
-		$this->formulario=$formulario;
-	}
+        $this->miConfigurador = Configurador::singleton();
+    }
 
-	function frontera()
-	{
-		$this->html();
-	}
+    public function setRuta($unaRuta)
+    {
+        $this->ruta = $unaRuta;
+    }
 
-	function setSql($a)
-	{
-		$this->sql=$a;
+    public function setLenguaje($lenguaje)
+    {
+        $this->lenguaje = $lenguaje;
+    }
 
-	}
+    public function setFormulario($formulario)
+    {
+        $this->formulario = $formulario;
+    }
 
-	function setFuncion($funcion)
-	{
-		$this->funcion=$funcion;
+    function frontera()
+    {
+        $this->html();
+    }
 
-	}
+    function setSql($a)
+    {
+        $this->sql = $a;
 
-	function html()
-	{
-		include_once("core/builder/FormularioHtml.class.php");
-		
-		$this->ruta=$this->miConfigurador->getVariableConfiguracion("rutaBloque");
-		
-		
-		$this->miFormulario=new formularioHtml();
-		
-		if(isset($_REQUEST['opcion'])){
+    }
 
-			$accion=$_REQUEST['opcion'];
+    function setFuncion($funcion)
+    {
+        $this->funcion = $funcion;
+
+    }
+
+    function html()
+    {
+        include_once("core/builder/FormularioHtml.class.php");
+
+        $this->ruta = $this->miConfigurador->getVariableConfiguracion("rutaBloque");
 
 
+        $this->miFormulario = new formularioHtml();
 
-			switch($accion){
-				case "verificarDatos":
-					include_once($this->ruta."/formulario/verificarDatos.php");
-					break;				
-				case "nuevo":
-					include_once($this->ruta."formulario/nuevo.php");
-					break;
-                                    
-                                case "editar":
-					include_once($this->ruta."formulario/editar.php");
-					break;    
-                                    
-                                case "inhabilitar":
-					include_once($this->ruta."formulario/inhabilitar.php");
-					break;        
-					
-				case "mensaje":
-					include_once($this->ruta."formulario/mensaje.php");
-					break;	
-				
-			}
-		}else{
-			$accion="nuevo";
-			include_once($this->ruta."/formulario/consultarProcesos.php");
-		}
+        if (isset($_REQUEST['opcion'])) {
+
+            $accion = $_REQUEST['opcion'];
 
 
-	}
+            switch ($accion) {
+                case "verificarDatos":
+                    include_once($this->ruta . "/formulario/verificarDatos.php");
+                    break;
+                case "nuevo":
+                    include_once($this->ruta . "formulario/nuevo.php");
+                    break;
+
+                case "editar":
+                    include_once($this->ruta . "formulario/editar.php");
+                    break;
+
+                case "inhabilitar":
+                    include_once($this->ruta . "formulario/inhabilitar.php");
+                    break;
+
+                case "mensaje":
+                    include_once($this->ruta . "formulario/mensaje.php");
+                    break;
+
+                case "armarTarjeton":
+                    include_once($this->ruta . "formulario/armarTarjeton.php");
+                    break;
 
 
+            }
+        } else {
+            $accion = "nuevo";
+            include_once($this->ruta . "/formulario/consultarProcesos.php");
+        }
 
+
+    }
 
 
 }
+
 ?>

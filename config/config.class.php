@@ -1,4 +1,4 @@
-<?PHP
+<?php
 /**
  * IMPORTANTE
  * Este archivo debe generarse en el momento de la instalación
@@ -24,7 +24,7 @@
  */
 
 class ArchivoConfiguracion{
-	
+
 	private static $instance;
 
 	/**
@@ -39,9 +39,9 @@ class ArchivoConfiguracion{
 	private function __construct(){
 
 		$this->conf=array();
-		$this->variable();		
+		$this->variable();
 	}
-	
+
 	public static function singleton()
 	{
 		if (!isset(self::$instance)) {
@@ -50,7 +50,7 @@ class ArchivoConfiguracion{
 		}
 		return self::$instance;
 	}
-	
+
 	public function setConectorDB($objeto){
 		$this->fabricaConexiones=$objeto;
 	}
@@ -68,7 +68,7 @@ class ArchivoConfiguracion{
 	 */
 
 	function variable() {
-			
+
 		require_once("core/crypto/Encriptador.class.php");
 		require_once("core/crypto/aes.class.php");
 		require_once("core/crypto/aesctr.class.php");
@@ -80,7 +80,9 @@ class ArchivoConfiguracion{
 
 	private function abrirArchivoConfiguracion($ruta=""){
 
-		$this->fp = fopen("config/config.inc.php", "r");
+		$archivo = $this->cargarArchivoConfiguracion('config');
+		
+		$this->fp = fopen($archivo, "r");
 		if (!$this->fp) {
 			return false;
 		}
@@ -101,7 +103,7 @@ class ArchivoConfiguracion{
 				case 5:
 					$this->conf["dbpuerto"] = $this->linea;
 					break;
-						
+
 				case 6:
 					$this->conf["dbnombre"] = $this->linea;
 					break;
@@ -121,6 +123,21 @@ class ArchivoConfiguracion{
 
 		}
 		fclose($this->fp);
+	}
+	
+	/**
+	 * Carga el archivo de configuración de acuerdo al ambiente establecido por variables de entorno
+	 * Esto permite establecer más de un archivo de configuración para desplegar en distintos ambientes
+	 * como develop (desarrollo), testing (pruebas), production/master (producción).
+	 */
+	function cargarArchivoConfiguracion($path='') {
+		$path=substr($path, -1)=='/'?substr($path, 0, -1):$path;
+		$oas_external_env = getEnv('OAS_EXTERNAL_ENV');
+		if($oas_external_env != '') {
+			return $path.'/config_'.$oas_external_env.'.inc.php';
+		} else {
+			return $path.'/config.inc.php';
+		}
 	}
 }
 ?>

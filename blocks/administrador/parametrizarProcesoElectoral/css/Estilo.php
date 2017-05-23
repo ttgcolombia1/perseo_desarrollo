@@ -10,8 +10,8 @@ $estilo[$indice++]="autocomplete.css";
 $estilo[$indice++]="chosen.css";
 $estilo[$indice++]="select2.css";
 $estilo[$indice++]="miestilo.css";
-$estilo[$indice++]="tablasVoto.css";
 $estilo[$indice++]="jquery_switch.css";
+$estilo[$indice++]="override.css";
 
 //Tablas
 $estilo[$indice++]="demo_page.css";

@@ -5,9 +5,3 @@ if(openssl_public_encrypt($voto[1], $textoEncriptado, $llavePublica)){
 }else{
     $respuesta=false;
 }
-
-
-
-
-
-?>

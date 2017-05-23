@@ -44,6 +44,15 @@ class FuncionParametrizarProcesoElectoral
 			}else if($_REQUEST["opcion"]=="guardarDatos")
 			{
 				$this->guardarDatos(); 
+			}else if($_REQUEST["opcion"]=="editarEleccion")
+			{
+				$this->editarEleccion(); 
+			}else if($_REQUEST["opcion"]=="editarProceso")
+			{
+				$this->editarProceso(); 
+			}else if($_REQUEST["opcion"]=="editarCandidato")
+			{
+				$this->editarCandidato(); 
 			}else if($_REQUEST["opcion"]=="guardarEleccion")
 			{
 				$this->guardarEleccion(); 
@@ -52,8 +61,12 @@ class FuncionParametrizarProcesoElectoral
 				$this->resumenProceso(); 
 			}else if($_REQUEST["opcion"]=="resumenEleccion")
 			{
-				$this->resumenEleccion(); 
+				$this->resumenEleccion();
 			}
+            else if($_REQUEST["opcion"]=="eliminarCandidato")
+            {
+                $this->eliminarCandidato();
+            }
 	}
 
 
@@ -92,11 +105,15 @@ class FuncionParametrizarProcesoElectoral
 		}else{
 			return true;
 		}
-	
-	
+
 	}
-	
-	function guardarDatos()
+
+    function eliminarCandidato()
+    {
+        include_once($this->ruta."/funcion/eliminarCandidato.php");
+    }
+
+    function guardarDatos()
 	{
 		include_once($this->ruta."/funcion/guardarDatos.php");
 	}	
@@ -105,12 +122,27 @@ class FuncionParametrizarProcesoElectoral
 	{
 		include_once($this->ruta."/funcion/guardarEleccion.php");
 	}	
-	
+
+	function editarEleccion()
+	{
+		include_once($this->ruta."/funcion/editarEleccion.php");
+	}
+
+	function editarProceso()
+	{
+		include_once($this->ruta."/funcion/editarProceso.php");
+	}        
+        
 	function resumenProceso()
 	{
 		include_once($this->ruta."/funcion/resumenProceso.php");
 	}
-	
+
+	function editarCandidato()
+	{
+		include_once($this->ruta."/funcion/editarCandidato.php");
+	} 
+        
         function resumenEleccion()
 	{
 		include_once($this->ruta."/funcion/resumenEleccion.php");
@@ -149,4 +181,4 @@ class FuncionParametrizarProcesoElectoral
 	}
 
 }
-?>
+

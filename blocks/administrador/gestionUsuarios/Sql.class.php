@@ -23,6 +23,8 @@ class SqlGestionUsuarios extends sql {
 
 
 	function cadena_sql($tipo,$variable="") {
+
+        $variable = $this->limpiarHTML($variable);
 			
 		/**
 		 * 1. Revisar las variables para evitar SQL Injection

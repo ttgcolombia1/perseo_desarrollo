@@ -61,8 +61,11 @@ class Funcionbanner {
     }
 
     function rescatarUsuario($usuario) {
-        include_once($this->ruta . "/funcion/rescatarUsuario.php");
-        
+        //include_once($this->ruta . "/funcion/rescatarUsuario.php");
+        $conexion = "estructura";
+        $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
+        $cadena_sql = $this->sql->cadena_sql("datosUsuario", $usuario);
+        $datosUsuario = $esteRecursoDB->ejecutarAcceso($cadena_sql,"busqueda");
         return $datosUsuario;
     }
 

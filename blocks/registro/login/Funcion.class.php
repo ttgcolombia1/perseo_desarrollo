@@ -84,7 +84,8 @@ class FuncionLogin
 
                             }else{
                                     //Validar las variables para evitar un tipo  insercion de SQL
-                                    $_REQUEST=$this->miInspectorHTML->limpiarSQL($_REQUEST);
+                                    $excluir=sha1("clave" . $_REQUEST['tiempo'])."|";
+                                    $_REQUEST=$this->miInspectorHTML->limpiarSQL($_REQUEST,$excluir);
 
                                     $this->procesarLogin();
 

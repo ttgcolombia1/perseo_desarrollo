@@ -39,5 +39,3 @@ foreach ($funcion as $clave=>$nombre){
 //	include("Ajax.php");
 
 
-
-?>

@@ -1,6 +1,7 @@
 <?php
 $indice=0;
-$estilo[$indice++]="barraSuperior.css";
+$estilo[$indice++]="basico";
+
 $rutaBloque=$this->miConfigurador->getVariableConfiguracion("host");
 $rutaBloque.=$this->miConfigurador->getVariableConfiguracion("site");
 

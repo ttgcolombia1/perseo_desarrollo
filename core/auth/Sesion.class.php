@@ -6,15 +6,15 @@ class Sesion {
 	/**
 	 * Aggregations:
 	 */
-	
+
 	/**
 	 * Compositions:
 	 */
-	
+
 	/**
 	 * * Attributes: **
 	 */
-	
+
 	/**
 	 * Miembros privados de la clase
 	 *
@@ -37,21 +37,22 @@ class Sesion {
 
 	var $prefijoTablas;
 
-	var $tiempoExpiracion;
+	var $configurador;
 
+        
 	/**
 	 *
 	 * @name sesiones
 	 *       constructor
 	 */
 	private function __construct() {
-
+                $this->configurador = Configurador::singleton ();
 		$this->miSql = new sesionSql ();
-		
+
 		// Valores predefinidos para las sesiones
 		$this->sesionUsuarioNombre = '';
 		$this->sesionNivel = 0;
-	
+
 	}
 
 	public static function singleton() {
@@ -61,7 +62,7 @@ class Sesion {
 			self::$instancia = new $className ();
 		}
 		return self::$instancia;
-	
+
 	}
 
 	/**
@@ -73,49 +74,41 @@ class Sesion {
 	 * @access public
 	 */
 	function verificarSesion() {
-		
 		// Se eliminan las sesiones expiradas
 		$borrar = $this->borrarSesionExpirada ();
-		
 		if ($this->sesionNivel > 0) {
-			
-			// Verificar si en el cliente existe y tenga registrada una cookie que identifique la sesion
+                        // Verificar si en el cliente existe y tenga registrada una cookie que identifique la sesion
 			$this->sesionId = $this->numeroSesion ();
-			
-			if ($this->sesionId) {
-				$resultado = $this->abrirSesion ( $this->sesionId );
-				
+                        if ($this->sesionId) {
+                                $registrado=$this->usuarioSesion();
+                        	$resultado = $this->abrirSesion ( $this->sesionId );
 				/* Detecta errores */
 				if ($resultado == false) {
-					
 					return false;
-				} else {
-					
-					// Si no hubo errores se puede actualizar los valores
-					// Update, porque se tiene un identificador
+                                    } 
+                                elseif ($resultado == true && $registrado==true)  {
+                                        // Si no hubo errores se puede actualizar los valores
+					// Update, porque se tiene un identificador y se verifico que el usuario es registrado
 					/* Crear una nueva cookie */
-					
+                                    
 					$parametro ['expiracion'] = time () + 60 * $this->tiempoExpiracion;
 					$parametro ['sesionId'] = $this->sesionId;
-					
 					setcookie ( "aplicativo", $this->sesionId, ($parametro ['expiracion']), "/" );
-					
 					$cadenaSql = $this->miSql->getCadenaSql ( "actualizarSesion", $parametro );
-					
-					/**
-					 * Ejecutar una consulta
-					 */
-					
+					/*** Ejecutar una consulta*/
 					$resultado = $this->miConexion->ejecutarAcceso ( $cadenaSql, "acceso" );
-					
+
 					return $resultado;
-				}
+                                    }
+                                else{
+                                    return true;
+                                    } 
 			}
-			
+
 			return false;
 		}
 		return true;
-	
+
 	}
 
 	/**
@@ -138,9 +131,9 @@ class Sesion {
 				return false;
 			}
 		}
-		
+
 		return $this->sesionId;
-	
+
 	} /* Fin de la función numero_sesion */
 
 	/**
@@ -158,57 +151,57 @@ class Sesion {
 			return FALSE;
 		} else {
 			// Verifica la validez del id de sesion
-			
+
 			if ($this->caracteresValidos ( $sesion ) != strlen ( $sesion )) {
 				return false;
 			}
-			
+
 			$this->setSesionId ( $sesion );
-			
+
 			// Busca una sesión que coincida con el id del computador y el nivel de acceso de la página
 			$this->sesionUsuarioId = trim ( $this->getValorSesion ( 'idUsuario' ) );
 			$nivelPagina = $this->getSesionNivel ();
 			$nivelAut = false;
-			
+
 			if ($this->sesionUsuarioId) {
-				
+
 				$cadenaSql = $this->miSql->getCadenaSql ( "verificarNivelUsuario", $this->sesionUsuarioId );
 				$resultadoNivel = $this->miConexion->ejecutarAcceso ( $cadenaSql, "busqueda" );
-				
+
 				/**
 				 *
 				 * @deprecated La siguiente comprobación no hace parte del core de SARA se utiliza para el
 				 *             aplicativo de voto.
 				 */
 				if (! $resultadoNivel) {
-					
+
 					$cadenaSql = $this->miSql->getCadenaSql ( 'verificarUsuarioCenso', $this->sesionUsuarioId );
 					$resultadoNivel = $this->miConexion->ejecutarAcceso ( $cadenaSql, 'busqueda' );
 					if ($resultadoNivel && $nivelPagina == 1) {
 						$nivelAut = true;
-						
+
 					}
 				} else {
-					
+
 					$tipo = explode ( ",", $resultadoNivel [0] ['tipo'] );
-					
+
 					for($i = 0; $i < count ( $tipo ); $i ++) {
 						if ($tipo [$i] == $nivelPagina) {
 							$nivelAut = true;
 						}
 					}
 				}
-				
+
 				if (($this->sesionExpiracion > time ()) && ($nivelAut == true)) {
 					return true;
 				}
 			}
-			
+
 			return false;
 		}
-	
+
 	} // Final del método abrir_sesion
-	
+
 	/**
 	 * @METHOD caracteres_validos
 	 *
@@ -216,7 +209,8 @@ class Sesion {
 	 * @PARAM cadena
 	 *
 	 * @return valor
-	 * @access public//Realizar un barrido por la matriz de resultados para comprobar que se tiene los privilegios para la pagina
+	 * @access
+	 *         Realizar un barrido por la matriz de resultados para comprobar que se tiene los privilegios para la pagina
 	 *         $this->validacion=0;
 	 *         for($this->i=0;$this->i<$this->count;$this->i++)
 	 *         {
@@ -224,7 +218,7 @@ class Sesion {
 	function caracteresValidos($cadena) {
 		// Retorna el número de elementos que coinciden con la lista de caracteres
 		return strspn ( $cadena, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" );
-	
+
 	}
 
 	/**
@@ -240,17 +234,17 @@ class Sesion {
 	 * @access public
 	 */
 	function crearSesion($usuarioId) {
-		
+
 		// 0. Borrar todas las sesiones del equipo
 		if ($this->verificarSesion ()) {
-			
+
 			$this->terminarSesion ( $this->sesionId );
 		}
-		
+
 		// 1. Identificador de sesion
 		$this->fecha = explode ( " ", microtime () );
 		$this->sesionId = md5 ( $this->fecha [1] . substr ( $this->fecha [0], 2 ) . rand () );
-		
+
 		if (strlen ( $this->sesionId ) != 32) {
 			return FALSE;
 		} else {
@@ -258,33 +252,33 @@ class Sesion {
 			if ($this->caracteresValidos ( $this->sesionId ) != strlen ( $this->sesionId )) {
 				return FALSE;
 			}
-			
+
 			/**
 			 * Borra todas las sesiones que existan con el id del computador
 			 */
-			
+
 			if (isset ( $_COOKIE ["aplicativo"] )) {
 				$this->la_sesion = $_COOKIE ["aplicativo"];
 				$this->terminarSesion ( $this->la_sesion );
 			}
-			
+
 			/* Actualizar la cookie, la sesión tiene un tiempo de 1 hora */
-			
+
 			$this->sesionExpiracion = time () + $this->tiempoExpiracion * 60;
 			setcookie ( "aplicativo", $this->sesionId, $this->sesionExpiracion, "/" );
-			
+
 			// Insertar id_usuario
 			$this->resultado = $this->guardarValorSesion ( 'idUsuario', $usuarioId, $this->sesionId, $this->sesionExpiracion );
 			if ($this->resultado) {
 				return $this->sesionId;
 			} else {
-				
+
 				return false;
 			}
 		}
-	
+
 	} // Fin del método crear_sesion
-	
+
 	/**
 	 * @METHOD guardar_valor_sesion
 	 * @PARAM variable
@@ -308,28 +302,28 @@ class Sesion {
 			} else {
 				$this->sesionId = $sesion;
 			}
-			
+
 			// Si el valor de sesión existe entonces se actualiza, si no se crea un registro con el valor.
-			
+
 			$parametro ["sesionId"] = $this->sesionId;
 			$parametro ["variable"] = $variable;
 			$parametro ["valor"] = $valor;
 			$parametro ["expiracion"] = $expiracion;
 			$cadenaSql = $this->miSql->getCadenaSql ( "buscarValorSesion", $parametro );
-			
+
 			$resultado = $this->miConexion->ejecutarAcceso ( $cadenaSql, "busqueda" );
-			
+
 			if ($resultado) {
-				
+
 				$cadenaSql = $this->miSql->getCadenaSql ( "actualizarValorSesion", $parametro );
 			} else {
 				$cadenaSql = $this->miSql->getCadenaSql ( "insertarValorSesion", $parametro );
 			}
-			
+
 			$resultado = $this->miConexion->ejecutarAcceso ( $cadenaSql, "acceso" );
 			return $resultado;
 		}
-	
+
 	} // Fin del método guardar_valor_sesion
 	function setValorSesion($variable, $valor) {
 
@@ -337,30 +331,30 @@ class Sesion {
 		if ($num_args == 0) {
 			return FALSE;
 		} else {
-			
+
 			// Si el valor de sesión existe entonces se actualiza, si no se crea un registro con el valor.
-			
+
 			$parametro ["sesionId"] = $this->sesionId;
 			$parametro ["variable"] = $variable;
 			$parametro ["valor"] = $valor;
 			$parametro ["expiracion"] = $this->tiempoExpiracion;
 			$cadenaSql = $this->miSql->getCadenaSql ( "buscarValorSesion", $parametro );
-			
+
 			$resultado = $this->miConexion->ejecutarAcceso ( $cadenaSql, "busqueda" );
-			
+
 			if ($resultado) {
-				
+
 				$cadenaSql = $this->miSql->getCadenaSql ( "actualizarValorSesion", $parametro );
 			} else {
 				$cadenaSql = $this->miSql->getCadenaSql ( "insertarValorSesion", $parametro );
 			}
-			
+
 			$resultado = $this->miConexion->ejecutarAcceso ( $cadenaSql, "acceso" );
 			return $resultado;
 		}
-	
+
 	} // Fin del método guardar_valor_sesion
-	
+
 	/**
 	 * @METHOD borrar_valor_sesion
 	 * @PARAM variable
@@ -378,24 +372,24 @@ class Sesion {
 				return false;
 			}
 		}
-		
+
 		$parametro ["sesionId"] = $sesion;
 		$parametro ["dato"] = $variable;
-		
+
 		if ($variable != 'TODOS') {
 			$cadenaSql = $this->miSql->getCadenaSql ( "borrarVariableSesion", $parametro );
 		} else {
 			$cadenaSql = $this->miSql->getCadenaSql ( "borrarSesion", $parametro );
 		}
-		
+
 		if ($this->miConexion->ejecutarAcceso ( $cadenaSql )) {
 			return false;
 		} else {
 			return true;
 		}
-	
+
 	} // Fin del método borrar_valor_sesion
-	
+
 	/**
 	 *
 	 * @name borrar_sesion_expirada
@@ -405,39 +399,77 @@ class Sesion {
 	function borrarSesionExpirada() {
 
 		$cadenaSql = $cadenaSql = $this->miSql->getCadenaSql ( "borrarSesionesExpiradas" );
-		
+
 		if ($this->miConexion->ejecutarAcceso ( $cadenaSql )) {
 			return false;
 		} else {
 			return true;
 		}
-	
+
 	} // Fin del método borrar_sesion_expirada
-	
+
 	/**
 	 *
 	 * @name terminar_sesion
 	 * @return boolean
 	 * @access public
 	 */
-	function terminarSesion($sesion) {
+	function terminarSesion($sesion,$usuario=null) {
 
-		if (strlen ( $sesion ) != 32) {
-			return FALSE;
+		if($usuario != null){
+            if (strlen ( $sesion ) != 32) {
+                return FALSE;
+            }
+            // Borrar cookies anteriores
+            setcookie ( "aplicativo", "", time () - 3600, "/" );
+
+            $cadenaSql = $cadenaSql = $this->miSql->getCadenaSql ( "borrarSesion", $sesion );
+
+            if ($this->miConexion->ejecutarAcceso ( $cadenaSql )) {
+                return false;
+            } else {
+                return true;
+            }
+		}else{
+            if (strlen ( $sesion ) != 32) {
+                return FALSE;
+            }
+            // Borrar cookies anteriores
+            setcookie ( "aplicativo", "", time () - 3600, "/" );
+
+            $cadenaSql = $cadenaSql = $this->miSql->getCadenaSql ( "borrarSesion", $sesion );
+
+            if ($this->miConexion->ejecutarAcceso ( $cadenaSql )) {
+                return false;
+            } else {
+                return true;
+            }
 		}
-		// Borrar cookies anteriores
-		setcookie ( "aplicativo", "", time () - 3600, "/" );
-		
-		$cadenaSql = $cadenaSql = $this->miSql->getCadenaSql ( "borrarSesion", $sesion );
-		
-		if ($this->miConexion->ejecutarAcceso ( $cadenaSql )) {
-			return false;
-		} else {
-			return true;
-		}
-	
+
+
+
 	} // Fin del método terminar_sesion
-	
+
+	/**
+	 *
+	 * @name usuarioSesion
+         * Verifica si la sesion registrada es de votante o usuario registrado.
+	 * @return void
+	 * @access public
+	 */
+	function usuarioSesion() {
+                $cadenaSql = $cadenaSql = $this->miSql->getCadenaSql ( "verificarUsuarioSesion" ,$this->sesionId);
+                $resultado=$this->miConexion->ejecutarAcceso ( $cadenaSql, "busqueda" );
+                if ($this->miConexion->ejecutarAcceso ( $cadenaSql, "busqueda" )) {
+                        $this->setTiempoExpiracion($this->configurador->getVariableConfiguracion ( "expiracion_admin" ));
+			return true;
+		} else {
+			return false;
+		}
+
+	} // Fin del método borrar_sesion_expirada        
+        
+        
 	/**
 	 * @METHOD setSesionId
 	 *
@@ -449,9 +481,9 @@ class Sesion {
 	function setSesionId($sesionId) {
 
 		$this->sesionId = $sesionId;
-	
+
 	} // end of member function especificar_sesion
-	
+
 	/**
 	 * @METHOD setSesionExpiracion
 	 *
@@ -461,12 +493,12 @@ class Sesion {
 	function setSesionExpiracion($expiracion) {
 
 		$this->sesionExpiracion = $expiracion;
-	
+
 	} // Fin del mètodo especificar_expiracion
 	function setConexion($conexion) {
 
 		$this->miConexion = $conexion;
-	
+
 	}
 
 	/**
@@ -479,9 +511,9 @@ class Sesion {
 	function setSesionNivel($nivel) {
 
 		$this->sesionNivel = $nivel;
-	
+
 	} // Fin de la función especificar_enlace
-	
+
 	/**
 	 * @METHOD setIdusuario
 	 *
@@ -491,25 +523,25 @@ class Sesion {
 	function setIdUsuario($id_usuario) {
 
 		$this->setSesionUsuarioId = $id_usuario;
-	
+
 	} // Fin del mètodo especificar_usuario
 	function setSesionUsuario($valor) {
 
 		$this->sesionUsuario = $valor;
-	
+
 	}
 
 	function setTiempoExpiracion($valor) {
 
 		$this->tiempoExpiracion = $valor;
-	
+
 	}
 
 	function setPrefijoTablas($valor) {
 
 		$this->prefijoTablas = $valor;
 		$this->miSql->setPrefijoTablas ( $this->prefijoTablas );
-	
+
 	}
 
 	/**
@@ -527,42 +559,42 @@ class Sesion {
 		} else {
 			return FALSE;
 		}
-		
+
 		$parametro ["sesionId"] = $this->sesionId;
 		$parametro ["variable"] = $variable;
 		$clausulaSQL = $this->miSql->getCadenaSql ( "buscarValorSesion", $parametro );
-		
+
 		$resultado = $this->miConexion->ejecutarAcceso ( $clausulaSQL, "busqueda" );
-		
+
 		if ($resultado) {
 			$this->sesionExpiracion = $resultado [0] ["expiracion"];
 			return $resultado [0] ["valor"];
 		}
 		return false;
-	
+
 	} // Fin del método rescatar_valor_sesion return FALSE;
 	function getSesionId() {
 
 		return $this->sesionId;
-	
+
 	}
 
 	function getSesionUsuarioId() {
 
 		return $this->sesionUsuarioId;
-	
+
 	}
 
 	function getSesionNivel() {
 
 		return $this->sesionNivel;
-	
+
 	}
 
 	function getSesionExpiracion() {
 
 		return $this->sesionExpiracion;
-	
+
 	}
 
 } // Fin de la clase sesion

@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once("Conector.interface.php");
 require_once("mysql.class.php");
 require_once("oci8.class.php");
@@ -33,7 +33,7 @@ class dbms
 		if(isset($registro[0]["dbsys"])){
 			$this->configuracion=$registro[0];
 			$this->dbsys = $registro[0]["dbsys"];
-				
+
 		}else{
 			$this->configuracion=$registro;
 			if(isset($registro['dbsys'])){
@@ -99,14 +99,19 @@ class dbms
 
 		if(isset($this->dbsys)){
 			$clase=trim($this->dbsys);
-				
+
+
 			$recurso=new $clase($this->configuracion);
-				
+			error_log(get_class($recurso));
+
+
 			if($recurso){
 				return $recurso;
 			}
-				
+
+
 		}
+		error_log("false!");
 		return false;
 	}
 
@@ -150,4 +155,3 @@ class dbms
 
 }//Fin de la clase db_admin
 
-?>

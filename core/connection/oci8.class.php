@@ -1,4 +1,4 @@
-<?
+<?php
 
 /*
   ############################################################################
@@ -215,10 +215,8 @@ class oci8 implements Conector {
         // echo "<br>Usuario:".$this->usuario;
         // echo "<br>Clave:".$this->clave;
         // echo "<br>Db:".$this->db;
-
-
-        $this->enlace = oci_connect($this->usuario, $this->clave, $this->db);
-
+        //$this->enlace = oci_connect($this->usuario, $this->clave, $this->db);
+        $this->enlace = oci_connect ( $this->usuario, $this->clave, $this->servidor . ':' . $this->puerto . '/' . $this->db, 'UTF8');
         if ($this->enlace) {
             return $this->enlace;
         } else {

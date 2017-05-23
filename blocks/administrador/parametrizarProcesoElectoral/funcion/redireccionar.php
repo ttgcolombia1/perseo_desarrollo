@@ -1,4 +1,4 @@
-<?
+<?php
 if(!isset($GLOBALS["autorizado"]))
 {
 	include("index.php");
@@ -17,7 +17,7 @@ if(!isset($GLOBALS["autorizado"]))
 				$variable.="&proceso=".$valor;
 			}
 			break;
-                        
+                       
                 case "insertoSinCandidatos":
 			$variable="pagina=".$miPaginaActual;
 			$variable.="&opcion=mensaje";
@@ -53,6 +53,23 @@ if(!isset($GLOBALS["autorizado"]))
 			}
 			break;
 
+                case "Actualiza":
+			$variable="pagina=".$miPaginaActual;
+			$variable.="&opcion=mensaje";
+			$variable.="&mensaje=confirmaActualiza";
+			if($valor!=""){
+				$variable.="&proceso=".$valor;
+			}
+			break;                        
+                case "ErrorActualiza":
+			$variable="pagina=".$miPaginaActual;
+			$variable.="&opcion=mensaje";
+			$variable.="&mensaje=errorActualiza";
+			if($valor!=""){
+				$variable.="&proceso=".$valor;
+			}
+			break;
+                        
                 case "paginaPrincipal":
 			$variable="pagina=index";
 			break;

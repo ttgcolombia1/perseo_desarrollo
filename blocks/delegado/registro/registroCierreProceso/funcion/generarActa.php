@@ -10,7 +10,20 @@ include($ruta.'/classes/html2pdf/html2pdf.class.php');
 //$directorio=$this->miConfigurador->getVariableConfiguracion("rutaUrlBloque")."/";
 $directorio=$this->miConfigurador->getVariableConfiguracion("rutaBloque");
 
-$contenidoPagina = "<page backtop='30mm' backbottom='50mm' backleft='20mm' backright='20mm'>";
+$unidad=['UNO','DOS','TRES','CUATRO','CINCO','SEIS','SIETE','OCHO','NUEVE'];
+$decenas=['DIEZ','VEINTE','TREINTA','CUARENTA','CINCUENTA','SESENTA','SETENTA','OCHENTA','NOVENTA'];
+$annos=(date('Y')-1948);
+$posdec=ceil($annos/10)-1;
+$posun=($annos%10);
+$letras='';
+if($posdec>0 && $posun>0){$letras=$decenas[$posdec-1].'  Y ';}
+elseif($posdec>0 && $posun==0){$letras=$decenas[$posdec];}
+
+if($posun>0){$letras.=' '.$unidad[$posun-1];}
+
+
+
+$contenidoPagina = "<page footer='page' backtop='30mm' backbottom='50mm' backleft='20mm' backright='20mm'>";
 $contenidoPagina .= "<page_header>
         <table align='center' style='width: 100%;'>
             <tr>
@@ -22,7 +35,7 @@ $contenidoPagina .= "<page_header>
                     <br>
                     <font size='18px'><b>FRANCISCO JOSÉ DE CALDAS</b></font>
                     <br>
-                    <font size='9px'><b>1948 - ".date('Y')." SESENTA Y SEIS A&Ntilde;OS DE VIDA UNIVERSITARIA</b></font>
+                    <font size='9px'><b>1948 - ".date('Y')." ".$letras." A&Ntilde;OS DE VIDA UNIVERSITARIA</b></font>
                 </td>
                 <td align='center' >
                     <img src='".$directorio."css/images/sabio.jpg' width='60'>

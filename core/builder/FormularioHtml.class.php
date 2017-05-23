@@ -1,6 +1,7 @@
 <?php
 
 include_once ("WidgetHtml.class.php");
+include_once("core/manager/Configurador.class.php");
 
 class FormularioHtml extends WidgetHtml {
 
@@ -8,6 +9,7 @@ class FormularioHtml extends WidgetHtml {
 
     public function setConfiguracion($configuracion) {
         $this->configuracion = $configuracion;
+        $this->miConfigurador=Configurador::singleton();
     }
 
     function recaptcha($atributos) {
@@ -104,10 +106,10 @@ class FormularioHtml extends WidgetHtml {
     /**
      * Formulario que no requieren su propia división
      *
-     * @param unknown $tipo        	
-     * @param unknown $atributos        	
+     * @param unknown $tipo
+     * @param unknown $atributos
      * @return Ambigous <string, unknown>
-     *        
+     *
      */
     function formulario($tipo, $atributos = "") {
         if ($tipo == "inicio") {
@@ -145,10 +147,10 @@ class FormularioHtml extends WidgetHtml {
     /**
      * Agrupaciones que no deben tener una división propia
      *
-     * @param unknown $tipo        	
-     * @param string $atributos        	
+     * @param unknown $tipo
+     * @param string $atributos
      * @return Ambigous <string, unknown>
-     *        
+     *
      */
     function agrupacion($tipo, $atributos = "") {
         $this->cadenaHTML = "";
@@ -224,17 +226,42 @@ class FormularioHtml extends WidgetHtml {
         return $this->cadenaHTML;
     }
 
-    
+
     function cuadroMensaje($atributos) {
-        
+
         if(!isset($atributos['id'])){
             $atributos['id']='default';
         }
-        
+
         $this->cadenaHTML = "<div id='". $atributos ['id'] ."' class='" . $atributos ["tipo"] . " shadow " . $atributos ["estilo"] . "' >";
         $this->cadenaHTML .= "<span>" . $atributos ["mensaje"] . "</span>";
         $this->cadenaHTML .= "</div><br>";
         return $this->cadenaHTML;
+    }
+
+    function enlaceCifrado($parametros){
+      $link = "";
+      $first = TRUE;
+      foreach ($parametros as $key => $value) {
+        if($first){
+          $link.= "$key=$value";
+          $first = FALSE;
+        }else{
+          $link.= "&"."$key=$value";
+        }
+      }
+      $directorio = $this->miConfigurador->getVariableConfiguracion("host");
+      $directorio.= $this->miConfigurador->getVariableConfiguracion("site") . "/index.php?";
+      $directorio.= $this->miConfigurador->getVariableConfiguracion("enlace");
+      return $this->miConfigurador->fabricaConexiones->crypto->codificar_url($link, $directorio);
+    }
+
+    function enlaceBotonCifrado($parametros,$texto="Enviar",$id="",$estilo=""){
+      $enlace = $this->enlaceCifrado($parametros);
+      if($id){
+          return "<button type='button' id=\"$id\" $estilo onclick=\"location.replace('$enlace')\">$texto</button>";
+      }
+        return "<button type='button' $estilo onclick=\"location.replace('$enlace')\">$texto</button>";
     }
 
     function campoMensaje($atributos) {
@@ -423,11 +450,11 @@ class FormularioHtml extends WidgetHtml {
         } else {
             $this->cadenaHTML .= "height='200px' ";
         }
-        
+
         if (isset($atributos ["estiloImagen"]) && $atributos ["estiloImagen"] != "") {
-                $this->cadenaHTML .= "class='" . $atributos ['estiloImagen'] . "' ";            
+                $this->cadenaHTML .= "class='" . $atributos ['estiloImagen'] . "' ";
         }
-        
+
         $this->cadenaHTML .= " >";
         $this->cadenaHTML .= " </img>";
         $this->cadenaHTML .= "</div>\n";
@@ -605,21 +632,21 @@ class FormularioHtml extends WidgetHtml {
         foreach ($atributos ["items"] as $clave => $valor) {
             $this->cadenaHTML .= "<li>";
             if (is_array($valor)) {
-                
+
                 if(isset($valor['enlace']) && $atributos ['estilo']=='jqueryui'){
                     if(isset($valor['icono'])){
                         $icono='<span class="ui-accordion-header-icon ui-icon '.$valor['icono'].'"></span>';
                     }else{
                         $icono='';
                     }
-                    
+
                     $this->cadenaHTML .= "<a  id='pes" . $clave . "' href='" . $valor['urlCodificada'] . "'>";
                     $this->cadenaHTML .= "<div id='tab" . $clave . "' class='ui-accordion ui-widget ui-helper-reset'>";
                     $this->cadenaHTML .= "<h3 class='ui-accordion-header ui-state-default ui-accordion-icons ui-corner-all'>".$icono.$valor['nombre'] . "</h3>";
                     $this->cadenaHTML .= "</div>";
                     $this->cadenaHTML .= "</a>";
                 }
-                
+
             } else {
                 // Podría implementarse llamando a $this->enlace
                 if (isset($atributos ["pestañas"]) && $atributos ["pestañas"] == "true") {

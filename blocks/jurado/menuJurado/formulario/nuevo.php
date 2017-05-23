@@ -57,7 +57,7 @@ $miSesion = Sesion::singleton();
                 </li>   
                 <li id="menu-item-6">
                     <a href="<?
-                    $variable = "pagina=cerrarSesionJurado"; //pendiente la pagina para modificar parametro
+                    $variable = "pagina=cerrarSesionVeedor"; //pendiente la pagina para modificar parametro
                     $variable.= "&sesionId=" . $miSesion->getSesionId();
                     $variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variable, $directorio);
                     echo $variable;

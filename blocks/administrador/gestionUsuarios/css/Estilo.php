@@ -1,9 +1,6 @@
 <?php
 $indice=0;
 
-$estilo[$indice++]="jquery-ui.css";
-//$estilo[$indice++]="smoothness/jquery-ui-1.10.3.custom.css";
-//$estilo[$indice++]="smoothness/jquery-ui-1.10.3.custom.min.css";
 $estilo[$indice++]="tablasVoto.css";
 $estilo[$indice++]="ui.jqgrid.css";
 $estilo[$indice++]="timepicker.css";

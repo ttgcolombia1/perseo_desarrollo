@@ -31,7 +31,7 @@ class ArmadorPagina{
 		if($this->miConfigurador->getVariableConfiguracion("cache")) {
 
 			//De forma predeterminada las paginas del aplicativo no tienen cache
-			header("Cache-Control: cache");
+			//header("Cache-Control: cache");
 			// header("Expires: Sat, 20 Jun 1974 10:00:00 GMT");
 		}else
 		{
@@ -40,11 +40,11 @@ class ArmadorPagina{
 				
 			}else
 			{
-				header("Expires: Tue, 03 Jul 2001 06:00:00 GMT");
-				header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-				header("Cache-Control: no-store, no-cache, must-revalidate");
-				header("Cache-Control: post-check=0, pre-check=0", false);
-				header("Pragma: no-cache");
+//				header("Expires: Tue, 03 Jul 2001 06:00:00 GMT");
+//				header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+//				header("Cache-Control: no-store, no-cache, must-revalidate");
+//				header("Cache-Control: post-check=0, pre-check=0", false);
+//				header("Pragma: no-cache");
 			}
 		}
 
@@ -68,6 +68,8 @@ class ArmadorPagina{
 		//Incluir estilos
 		include_once("theme/basico/Estilo.php");
 
+
+
 		// Enlazar los estilos definidos en cada bloque
 		foreach($this->bloques as $unBloque){
 			$this->incluirEstilosBloque($unBloque);
@@ -86,6 +88,8 @@ class ArmadorPagina{
 				
 			$this->incluirFuncionReady($unBloque);
 		}
+        //Incluir javascript
+        include_once("theme/basico/Script.php");
 
 		echo "</head>\n";
 	}

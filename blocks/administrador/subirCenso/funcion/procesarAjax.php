@@ -56,4 +56,3 @@ switch($_REQUEST["funcion"]){
 }
 
 echo $respuesta;
-?>

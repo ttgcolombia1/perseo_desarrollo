@@ -62,4 +62,4 @@ echo $this->miFormulario->division("fin");
 //------------------Fin Division para las pestañas-------------------------
 echo $this->miFormulario->division("fin");
 
-?>
+

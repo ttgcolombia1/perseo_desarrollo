@@ -210,13 +210,16 @@ class SqlregistroInicioProceso extends sql {
                         case "guardarLlavePublica":
 
 				$cadena_sql = "INSERT INTO ".$prefijo."llave_seguridad ";
-				$cadena_sql .= " VALUES('',".$variable.",'1','llavePublica".$variable.".pem')";
+				$cadena_sql .= " VALUES((SELECT MAX(llave.idllave)+1 FROM evoto_llave_seguridad llave),";
+                                $cadena_sql .= " ".$variable.",'1','llavePublica".$variable.".pem')";
 			break;
                     
                         case "guardarLlavePrivada":
 
 				$cadena_sql = "INSERT INTO ".$prefijo."llave_seguridad ";
-				$cadena_sql .= " VALUES('',".$variable.",'2','llave".$variable.".pem')";
+				$cadena_sql .= " VALUES((SELECT MAX(llave.idllave)+1 FROM evoto_llave_seguridad llave),";
+                                $cadena_sql .= " ".$variable.",'2','llave".$variable.".pem')";
+                                
 			break;
                         
                         case "idioma":

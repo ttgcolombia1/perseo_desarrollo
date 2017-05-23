@@ -1,15 +1,8 @@
 <?php
 
-/* * *************************************************************************
- * SARA
- * Copyright (c) 2013
- * UNIVERSIDAD DISTRITAL Francisco José de Caldas
- *
- * ************************************************************************** */
+require_once __DIR__.'/../auth/Sesion.class.php';
+require_once __DIR__.'/../manager/Configurador.class.php';
 
-//IMPORTANTE
-//Cada base de datos MYSQL que este registrada en el sistema debe tener un nombre de usuario diferente
-//Se recomienda que se manejen diferentes perfiles por cada subsistema
 
 class mysql implements Conector {
     /*     * * Atributos: ** */
@@ -30,6 +23,7 @@ class mysql implements Conector {
     var $conteo;
     var $registro;
     var $campo;
+    var $charset='utf8';
 
     /*     * * Fin de sección Atributos: ** */
 
@@ -132,7 +126,7 @@ class mysql implements Conector {
 
 
         $this->enlace = mysqli_connect($this->servidor, $this->usuario, $this->clave);
-
+        mysqli_set_charset( $this->enlace,$this->charset);
 
         if ($this->enlace) {
 
@@ -141,10 +135,12 @@ class mysql implements Conector {
                 return $this->enlace;
             } else {
                 $this->error = mysqli_errno();
+                //error_log($this->error);
             }
         } else {
 
             $this->error = mysqli_errno();
+            //error_log($this->error);
         }
     }
 
@@ -167,25 +163,38 @@ class mysql implements Conector {
 
 // Fin del método probar_conexion
 
-    function logger($configuracion, $id_usuario, $evento) {
+    function logger($configuracion, $id, $evento) {
         $this->cadena_sql = "INSERT INTO ";
         $this->cadena_sql.= "" . $configuracion["prefijo"] . "logger ";
         $this->cadena_sql.= "( ";
-        $this->cadena_sql.= "`id_usuario` ,";
         $this->cadena_sql.= " `evento` , ";
         $this->cadena_sql.= "`fecha`  ";
         $this->cadena_sql.= ") ";
         $this->cadena_sql.= "VALUES (";
-        $this->cadena_sql.= $id_usuario . ",";
         $this->cadena_sql.= "'" . $evento . "',";
         $this->cadena_sql.= "'" . time() . "'";
         $this->cadena_sql.=")";
-        //echo $this->cadena_sql;
         $this->ejecutar_acceso_db($this->cadena_sql);
         unset($this->db_sel);
         return TRUE;
     }
-
+    
+    function registrarEvento($cadena_sql) 
+        {   $miSesion = Sesion::singleton();
+            $configurador = Configurador::singleton();
+            $usuario = $miSesion->getSesionUsuarioId();
+            $prefijo = $configurador->getVariableConfiguracion("prefijo");
+            $configuracion = array('prefijo'=> $prefijo);
+            //filtra para no registrar los eventos de la tablas listadas
+            $log_cadena = str_replace("'", "", $cadena_sql);
+            if(!strpos($log_cadena,$prefijo.'valor_sesion') &&
+               !strpos($log_cadena,$prefijo.'logger') &&
+               !strpos($log_cadena,$prefijo.'votocodificado') &&
+               !strpos($log_cadena,$prefijo.'votodecodificado')  &&
+               !strpos($log_cadena,'lc_time_names')  )
+               { $this->logger($configuracion,"","{usuario: $usuario, consulta: $log_cadena}");}
+        }
+    
     /**
      *
      * @name desconectar_db
@@ -327,26 +336,26 @@ class mysql implements Conector {
     function transaccion($insert, $delete) {
 
         $acceso=true;
-        
+
         /* Desactivar el autocommit */
         mysqli_autocommit($this->enlace, FALSE);
         $this->instrucciones = count($insert);
         for ($contador = 0; $contador < $this->instrucciones; $contador++) {
             $acceso &= $this->ejecutar_acceso_db($insert[$contador]);
         }
-        
-        
+
+
         if($acceso){
                 $resultado=mysqli_commit($this->enlace);
         }else{
             mysqli_rollback($this->enlace);
             $resultado=false;
-            
+
         }
         /* Activar el autocommit */
-        
         mysqli_autocommit($this->enlace, TRUE);
-        
+        /*registrar eventos*/
+        if($resultado===true){ foreach ($insert as $key => $value) {$this->registrarEvento($value);}}
         return $resultado;
     }
 
@@ -413,6 +422,7 @@ class mysql implements Conector {
     //Funcion para el acceso a las bases de datos
 
     function ejecutarAcceso($cadena_sql, $tipo = "", $numeroRegistros = 0) {
+
         if (!is_object($this->enlace)) {
             error_log("NO HAY ACCESO A LA BASE DE DATOS!!!");
             return "error";
@@ -425,6 +435,7 @@ class mysql implements Conector {
             return $esteRegistro;
         } else {
             $resultado = $this->ejecutar_acceso_db($cadena_sql);
+            $this->registrarEvento($cadena_sql);
             return $resultado;
         }
     }
@@ -434,6 +445,3 @@ class mysql implements Conector {
     }
 
 }
-
-//Fin de la clase db_admin
-?>

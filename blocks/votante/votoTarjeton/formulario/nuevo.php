@@ -147,7 +147,6 @@ if($resultadoProcesos)
 {
 	$atributos["id"]="divNoEncontroEgresado";
 	$atributos["estilo"]="marcoBotones";
-   //$atributos["estiloEnLinea"]="display:none"; 
 	echo $this->miFormulario->division("inicio",$atributos);
 	
 	//-------------Control Boton-----------------------

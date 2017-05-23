@@ -56,9 +56,14 @@ class SqlvotoTarjeton extends sql {
         
             case "listaTarjetones":
     
-                $cadena_sql = " SELECT lis.idlista, lis.nombre ";
+                $cadena_sql = " SELECT DISTINCT ";
+                $cadena_sql.= " lis.idlista, ";
+                $cadena_sql.= " lis.nombre, ";
+                $cadena_sql.= " lis.eleccion_ideleccion, ";
+                $cadena_sql.= " lis.posiciontarjeton ";
                 $cadena_sql.= " FROM ".$prefijo."lista lis ";
                 $cadena_sql.= " WHERE eleccion_ideleccion = ".$variable."";
+                $cadena_sql.= " ORDER BY  lis.posiciontarjeton ASC ,lis.idlista ASC";
             break;
         
             case "infoEleccion":
@@ -77,11 +82,13 @@ class SqlvotoTarjeton extends sql {
         
             case "listaCandidatos":
     
-                $cadena_sql = " SELECT lis.idlista, can.idcandidato, can.identificacion, can.nombre, can.apellido, can.foto ";
+                $cadena_sql = " SELECT lis.idlista, can.idcandidato, can.identificacion, can.nombre, can.apellido, can.foto, can.reglon";
                 $cadena_sql.= " FROM ".$prefijo."lista lis ";
                 $cadena_sql.= " JOIN evoto_candidato can ON can.lista_idlista = lis.idlista";
                 $cadena_sql.= " WHERE eleccion_ideleccion = ".$variable[0]."";
                 $cadena_sql.= " AND lis.idlista = ".$variable[1]."";
+                $cadena_sql.= " ORDER BY  can.reglon ";
+                
             break;
         
             case "rutaLlavePublica":
@@ -194,6 +201,7 @@ class SqlvotoTarjeton extends sql {
             
         
         }
+        
         return $cadena_sql;  
     }
     

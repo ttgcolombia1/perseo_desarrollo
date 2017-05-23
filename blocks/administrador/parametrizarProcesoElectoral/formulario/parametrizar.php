@@ -24,18 +24,18 @@ $esteRecursoDB=$this->miConfigurador->fabricaConexiones->getRecursoDB($conexion)
 $proceso = $_REQUEST['proceso'];
 
 $cadena_sql = $this->sql->cadena_sql("idioma", $proceso);
-$resultadoIdioma = $esteRecursoDB->ejecutarAcceso($cadena_sql, "acceso");  
+$resultadoIdioma = $esteRecursoDB->ejecutarAcceso($cadena_sql, "acceso");
 
 $cadena_sql = $this->sql->cadena_sql("datosProceso", $proceso);
-$resultadoProceso = $esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda"); 
+$resultadoProceso = $esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
 //var_dump($resultadoProceso);
 if($resultadoProceso)
     {
         $atributos["id"]="divInfoProceso";
         $atributos["estilo"]="marcoBotones";
-        //$atributos["estiloEnLinea"]="display:none"; 
+        //$atributos["estiloEnLinea"]="display:none";
         echo $this->miFormulario->division("inicio",$atributos);
-        
+
         //-----------------Inicio de Conjunto de Controles----------------------------------------
         $esteCampo = "marcoDatosProceso";
         $atributos["estilo"] = "jqueryui";
@@ -86,43 +86,43 @@ if($resultadoProceso)
 
         //Fin de Conjunto de Controles
         echo $this->miFormulario->marcoAGrupacion("fin");
-        
+
         //-----------------Inicio de Conjunto de Controles----------------------------------------
         $esteCampo = "marcoDatosParametrizacion";
         $atributos["estilo"] = "jqueryui";
         $atributos["leyenda"] = $this->lenguaje->getCadena($esteCampo);
         echo $this->miFormulario->marcoAGrupacion("inicio", $atributos);
         unset($atributos);
-        
+
         //------------------Division para las pestañas-------------------------
         $atributos["id"]="tabs";
         $atributos["estilo"]="";
         echo $this->miFormulario->division("inicio",$atributos);
         unset($atributos);
-                
+
         $cantidadElecciones = (int)$resultadoProceso[0]['cantidadelecciones'];
-        
+
         for($i=0;$i<$cantidadElecciones;$i++)
         {
             $eleccionForm = ($i+1);
             $arrayEleccionForm = array($proceso, $eleccionForm);
-            
+
             $this->cadena_sql = $this->sql->cadena_sql("consultaEleccion", $arrayEleccionForm);
             $resultadoEleccionForm = $esteRecursoDB->ejecutarAcceso($this->cadena_sql, "busqueda");
-                        
+
             if($resultadoEleccionForm)
                 {
                     $items["tabEleccion".$i]=$resultadoEleccionForm[0]['nombre'];
                 }else
                     {
                         $items["tabEleccion".$i]=$this->lenguaje->getCadena("tabEleccion")." ".($i+1);
-                    }            
+                    }
         }
         $atributos["items"]=$items;
         $atributos["estilo"]="jqueryui";
         $atributos["pestañas"]="true";
         echo $this->miFormulario->listaNoOrdenada($atributos);
-            
+
         for($j=0;$j<$cantidadElecciones;$j++)
         {   unset($atributos);
             //------------------Division para la pestaña 2-------------------------
@@ -130,26 +130,26 @@ if($resultadoProceso)
             $atributos["id"]="tabEleccion".$j;
             $atributos["estilo"]="";
             echo $this->miFormulario->division("inicio",$atributos);
-            
-            include($this->ruta."formulario/tabs/tabEleccion.php"); 
-            
+
+            include($this->ruta."formulario/tabs/tabEleccion.php");
+
              //-----------------Fin Division para la pestaña 1-------------------------
             echo $this->miFormulario->division("fin");
-            
+
         }
-       
+
         //-----------------Fin Division para los tabs-------------------------
         echo $this->miFormulario->division("fin");
-        
+
         //Fin de Conjunto de Controles
         echo $this->miFormulario->marcoAGrupacion("fin");
-        
+
 
     }else
         {
             $atributos["id"]="divNoEncontroEgresado";
             $atributos["estilo"]="marcoBotones";
-            //$atributos["estiloEnLinea"]="display:none"; 
+            //$atributos["estiloEnLinea"]="display:none";
             echo $this->miFormulario->division("inicio",$atributos);
 
             //-------------Control Boton-----------------------
@@ -160,12 +160,12 @@ if($resultadoProceso)
             $atributos["tipo"] = 'error';
             $atributos["mensaje"] = $this->lenguaje->getCadena($esteCampo);;
             echo $this->miFormulario->cuadroMensaje($atributos);
-            unset($atributos); 
+            unset($atributos);
             //-------------Fin Control Boton----------------------
 
             //------------------Fin Division para los botones-------------------------
             echo $this->miFormulario->division("fin");
         }
-    
+
 
 ?>

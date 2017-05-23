@@ -1,36 +1,72 @@
-/* 
-    Document   : miestilo
-    Created on : 29/08/2013, 12:11:16 PM
-    Author     : esanchez
-    Description:
-        Purpose of the stylesheet follows.
+/*
 */
+
 #plantilla {
-background-color: white;
-width: 800px;
-margin: 4px auto ;
-text-align:center ; 
-} 
+    background-color: white;
+    width: 800px;
+    margin: 4px auto;
+    margin-top: 40px;
+    text-align: center;
+}
 
-.contenedor-tabla{
+.contenedor-tabla {
+    display: table;
+}
 
-display: table;
+.contenedor-fila {
+    display: table-row;
+}
+
+.contenedor-columna {
+    display: table-cell;
+}
+
+#tablaCandidatos {
+    border: solid 1px #333;
+    width: 100%;
+}
+
+#tablaCandidatos tbody tr {
+    background: #E0F0FA;
+}
+
+.fila-base {
+    display: none;
+}
+
+
+/* fila base oculta */
+
+.eliminar {
+    cursor: pointer;
+    color: #000;
+}
+
+p {
+    font-family: Arial;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#progressbar {
+    width: 95%;
+    height: 40px;
+}
+
+.ui-progressbar {
+    position: relative;
+}
+
+.progress-label {
+    position: absolute;
+    left: 50%;
+    top: 13px;
+    font-size: 13px;
 
 }
 
-.contenedor-fila{
-
-display: table-row;
-
+.ui-progressbar .ui-progressbar-value {
+    margin: 0;
+    height: 38px !important;
 }
-
-.contenedor-columna{
-
-display: table-cell;
-
-}
-
-#tablaCandidatos{	border: solid 1px #333;	width: 100%; }
-#tablaCandidatos tbody tr{ background: #E0F0FA; }
-.fila-base{ display: none; } /* fila base oculta */
-.eliminar{ cursor: pointer; color: #000; }

@@ -63,4 +63,5 @@ $this->idioma["continuar"]="Continuar";
 
 $this->idioma["regresar"]="Regresar";
 
-?>
+$this->idioma["noEncontroProcesos"]="No existen procesos en curso";
+

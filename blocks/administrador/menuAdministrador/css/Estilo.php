@@ -1,6 +1,6 @@
 <?php
 $indice=0;
-$estilo[$indice++]="menuVertical/vertical_menu.css";
+$estilo = array();
 $rutaBloque=$this->miConfigurador->getVariableConfiguracion("host");
 $rutaBloque.=$this->miConfigurador->getVariableConfiguracion("site");
 
@@ -15,4 +15,4 @@ foreach ($estilo as $nombre){
 
 
 }
-?>
+

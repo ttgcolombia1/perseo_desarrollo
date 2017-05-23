@@ -139,8 +139,20 @@ class sesionSql {
 				$this->cadena_sql [$indice] .= $this->prefijoTablas. 'censo ';
 				$this->cadena_sql [$indice] .= "WHERE ";
 				$this->cadena_sql [$indice] .= "identificacion = '" . trim ( $parametro) . "' ";
-				
 				break;
+ 			case "verificarUsuarioSesion" :
+				$this->cadena_sql [$indice]=" SELECT ";
+                                $this->cadena_sql [$indice].=" sesionId, ";
+                                $this->cadena_sql [$indice].=" variable, ";
+                                $this->cadena_sql [$indice].=" valor, ";
+                                $this->cadena_sql [$indice].=" expiracion ";
+                                $this->cadena_sql [$indice].=" FROM ";
+				$this->cadena_sql [$indice] .= $this->prefijoTablas. "valor_sesion ses";
+                                $this->cadena_sql [$indice].=" INNER JOIN ";
+				$this->cadena_sql [$indice] .= $this->prefijoTablas. "usuario usu ON usu.id_usuario= ses.valor AND ses.variable='idUsuario'";
+                                $this->cadena_sql [$indice].=" WHERE sesionId= '" . trim ( $parametro) . "' ";
+                        	break;                           
+                            
 		}
 	
 	}

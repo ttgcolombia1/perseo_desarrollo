@@ -1,12 +1,4 @@
-<?
-/***************************************************************************
- *   PHP Application Framework Version 10                                  *
- *   Copyright (c) 2003 - 2009                                             *
- *   Teleinformatics Technology Group de Colombia                          *
- *   ttg@ttg.com.co                                                        *
- *                                                                         *
-****************************************************************************/
-
+<?php
 if(!isset($GLOBALS["autorizado"])) {
     include("../index.php");
     exit;

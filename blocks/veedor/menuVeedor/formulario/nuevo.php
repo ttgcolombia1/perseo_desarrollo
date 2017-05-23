@@ -11,8 +11,8 @@ $directorio.=$this->miConfigurador->getVariableConfiguracion("enlace");
 $miSesion = Sesion::singleton();
 
 ?>
-<div class="wrap">
-    <div class="demo-container clear">
+<div id="divPrincipal" style="margin-left: 0px;" class="wrap">
+    <div id="divContenedor" class="demo-container clear">
         <div class="dcjq-vertical-mega-menu">
             <ul id="mega-1" class="menu">
                 <li id="menu-item-0"><a href="#"><img src='<?php echo $rutaBloque . "/css/menuVertical/images/home.png" ?>' width="15px" style="vertical-align:text-bottom;" >  Inicio</a></li> 

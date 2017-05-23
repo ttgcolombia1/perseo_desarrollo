@@ -2,6 +2,8 @@
 
 $this->idioma["tabProceso"]="Parametrizar Proceso Electoral";
 
+$this->idioma["tabNuevoVotante"]="Crear un nuevo votante";
+
 $this->idioma["nombreProcesoTitulo"]="Digite el nombre del proceso electoral";
 
 $this->idioma["nombreProceso"]="Nombre del proceso electoral"; 
@@ -46,6 +48,10 @@ $this->idioma["noDefinido"]="No definido";
 
 $this->idioma["botonAceptar"]="Guardar";
 
+$this->idioma["botonBuscar"]="Buscar";
+
+$this->idioma["botonCrear"]="Crear Registro";
+
 $this->idioma["noEncontroProcesos"]="No se encontraron procesos activos";
 
 //------------------Mensajes -----------------------------------
@@ -74,4 +80,18 @@ $this->idioma["llavehash"]="Digite la llave para la validación:";
 
 $this->idioma["llavehashTitulo"]="Llave de 32 caracteres de validación";
 
-?>
+$this->idioma["errorConsultaProceso"]="No se encuentra el proceso solicitado";
+
+$this->idioma["identificacionVotante"]="Documento de Identidad";
+
+$this->idioma["identificacionVotanteTitulo"]="Documento de Identidad del votante a buscar";
+
+$this->idioma["tabConsultaVotante"]="Busqueda de votantes";
+
+$this->idioma["identificacion"]="Identificacion";
+
+$this->idioma["identificacionTitulo"]="Documento de Identificacion del Votante";
+
+$this->idioma["nombreCompleto"]="Nombre Completo Votante";
+
+$this->idioma["nombreCompletoTitulo"]="Nombre Completo del Votante";

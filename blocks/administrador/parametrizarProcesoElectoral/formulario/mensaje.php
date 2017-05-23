@@ -74,6 +74,30 @@ echo $this->miFormulario->formulario("inicio",$atributos);
             $valorCodificado.="&bloque=".$esteBloque["id_bloque"];
             $valorCodificado.="&bloqueGrupo=".$esteBloque["grupo"];
             $valorCodificado=$cripto->codificar($valorCodificado);
+	}else if($_REQUEST['mensaje'] == 'confirmaActualiza')
+	{
+            $tipo = 'success';
+            $mensaje = "La parametrización se ha Actualizado exitosamente. Presione el botón Continuar.";
+            $boton = "continuar";
+            
+            $valorCodificado="pagina=".$miPaginaActual;
+            $valorCodificado.="&opcion=consultaParametros"; 
+            $valorCodificado.="&proceso=".$_REQUEST['proceso']; 
+            $valorCodificado.="&bloque=".$esteBloque["id_bloque"];
+            $valorCodificado.="&bloqueGrupo=".$esteBloque["grupo"];
+            $valorCodificado=$cripto->codificar($valorCodificado);
+                
+	}else if($_REQUEST['mensaje'] == 'errorActualiza')
+	{
+            $tipo = 'error';
+            $mensaje = "La parametrización no se puede Actualizar. Por favor intente mas tarde.";
+            $boton = "regresar";
+                        
+            $valorCodificado="&opcion=nuevo"; 
+            $valorCodificado.="&nombreProceso=".$_REQUEST['proceso']; 
+            $valorCodificado.="&bloque=".$esteBloque["id_bloque"];
+            $valorCodificado.="&bloqueGrupo=".$esteBloque["grupo"];
+            $valorCodificado=$cripto->codificar($valorCodificado);
 	}
 	
 	$esteCampo = $_REQUEST['proceso'];

@@ -1,4 +1,4 @@
-<?
+<?php
 if(!isset($GLOBALS["autorizado"])) {
     include("../index.php");
     exit;
@@ -39,4 +39,3 @@ var_dump($_REQUEST);
 	
 }
 
-?>

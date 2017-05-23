@@ -111,7 +111,10 @@ class SqlregistroCierreProceso extends sql {
                        
                        case "llavePrivadaProceso":
                                 $cadena_sql = " SELECT";
-                                $cadena_sql.= " tipollave, nombrellave";
+                                $cadena_sql.= " ll.tipollave, ";
+                                $cadena_sql.= " ll.nombrellave, ";
+                                $cadena_sql.= " el.procesoelectoral_idprocesoelectoral proceso,";
+                                $cadena_sql.= " el.fechafin ";
                                 $cadena_sql.= " FROM";
                                 $cadena_sql.= " ".$prefijo."llave_seguridad ll ";
                                 $cadena_sql.= " JOIN ".$prefijo."eleccion el ON ll.idproceso = el.procesoelectoral_idprocesoelectoral ";
@@ -119,7 +122,15 @@ class SqlregistroCierreProceso extends sql {
                                 $cadena_sql.= " ideleccion = ".$variable;
                                 $cadena_sql.= " AND tipollave = 2";
                                 break;     
-                        
+
+                       case "contarVotosCodificados":
+				$cadena_sql="SELECT ";
+				$cadena_sql.="count(*) as total ";
+				$cadena_sql.="FROM ";
+				$cadena_sql.=$prefijo."votocodificado ";
+				$cadena_sql.="WHERE ideleccion = ".$variable;
+				break;                              
+                            
                        case "contarVotosDecodificados":
 				$cadena_sql="SELECT ";
 				$cadena_sql.="count(*) as total ";
@@ -162,8 +173,9 @@ class SqlregistroCierreProceso extends sql {
 				$cadena_sql="UPDATE ";
 				$cadena_sql.=$prefijo."eleccion ";
 				$cadena_sql.="SET ";
-				$cadena_sql.=" fechafin = '".date('Y-m-d H:m:s')."'";
-                                $cadena_sql.="WHERE ideleccion = ".$variable;
+				//$cadena_sql.=" fechafin = '".date('Y-m-d H:m:s')."' ";
+				$cadena_sql.=" fechafin = '".$variable['fechafin']."' ";
+                                $cadena_sql.=" WHERE ideleccion = ".$variable['eleccion'];
 				break;   
                             
                         case "votaciones":
@@ -261,7 +273,7 @@ class SqlregistroCierreProceso extends sql {
                             
 				$cadena_sql = "SELECT DISTINCT nombre, ".$prefijo."procesoelectoral.descripcion, DATE_FORMAT(fechainicio,'%d de %M de %Y %r') as fechainicio, DATE_FORMAT(fechafin,'%d de %M de %Y %r')  as fechafin, ".$prefijo."tipovotacion.descripcion as tipoVotacion, cantidadelecciones,  ";
 				$cadena_sql .= "CONCAT(".$prefijo."actoadministrativo.descripcion, ' ', idactoadministrativo, ' del ',  DATE_FORMAT(fechaactoadministrativo,'%d de %M de %Y')) as acto  ";
-                                $cadena_sql .= ",idprocesoelectoral, dependenciasresponsables ";
+                                $cadena_sql .= ",idprocesoelectoral, dependenciasresponsables, fechafin as fechaTermina ";
                                 $cadena_sql .= "FROM ".$prefijo."procesoelectoral ";
                                 $cadena_sql .= "JOIN ".$prefijo."actoadministrativo ON ".$prefijo."procesoelectoral.tipoactoadministrativo = ".$prefijo."actoadministrativo.idacto  ";
                                 $cadena_sql .= "JOIN ".$prefijo."tipovotacion ON ".$prefijo."procesoelectoral.tipovotacion = ".$prefijo."tipovotacion.idtipo  ";
@@ -358,7 +370,7 @@ class SqlregistroCierreProceso extends sql {
 				$cadena_sql="SELECT ";
 				$cadena_sql.="count(*) as total ";
 				$cadena_sql.="FROM ";
-				$cadena_sql.="voto_voto_decodificado ";
+				$cadena_sql.=$prefijo."decodificado ";
 				break;
 
 				/**
@@ -429,8 +441,7 @@ class SqlregistroCierreProceso extends sql {
 
 
 		}
-
-		return $cadena_sql;
+                return $cadena_sql;
 
 	}
 }

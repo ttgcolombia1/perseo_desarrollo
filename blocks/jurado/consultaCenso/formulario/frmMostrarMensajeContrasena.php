@@ -108,7 +108,7 @@ echo $this->miFormulario->formulario("inicio",$atributos);
         <script>
         open_window();
         self.focus();
-        window.setInterval(" window_handle.close();", 30000, "JavaScript");
+        window.setInterval(" window_handle.close();", 15000, "JavaScript");
         </script>';
         
           

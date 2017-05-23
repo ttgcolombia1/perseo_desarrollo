@@ -23,7 +23,7 @@ class SqlConsultaProceso extends sql {
 
 
 	function cadena_sql($tipo,$variable="") {
-			
+
 		/**
 		 * 1. Revisar las variables para evitar SQL Injection
 		 *
@@ -31,14 +31,14 @@ class SqlConsultaProceso extends sql {
 
 		$prefijo=$this->miConfigurador->getVariableConfiguracion("prefijo");
 		$idSesion=$this->miConfigurador->getVariableConfiguracion("id_sesion");
-			
+
 		switch($tipo) {
 
 			/**
 			 * Clausulas específicas
 			 */
 			case "usuarioAcceso":
-				
+
 				$cadena_sql="SELECT ";
                                 $cadena_sql.="DATE_FORMAT(from_unixtime(fecha),'%Y %m %d'), ";
                                 $cadena_sql.="DATE_FORMAT(from_unixtime(fecha),'%H'), ";
@@ -48,68 +48,89 @@ class SqlConsultaProceso extends sql {
 				$cadena_sql.=$prefijo."logger ";
 				$cadena_sql.="WHERE ";
 				$cadena_sql.="evento like '%autenticacionExitosa%' ";
-                                $cadena_sql.="AND fecha > ".strtotime(date('Y M D'))." ";
+                                $cadena_sql.="AND fecha > ".strtotime(date('Ymd'))." ";
 				$cadena_sql.="group by 2 ";
 				$cadena_sql.="order by 1,2 ";
-				break;	
+				break;
                         case 'zonaHoraria':
                             $cadena_sql="SET time_zone='-5:00'";
                             break;
-				
+
 			case "usuarioNoExiste":
-				
+
 				$cadena_sql="SELECT DATE_FORMAT(from_unixtime(fecha),'%Y %m %d'),DATE_FORMAT(from_unixtime(fecha),'%H'), DATE_FORMAT(from_unixtime(fecha),'%l %p') , ";
 				$cadena_sql.="COUNT(*) ";
 				$cadena_sql.="FROM ";
 				$cadena_sql.=$prefijo."logger ";
 				$cadena_sql.="WHERE ";
-				$cadena_sql.="evento like '%usuarioNoValido%' ";
-                                $cadena_sql.="AND fecha > ".strtotime(date('Y M D'))." ";
+				$cadena_sql.="(evento like '%usuarioNoValido%' ";
+                                $cadena_sql.="OR evento like '%inexistente%') ";
+                                $cadena_sql.="AND fecha > ".strtotime(date('Ymd'))." ";
 				$cadena_sql.="group by 2 ";
 				$cadena_sql.="order by 1,2 ";
-				
-				break;	
-				
+
+				break;
+
 			case "usuarioClave":
-				
+
 				$cadena_sql="SELECT DATE_FORMAT(from_unixtime(fecha),'%Y %m %d'),DATE_FORMAT(from_unixtime(fecha),'%H'), DATE_FORMAT(from_unixtime(fecha),'%l %p') , ";
 				$cadena_sql.="COUNT(*) ";
 				$cadena_sql.="FROM ";
 				$cadena_sql.=$prefijo."logger ";
 				$cadena_sql.="WHERE ";
 				$cadena_sql.="evento like '%claveNoValida%' ";
-                                $cadena_sql.="AND fecha > ".strtotime(date('Y M D'))." ";
+                                $cadena_sql.="AND fecha > ".strtotime(date('Ymd'))." ";
 				$cadena_sql.="group by 2 ";
 				$cadena_sql.="order by 1,2 ";
-				
-				break;	
-				
+
+				break;
+
 			case "certificadosGenerados":
-				
+
 				$cadena_sql="SELECT DATE_FORMAT(from_unixtime(fecha),'%Y %m %d'),DATE_FORMAT(from_unixtime(fecha),'%H'), DATE_FORMAT(from_unixtime(fecha),'%l %p') , ";
 				$cadena_sql.="COUNT(*) ";
 				$cadena_sql.="FROM ";
 				$cadena_sql.=$prefijo."logger ";
 				$cadena_sql.="WHERE ";
 				$cadena_sql.="evento like '%certificadoGenerado%' ";
-                                $cadena_sql.="AND fecha > ".strtotime(date('Y M D'))." ";
+                                $cadena_sql.="AND fecha > ".strtotime(date('Ymd'))." ";
 				$cadena_sql.="group by 2 ";
 				$cadena_sql.="order by 1,2 ";
-				
-				break;	
-				
+
+				break;
+
 			case "totalVotaciones":
-				
 				$cadena_sql="SELECT DATE_FORMAT(from_unixtime(fecha),'%Y %m %d'),DATE_FORMAT(from_unixtime(fecha),'%H'), DATE_FORMAT(from_unixtime(fecha),'%l %p') , ";
 				$cadena_sql.="COUNT(*) ";
 				$cadena_sql.="FROM ";
 				$cadena_sql.=$prefijo."datovoto ";
-                                $cadena_sql.="WHERE fecha > ".strtotime(date('Y M D'))." ";
+                                $cadena_sql.="WHERE fecha > ".strtotime(date('Ymd'))." ";
 				$cadena_sql.="group by 2 ";
 				$cadena_sql.="order by 1,2 ";
-				
-				
-				break;	
+				break;
+
+			case "totalVotantes":
+					$cadena_sql="SELECT ";
+					$cadena_sql.="'Votantes' as tipo, ";
+                                        $cadena_sql.="count(DISTINCT idusuario) as conteo ";
+					$cadena_sql.="FROM ";
+					$cadena_sql.=$prefijo."datovoto";
+					$cadena_sql.=" UNION ";
+					$cadena_sql.="SELECT ";
+                                        $cadena_sql.="'Censo' as tipo, ";
+					$cadena_sql.="count(DISTINCT identificacion) conteo ";
+					$cadena_sql.="FROM ";
+					$cadena_sql.=$prefijo."censo";
+					break;
+
+
+                        case "totalPorEstamento":
+                                        $cadena_sql="select count(*) as conteo, et.descripcion ";
+                                        $cadena_sql.="FROM ";
+                                        $cadena_sql.=$prefijo."votocodificado";
+                                        $cadena_sql.=" as ev, ".$prefijo."tipoestamento as et ";
+                                        $cadena_sql.="where et.idtipo = ev.estamento group by ev.estamento";
+                                        break;
 
 				/**
 				 * Clausulas genéricas. se espera que estén en todos los formularios

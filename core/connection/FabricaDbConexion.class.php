@@ -90,15 +90,14 @@ class FabricaDbConexion {
         } else {
             $gestorDb = new dbms($registro);
         }
-        $recurso = $gestorDb->getRecursoDb();
 
+        $recurso = $gestorDb->getRecursoDb();
 
         if ($recurso && !isset($this->misConexiones[$nombre])) {
             $this->misConexiones[$nombre] = $recurso;
             return true;
         }
-
-        error_log($this->miLenguaje->getCadena("noInstanciaDatos"));
+        //error_log($this->miLenguaje->getCadena("noInstanciaDatos"));
         return false;
     }
 
@@ -113,7 +112,7 @@ class FabricaDbConexion {
         	foreach($resultado[0] as $clave=>$valor){
         		$resultado[0][$clave]=trim($valor);
         	}
-        	
+
             $resultado[0]["dbclave"] = $this->crypto->decodificar($resultado[0]["dbclave"]);
             $resultado[0][6] = $this->crypto->decodificar(trim($resultado[0][6]));
             return $this->recursoConfiguracion($nombre, $resultado);

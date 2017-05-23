@@ -11,7 +11,6 @@ $estilo[$indice++]="chosen.css";
 $estilo[$indice++]="select2.css";
 $estilo[$indice++]="miestilo.css";
 $estilo[$indice++]="jquery_switch.css";
-$estilo[$indice++]="tablasVoto.css";
 
 //Tablas
 $estilo[$indice++]="demo_page.css";
@@ -33,4 +32,4 @@ foreach ($estilo as $nombre){
 	echo "<link rel='stylesheet' type='text/css' href='".$rutaBloque."/css/".$nombre."'>\n";
 
 }
-?>
+

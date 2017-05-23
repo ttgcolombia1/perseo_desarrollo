@@ -122,12 +122,20 @@ if($resultadoProcesos)
                                                     No se ha finalizado la elección
                                                 </td>";
                                         }else
-                                            {
+                                            {   $cadena_sql = $this->sql->cadena_sql("contarVotosCodificados",$resultadoElecciones[$j]['ideleccion']);
+                                                $resultadocodificado = $esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
+                                                unset($desabilita);
+                                                if(isset($resultadocodificado) && $resultadocodificado[0]['total']>0)
+                                                    { $deshabilita = "";
+                                                      $mensaje = "Decodificar Votos";}
+                                                else{ $deshabilita = "disabled='true'";
+                                                      $mensaje = "No hay Votos registrados";}    
                                                 echo "<td>
-                                                        <button type='button'  onclick=\"location.replace('".$variableCerrar."')\" >
-                                                            Decodificar Votos
+                                                        <button type='button' $deshabilita  onclick=\"location.replace('".$variableCerrar."')\" >
+                                                            $mensaje
                                                         </button>                                                        
                                                       </td>";
+                                                
                                             }
                                             echo "<td>
                                                     No hay votos decodificados

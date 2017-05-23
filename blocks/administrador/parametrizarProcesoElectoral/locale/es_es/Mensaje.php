@@ -52,15 +52,46 @@ $this->idioma["botonAceptar"]="Consultar";
 
 $this->idioma["marcoDatosResultadoParametrizar"]="Resultados de Procesos Electorales";
 
+$this->idioma["botonFecha"]="Ver fechas";
+
+$this->idioma["listaTitulo"]="Seleccione la lista para el candidato";
+
+$this->idioma["lista"]="Nombre de Lista"; 
+
+$this->idioma["nombreTitulo"]="Ingrese el Nombre del Candidato";
+
+$this->idioma["nombre"]="Nombre del Candidato"; 
+
+$this->idioma["apellidoTitulo"]="Ingrese el Apellido del Candidato";
+
+$this->idioma["apellido"]="Apellido del Candidato"; 
+
+$this->idioma["eleccionTitulo"]="Elección";
+
+$this->idioma["eleccion"]="Elección";
+
+
+$this->idioma["identificacion"]="Identificacion";
+
+$this->idioma["renglonTitulo"]="Ingrese el Renglón en la lista para Candidato";
+
+$this->idioma["renglon"]="Renglón"; 
+
 //------------------Mensajes -----------------------------------
 
 $this->idioma["marcoDatosProceso"]="Información del proceso electoral";
 
 $this->idioma["marcoDatosCandidatos"]="Registrar Candidatos"; 
 
+$this->idioma["marcoDetalleCandidatos"]="Detalle Candidatos"; 
+
 $this->idioma["marcoDatosListas"]="Registrar Listas"; 
 
 $this->idioma["tabEleccion"]="Elección";
+
+$this->idioma["tabProcesoEditar"]="Ajustar Proceso electoral";
+
+$this->idioma["tabCandidatoEditar"]="Ajustar Candidato";
 
 $this->idioma["marcoDatosParametrizacion"]="Parametrización de la elección";
 

@@ -22,44 +22,35 @@ $conexion="estructura";
 $esteRecursoDB=$this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
 $cadena_sql = $this->sql->cadena_sql("idioma", "");
-$resultadoIdioma = $esteRecursoDB->ejecutarAcceso($cadena_sql, "acceso");    
-   
+$resultadoIdioma = $esteRecursoDB->ejecutarAcceso($cadena_sql, "acceso");
+
 $cadena_sql = $this->sql->cadena_sql("consultarUsuarios", "");
 $resultadoUsuarios = $esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
 
-$variableNuevo = "pagina=gestionUsuarios"; //pendiente la pagina para modificar parametro                                                        
+$variableNuevo = "pagina=gestionUsuarios"; //pendiente la pagina para modificar parametro
 $variableNuevo.= "&opcion=nuevo";
 $variableNuevo.= "&usuario=" . $miSesion->getSesionUsuarioId();
 $variableNuevo = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variableNuevo, $directorio);
-		
 
-echo "<div class='datagrid'><table width='100%' align='center'>
-        <caption>GESTIÓN DE USUARIOS - UNIVERSIDAD DISTRITAL</caption>
-        <tr align='center'>
-            <td align='center'>
-                <a href='".$variableNuevo."'>                        
-                    <img src='".$rutaBloque."/images/add_user.png' width='45px'> <br> <b>Crear Nuevo <br>Usuario</b>
-                </a>
-            </td>
-        </tr>
-      </table></div> ";
+echo "<h1>Gestión de Usuarios</h1>";
+
 
 if($resultadoUsuarios)
-{	
+{
     //-----------------Inicio de Conjunto de Controles----------------------------------------
         $esteCampo = "marcoDatosResultadoParametrizar";
         $atributos["estilo"] = "jqueryui";
         $atributos["leyenda"] = $this->lenguaje->getCadena($esteCampo);
         //echo $this->miFormulario->marcoAgrupacion("inicio", $atributos);
         unset($atributos);
-    
+
         echo "<div class='datagrid'><table id='tablaProcesos'>";
-        
+
         echo "<thead>
                 <tr align='center'>
                     <th>ID Usuario</th>
                     <th>Nombres</th>
-                    <th>Apellidos</th>                    
+                    <th>Apellidos</th>
                     <th>Correo</th>
                     <th>Teléfono</th>
                     <th>Tipo Usuario</th>
@@ -68,21 +59,21 @@ if($resultadoUsuarios)
                 </tr>
             </thead>
             <tbody>";
-        
+
         for($i=0;$i<count($resultadoUsuarios);$i++)
         {
-            $variableEditar = "pagina=gestionUsuarios"; //pendiente la pagina para modificar parametro                                                        
+            $variableEditar = "pagina=gestionUsuarios"; //pendiente la pagina para modificar parametro
             $variableEditar.= "&opcion=editar";
             $variableEditar.= "&usuario=" . $miSesion->getSesionUsuarioId();
             $variableEditar.= "&id_usuario=" .$resultadoUsuarios[$i][0];
             $variableEditar = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variableEditar, $directorio);
-			
-            $variableInhabilitar = "pagina=gestionUsuarios"; //pendiente la pagina para modificar parametro                                                        
+
+            $variableInhabilitar = "pagina=gestionUsuarios"; //pendiente la pagina para modificar parametro
             $variableInhabilitar.= "&opcion=inhabilitar";
             $variableInhabilitar.= "&usuario=" . $miSesion->getSesionUsuarioId();
             $variableInhabilitar.= "&id_usuario=" .$resultadoUsuarios[$i][0];
             $variableInhabilitar = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variableInhabilitar, $directorio);
-            
+
             $mostrarHtml = "<tr align='center'>
                     <td>".$resultadoUsuarios[$i][0]."</td>
                     <td>".$resultadoUsuarios[$i][1]."</td>
@@ -91,30 +82,30 @@ if($resultadoUsuarios)
                     <td>".$resultadoUsuarios[$i][4]."</td>
                     <td>".$resultadoUsuarios[$i][6]."</td>
                     <td>";
-            
-                    $mostrarHtml .= "<a href='".$variableEditar."'>                        
-                                        <img src='".$rutaBloque."/images/edit.png' width='25px'> 
+
+                    $mostrarHtml .= "<a href='".$variableEditar."'>
+                                        <img src='".$rutaBloque."/images/edit.png' width='25px'>
                                     </a>";
                     $mostrarHtml .= "<td>";
-                    $mostrarHtml .= "<a href='".$variableInhabilitar."'>                        
-                                        <img src='".$rutaBloque."/images/cancel.png' width='25px'> 
+                    $mostrarHtml .= "<a href='".$variableInhabilitar."'>
+                                        <img src='".$rutaBloque."/images/cancel.png' width='25px'>
                                     </a>";
                     $mostrarHtml .= "</td>";
-                    
-                        
+
+
                 $mostrarHtml .= "</tr>";
                 echo $mostrarHtml;
                 unset($mostrarHtml);
                 unset($variable);
         }
-               
+
         echo "</tbody>";
-        
+
         echo "</table></div>";
-        
+
         //Fin de Conjunto de Controles
         //echo $this->miFormulario->marcoAgrupacion("fin");
-   
+
 }else
 {
         $nombreFormulario=$esteBloque["nombre"];
@@ -132,12 +123,12 @@ if($resultadoUsuarios)
         $atributos["nombreFormulario"]=$nombreFormulario;
         $verificarFormulario="1";
         echo $this->miFormulario->formulario("inicio",$atributos);
-        
+
 	$atributos["id"]="divNoEncontroEgresado";
 	$atributos["estilo"]="marcoBotones";
-   //$atributos["estiloEnLinea"]="display:none"; 
+   //$atributos["estiloEnLinea"]="display:none";
 	echo $this->miFormulario->division("inicio",$atributos);
-	
+
 	//-------------Control Boton-----------------------
 	$esteCampo = "noEncontroProcesos";
 	$atributos["id"] = $esteCampo; //Cambiar este nombre y el estilo si no se desea mostrar los mensajes animados
@@ -146,21 +137,21 @@ if($resultadoUsuarios)
 	$atributos["tipo"] = 'error';
 	$atributos["mensaje"] = $this->lenguaje->getCadena($esteCampo);;
 	echo $this->miFormulario->cuadroMensaje($atributos);
-    unset($atributos); 
-    
+    unset($atributos);
+
         $valorCodificado="pagina=".$miPaginaActual;
         $valorCodificado.="&bloque=".$esteBloque["id_bloque"];
         $valorCodificado.="&bloqueGrupo=".$esteBloque["grupo"];
         $valorCodificado=$cripto->codificar($valorCodificado);
 	//-------------Fin Control Boton----------------------
-	
+
 	//------------------Fin Division para los botones-------------------------
 	echo $this->miFormulario->division("fin");
         //------------------Division para los botones-------------------------
 	$atributos["id"]="botones";
 	$atributos["estilo"]="marcoBotones";
 	echo $this->miFormulario->division("inicio",$atributos);
-	
+
 	//-------------Control Boton-----------------------
 	$esteCampo = "regresar";
 	$atributos["id"]=$esteCampo;
@@ -174,11 +165,11 @@ if($resultadoUsuarios)
 	echo $this->miFormulario->campoBoton($atributos);
 	unset($atributos);
 	//-------------Fin Control Boton----------------------
-	
-	
+
+
 	//------------------Fin Division para los botones-------------------------
 	echo $this->miFormulario->division("fin");
-    
+
 	//-------------Control cuadroTexto con campos ocultos-----------------------
 	//Para pasar variables entre formularios o enviar datos para validar sesiones
 	$atributos["id"]="formSaraData"; //No cambiar este nombre
@@ -188,10 +179,19 @@ if($resultadoUsuarios)
 	$atributos["valor"]=$valorCodificado;
 	echo $this->miFormulario->campoCuadroTexto($atributos);
 	unset($atributos);
-	
+
         //Fin del Formulario
         echo $this->miFormulario->formulario("fin");
 }
-    
+echo "<div class='datagrid'><table align='center' id='proceso'>
+        <tr align='center'>
+            <td align='center'>
+                <a href='".$variableNuevo."'>
+                    <img src='".$rutaBloque."/images/add_user.png' width='45px'> <br> <b>Crear Nuevo <br>Usuario</b>
+                </a>
+            </td>
+        </tr>
+      </table></div> ";
+
 
 ?>

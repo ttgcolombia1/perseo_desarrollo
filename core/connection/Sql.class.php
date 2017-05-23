@@ -37,6 +37,21 @@ class Sql
 		
 		
 	}
+
+	function limpiarHTML($variables){
+		$resultado = array();
+		if(is_array($variables)){
+            foreach ($variables as $variable){
+                //$variable = mysql_real_escape_string($variable);
+                //$variable = mysqli::escape_string ( $variable);
+                //$variable = mysqli_real_escape_string($variable);
+                array_push($resultado,htmlspecialchars($variable));
+            }
+        }else{
+		    $resultado = htmlspecialchars($variables);
+        }
+		return $resultado;
+	}
 	
 	function limpiarVariables($variable,$conexion){
 		

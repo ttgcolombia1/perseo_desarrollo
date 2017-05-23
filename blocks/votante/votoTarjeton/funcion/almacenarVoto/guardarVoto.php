@@ -39,6 +39,3 @@ if ($estamentoVotante) {
 if ($respuesta == false) {
     error_log($error . ':' . $variable['eleccion'] . '|' . $variable['usuario'] . '|' . $variable['ip'] . '|' . $variable['fecha']);
 }
-
-//error_log('Voto' . ':' . $variable['eleccion'] . '|' . $variable['usuario'] . '|' . $variable['ip'] . '|' . $variable['fecha']. '|' .$variable['textoEncriptado']. '|' .$voto);
-?>

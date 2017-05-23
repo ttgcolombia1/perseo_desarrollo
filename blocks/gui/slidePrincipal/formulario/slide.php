@@ -5,7 +5,7 @@ $esteCampo = 'imagen';
 $atributos ["id"] = $esteCampo;
 $atributos ['ancho'] = '283px';
 $atributos ['alto'] = '';
-$atributos ['estilo'] = 'campoImagen textoCentrar';
+$atributos ['estilo'] = 'campoImagen textoCentrar sabio';
 //$atributos ['estiloImagen'] = '';
 $atributos ['imagen'] = $directorio.'/imagen/sabio.png';
 
