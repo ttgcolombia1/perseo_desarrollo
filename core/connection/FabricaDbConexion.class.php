@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * Fabrica de objetos para la familia de conexiones a bases de datos

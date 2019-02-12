@@ -36,7 +36,9 @@ if (!isset($GLOBALS["autorizado"])) {
     }
 
     $candidatos = 0;
-
+    $aux=1;
+    $candidatosError = '';
+    $permite=array("jpg","jpeg","png");
     // Si se esta pasando un array de identificaciones estos corresponden a candidatos nuevos
     if (isset($_REQUEST['identificacion' . $idEleccion]) && is_array($_REQUEST['identificacion' . $idEleccion])) {
         for ($j = 1; $j < count($_REQUEST['identificacion' . $idEleccion]); $j++) {
@@ -45,15 +47,21 @@ if (!isset($GLOBALS["autorizado"])) {
                 $estension = explode(".", $_FILES['foto' . $idEleccion]['name'][$j]);
                 $nombre = $estension[0];
                 $ext = $estension[1];
-
-                $nombreArchivo = $_REQUEST['identificacion' . $idEleccion][$j] . "." . $ext;
-
-                copy($_FILES['foto' . $idEleccion]['tmp_name'][$j], $rutaCandidatos . $nombreArchivo);
-
-                $candidatosGuardar[$j] = array($_REQUEST['identificacion' . $idEleccion][$j], $_REQUEST['nombres' . $idEleccion][$j], $_REQUEST['apellidos' . $idEleccion][$j], $_REQUEST['nombreLista' . $idEleccion][$j], $nombreArchivo, $_REQUEST['renglon' . $idEleccion][$j]);
+                //valida si la extensión del archivo corresponde a una imagen, permite realizar el registro
+            if (in_array(strtolower($ext), $permite))     
+                {
+                    $nombreArchivo = $_REQUEST['identificacion' . $idEleccion][$j] . "." . $ext;
+                    copy($_FILES['foto' . $idEleccion]['tmp_name'][$j], $rutaCandidatos . $nombreArchivo);
+                    $candidatosGuardar[$aux] = array($_REQUEST['identificacion' . $idEleccion][$j], $_REQUEST['nombres' . $idEleccion][$j], $_REQUEST['apellidos' . $idEleccion][$j], $_REQUEST['nombreLista' . $idEleccion][$j], $nombreArchivo, $_REQUEST['renglon' . $idEleccion][$j]);
+                    $aux++;
+                }
+            else{
+                    $candidatosError.= $_REQUEST['identificacion' . $idEleccion][$j]." - ".$_REQUEST['nombres' . $idEleccion][$j]." ".$_REQUEST['apellidos' . $idEleccion][$j].", ";
+                }
             }
         }
-    }
+    } 
+
     // Si hay candidatos y se encuentra que tambien el nombre de la lista es un array se hace un array de listas unicas
     if ($candidatos != 0) {
         if (isset($_REQUEST['nombreLista' . $idEleccion]) && is_array($_REQUEST['nombreLista' . $idEleccion])) {
@@ -173,7 +181,10 @@ if (!isset($GLOBALS["autorizado"])) {
                 $resultadoCandidato = $esteRecursoDB->ejecutarAcceso($this->cadena_sql, "acceso");
 
             }
-            $this->funcion->redireccionar('inserto', $proceso);
+            $resultado=array('proceso'=> $proceso,
+                             'errores'=> $candidatosError
+                        );
+            $this->funcion->redireccionar('inserto', $resultado);
         } else {
             $this->funcion->redireccionar('insertoSinCandidatos', $proceso);
         }

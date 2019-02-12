@@ -66,7 +66,7 @@ if(!isset($GLOBALS["autorizado"])) {
             if ($moved)
             {
                 $stringArchivo = file_get_contents($destino);
-                $hashArchivo =  hash('sha1', $stringArchivo);
+                $hashArchivo =  hash('sha256', $stringArchivo);
 
                 if($_REQUEST['llavehash'] === $hashArchivo)
                     {

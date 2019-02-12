@@ -4,6 +4,10 @@ $estilo[$indice++]="general.css";
 $estilo[$indice++]="estiloCuadrosMensaje.css";
 $estilo[$indice++]="estiloTexto.css";
 $estilo[$indice++]="estiloFormulario.css";
+$estilo[$indice++]="tablas_voto.css";
+$estilo[$indice++]="vertical_menu.css";
+$estilo[$indice++]="barra_superior.css";
+$estilo[$indice++]="jquery-ui.css";
 
 $host=$this->miConfigurador->getVariableConfiguracion("host");
 $sitio=$this->miConfigurador->getVariableConfiguracion("site");
@@ -13,7 +17,7 @@ if(isset($_REQUEST["jquery-ui"])) {
 }
 
 foreach ($estilo as $nombre){
-	echo "<link rel='stylesheet' type='text/css' href='".$host.$sitio."/theme/basico/css/".$nombre."'>\n";	
-	
+	echo "<link rel='stylesheet' type='text/css' href='".$host.$sitio."/theme/basico/css/".$nombre."'>\n";
+
 }
-?>
+

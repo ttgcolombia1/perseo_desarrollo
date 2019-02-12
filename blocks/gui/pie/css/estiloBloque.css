@@ -1,7 +1,7 @@
  #pie{
 
  font-family:Arial;
- font-size:11px;
+ font-size:12px;
  margin:0 auto;
  text-align:center;
 
@@ -19,8 +19,8 @@
 
  #sabio{
     clear:both;
-    width: 596px;
-    height: 96px;
+    width: 700px;
+    height: 113px;
     display: block;
     margin: auto;
     background: url(../imagen/logo.png) no-repeat;

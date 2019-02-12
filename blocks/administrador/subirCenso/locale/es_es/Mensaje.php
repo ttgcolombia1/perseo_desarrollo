@@ -78,7 +78,7 @@ $this->idioma["regresar"]="Regresar";
 
 $this->idioma["llavehash"]="Digite la llave para la validación:";
 
-$this->idioma["llavehashTitulo"]="Llave de 32 caracteres de validación";
+$this->idioma["llavehashTitulo"]="Llave de validación";
 
 $this->idioma["errorConsultaProceso"]="No se encuentra el proceso solicitado";
 

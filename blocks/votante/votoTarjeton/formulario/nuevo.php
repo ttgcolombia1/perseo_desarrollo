@@ -18,15 +18,10 @@ $miSesion = Sesion::singleton();
 
 $nombreFormulario=$esteBloque["nombre"];
 
-$votante = $_REQUEST['usuario'];
-
 $conexion="estructura";
 $esteRecursoDB=$this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 
-
-
-$cadena_sql = $this->sql->cadena_sql("consultarProcesosVotante", $votante);
-
+$cadena_sql = $this->sql->cadena_sql("consultarProcesosVotante", $miSesion->getSesionUsuarioId());
 $resultadoProcesos = $esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
 
 if($resultadoProcesos)

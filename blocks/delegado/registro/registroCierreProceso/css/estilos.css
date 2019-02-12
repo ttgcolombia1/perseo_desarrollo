@@ -50,8 +50,11 @@ width: 600px;
 
 caption {
    padding: 0.3em;
-   color: #fff;
-    background: #34484E;
+   color: #ffffff;
+   background: #2b759b;
+   font-size: 14px;
+   font-weight:bold;
+   text-transform: uppercase;
 }
 th {
    background: #34484E;
@@ -60,10 +63,10 @@ th {
 .tabla th {
 padding: 5px;
 font-size: 12px;
-background-color: #83aec0;
+background-color: #d1e4f3;
 background-image: url(fondo_th.png);
 background-repeat: repeat-x;
-color: #FFFFFF;
+color: #34484E;
 border-right-width: 1px;
 border-bottom-width: 1px;
 border-right-style: solid;
@@ -75,7 +78,7 @@ text-transform: uppercase;
 }
 
 .tabla .modo1 {
-font-size: 12px;
+font-size: 13px;
 font-weight:bold;
 background-color: #e2ebef;
 background-image: url(fondo_tr01.png);
@@ -120,7 +123,7 @@ font-weight:m;
 background-color: #fdfdf1;
 background-image: url(fondo_tr02.png);
 background-repeat: repeat-x;
-color: #990000;
+color: #03145f;
 font-family: “Trebuchet MS”, Arial;
 text-align:center;
 }
@@ -130,8 +133,8 @@ border-right-width: 1px;
 border-bottom-width: 1px;
 border-right-style: solid;
 border-bottom-style: solid;
-border-right-color: #EBE9BC;
-border-bottom-color: #EBE9BC;
+border-right-color: #558FA6;
+border-bottom-color: #558FA6;
 }
 .tabla .modo2 th {
 background-image: url(fondo_tr02a.png);

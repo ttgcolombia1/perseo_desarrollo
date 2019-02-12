@@ -167,10 +167,16 @@ class SqlSubirCenso extends sql
                 break;
             
             case "consultaCensoProceso":
-                $cadena_sql=" SELECT DISTINCT identificacion, clave, cns.nombre";
+                $cadena_sql=" SELECT DISTINCT identificacion, clave, cns.nombre, cns.ideleccion";
                 $cadena_sql.=" FROM " . $prefijo . "censo cns";
                 $cadena_sql.=" INNER JOIN " . $prefijo . "eleccion elc ON cns.ideleccion=elc.ideleccion";
+                $cadena_sql.=" INNER JOIN " . $prefijo . "tipovotacion tvoto ON tvoto.idtipo=elc.tipovotacion";
                 $cadena_sql.=" WHERE elc.procesoelectoral_idprocesoelectoral=" . $variable[0];                
+                if(isset($variable[1]) && $variable[1]!='')
+                    {
+                      $cadena_sql.=" AND tvoto.descripcion NOT IN (".$variable[1].") ";                
+                    }
+                
                 break;            
             case "contarCensoProceso":
                 $cadena_sql=" SELECT COUNT(DISTINCT identificacion) censo";
@@ -194,7 +200,10 @@ class SqlSubirCenso extends sql
                 $cadena_sql=" UPDATE  " . $prefijo . "censo";
                 $cadena_sql.=" SET clave='" . $variable[1]."'";
                 $cadena_sql.=" WHERE identificacion= " . $variable[0];
-                
+                if(isset($variable[2]) && $variable[2]!='')
+                    {
+                      $cadena_sql.=" AND ideleccion IN (".$variable[2].") ";                
+                    }
                 break;            
             /**
              * Clausulas genéricas. se espera que estén en todos los formularios

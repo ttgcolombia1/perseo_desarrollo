@@ -11,10 +11,10 @@ echo $this->miFormulario->division("fin");
 //------------------Division-------------------------
 $atributos["id"]="escudo";
 $atributos["estilo"]="";
-echo $this->miFormulario->division("inicio",$atributos);
+//echo $this->miFormulario->division("inicio",$atributos);
 unset($atributos);
 //------------Fin de la División -----------------------
-echo $this->miFormulario->division("fin");
+//echo $this->miFormulario->division("fin");
 
 //------------------Division-------------------------
 $atributos["id"]="pie";

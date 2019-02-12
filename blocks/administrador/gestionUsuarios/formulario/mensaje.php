@@ -40,6 +40,9 @@ echo $this->miFormulario->formulario("inicio",$atributos);
    //$atributos["estiloEnLinea"]="display:none"; 
 	echo $this->miFormulario->division("inicio",$atributos);
 	
+        foreach ($_REQUEST as $clave => $valor)
+            {$_REQUEST[$clave]= str_replace("\\","",$_REQUEST[$clave]);	}
+            
 	if($_REQUEST['mensaje'] == 'confirma')
 	{
             $tipo = 'success';

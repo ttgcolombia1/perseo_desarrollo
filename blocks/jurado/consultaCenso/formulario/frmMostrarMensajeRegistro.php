@@ -47,37 +47,42 @@ $resultadoProcesos = $esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
                 <tr>
                     <th>Elección</th>
                     <th>Estamento</th>
+                    <th>Tipo Elección</th>
                     <th>Estado</th>
                 </tr>
             </thead>
             <tbody>";
+
         foreach($resultadoProcesos as $key => $value)
-		{ 
-		 $mostrarHtml = "<tr>";
-         $mostrarHtml.= "<td>".$resultadoProcesos[$key][6]."</td>";
-         $mostrarHtml.= "<td>".$resultadoProcesos[$key][4]."</td>";
-		
-		 if(isset($resultadoProcesos[$key][8]) && $resultadoProcesos[$key][8] != '')
-			 {  $fechaVoto=date('Y/m/d h:i:sa',$resultadoProcesos[$key][8]);
-				$mostrarHtml .= "<td>";
-				$mostrarHtml .= $this->lenguaje->getCadena('yaVoto');
-				$mostrarHtml .= "<br><b>".$fechaVoto."</b>";
-				$mostrarHtml .= "</td>";
-			 }
-		 elseif(isset($resultadoProcesos[$key][7]) && $resultadoProcesos[$key][7] == 1)
-			 {  $mostrarHtml .= "<td>";
-				$mostrarHtml .= $this->lenguaje->getCadena('activo');
-				$mostrarHtml .= "</td>";
-			 }
-		else { 	$fechaVoto=1;
-			    $mostrarHtml .= "<td>";
-			 	$mostrarHtml .= $this->lenguaje->getCadena('inactivo');
-			 	$mostrarHtml .= "</td>";
-			 }
-		$mostrarHtml .= "</tr>";
-		echo $mostrarHtml;
-		unset($mostrarHtml);
-		unset($variable);
+		{   
+                    if (isset($resultadoProcesos[$key][10]) &&  $resultadoProcesos[$key][10]=='Presencial') 
+                        {$presencial=1;}
+                    $mostrarHtml = "<tr>";
+                    $mostrarHtml.= "<td>".$resultadoProcesos[$key][6]."</td>";
+                    $mostrarHtml.= "<td>".$resultadoProcesos[$key][4]."</td>";
+                    $mostrarHtml.= "<td>".$resultadoProcesos[$key][10]."</td>";
+
+                            if(isset($resultadoProcesos[$key][8]) && $resultadoProcesos[$key][8] != '')
+                                    {  $fechaVoto=date('Y/m/d h:i:sa',$resultadoProcesos[$key][8]);
+                                           $mostrarHtml .= "<td>";
+                                           $mostrarHtml .= $this->lenguaje->getCadena('yaVoto');
+                                           $mostrarHtml .= "<br><b>".$fechaVoto."</b>";
+                                           $mostrarHtml .= "</td>";
+                                    }
+                            elseif(isset($resultadoProcesos[$key][7]) && $resultadoProcesos[$key][7] == 1)
+                                    {  $mostrarHtml .= "<td>";
+                                           $mostrarHtml .= $this->lenguaje->getCadena('activo');
+                                           $mostrarHtml .= "</td>";
+                                    }
+                           else { 	$fechaVoto=1;
+                                        $mostrarHtml .= "<td>";
+                                           $mostrarHtml .= $this->lenguaje->getCadena('inactivo');
+                                           $mostrarHtml .= "</td>";
+                                    }
+                           $mostrarHtml .= "</tr>";
+                           echo $mostrarHtml;
+                           unset($mostrarHtml);
+                           unset($variable);
 		}
  
 	echo "</tbody>";
@@ -91,7 +96,7 @@ $resultadoProcesos = $esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
 	$valorCodificado.="&opcion=cambiarContrasena";
 	$valorCodificado.="&bloque=".$esteBloque["id_bloque"];
 	$valorCodificado.="&bloqueGrupo=".$esteBloque["grupo"];	
-    $valorCodificado.="&idUsuario=" . $resultadoProcesos[0]['identificacion'];
+        $valorCodificado.="&idUsuario=" . $resultadoProcesos[0]['identificacion'];
 	$valorCodificado = $this->miConfigurador->fabricaConexiones->crypto->codificar($valorCodificado);
 
 
@@ -108,7 +113,7 @@ $atributos["id"] = "botones";
 $atributos["estilo"] = "marcoBotones";
 echo $this->miFormulario->division("inicio", $atributos);
 
-if (!isset($fechaVoto) ||  $fechaVoto== '') {
+if ((!isset($fechaVoto) ||  $fechaVoto== '') && (isset($presencial) &&  $presencial==1)) {
 
 //-------------Control Boton-----------------------
     $esteCampo = "botonClave";
@@ -120,7 +125,7 @@ if (!isset($fechaVoto) ||  $fechaVoto== '') {
     $atributos["valor"] = $this->lenguaje->getCadena($esteCampo);
     $atributos["nombreFormulario"] = $nombreFormulario;
     //Se deshabilita boton, descomentar para habilitar
-    //echo $this->miFormulario->campoBoton($atributos);
+    echo $this->miFormulario->campoBoton($atributos);
     unset($atributos);
 //-------------Fin Control Boton----------------------
 }

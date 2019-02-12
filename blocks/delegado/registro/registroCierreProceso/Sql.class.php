@@ -39,7 +39,7 @@ class SqlregistroCierreProceso extends sql {
 			 */
                         case "idioma":
 
-				$cadena_sql = "SET lc_time_names = 'es_ES' ";
+				$cadena_sql = "SET lc_time_names = 'es_CO' ";
 			break;
                     
                         case "tiporesultados":
@@ -83,8 +83,17 @@ class SqlregistroCierreProceso extends sql {
                         
                         case "infoElecciones":
                             
-				$cadena_sql = "SELECT DISTINCT ideleccion, EL.nombre AS nombreEleccion, EL.descripcion, DATE_FORMAT(EL.fechainicio,'%d de %M de %Y %r') as fechainicio, DATE_FORMAT(EL.fechafin,'%d de %M de %Y %r')  as fechafin ";
-                                $cadena_sql .= "FROM ".$prefijo."eleccion EL ";
+				$cadena_sql = "SELECT DISTINCT ideleccion, ";
+                                $cadena_sql .= " EL.nombre AS nombreEleccion, ";
+                                $cadena_sql .= " EL.descripcion, ";
+                                $cadena_sql .= " DATE_FORMAT(EL.fechainicio,'%d de %M de %Y %r') as fechainicio, ";
+                                $cadena_sql .= " DATE_FORMAT(EL.fechafin,'%d de %M de %Y %r')  as fechafin , ";
+                                $cadena_sql .= " EL.porcEstudiante, ";
+                                $cadena_sql .= " EL.porcDocente, ";
+                                $cadena_sql .= " EL.porcEgresado, ";
+                                $cadena_sql .= " EL.porcFuncionario, ";
+                                $cadena_sql .= " EL.porcDocenteVinEspecial";
+                                $cadena_sql .= " FROM ".$prefijo."eleccion EL ";
                                 $cadena_sql .= " WHERE  ideleccion = ".$variable;                                
                                 
 			break;
@@ -204,9 +213,22 @@ class SqlregistroCierreProceso extends sql {
 				$cadena_sql.=" idtipo, descripcion, ponderado ";
 				$cadena_sql.="FROM ";
 				$cadena_sql.=$prefijo."tipoestamento ";
-				$cadena_sql.="WHERE ponderado > 0 ";
+				//$cadena_sql.="WHERE ponderado > 0 ";
 				$cadena_sql.=" ORDER BY idtipo ";
 				break;        
+
+                        case "votosxcandidato":
+                            $cadena_sql="SELECT ";
+                            $cadena_sql.="lst.idlista as lista, ";
+                            $cadena_sql.="lst.nombre as nombre, ";
+                            $cadena_sql.='COUNT(*) as total ';
+                            $cadena_sql.="FROM ";
+                            $cadena_sql.=$prefijo."votodecodificado voto ";
+                            $cadena_sql.=" JOIN ".$prefijo."lista lst ON lst.idlista = voto.idlista ";
+                            $cadena_sql.="WHERE voto.ideleccion = ".$variable;
+                            $cadena_sql.=" GROUP BY 1,2"; 
+                            break;    
+                            ///Revisando
                         
                         case "votacionesPonderada":
                             $cadena_sql="SELECT ";
@@ -389,7 +411,9 @@ class SqlregistroCierreProceso extends sql {
 			case "cancelarTransaccion":
 				$cadena_sql="ROLLBACK";
 				break;
-
+                        case "idioma":
+				$cadena_sql="SET lc_time_names = 'es_CO'";
+				break;    
 
 			case "eliminarTemp":
 

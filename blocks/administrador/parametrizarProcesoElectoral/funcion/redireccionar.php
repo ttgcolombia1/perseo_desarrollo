@@ -14,7 +14,8 @@ if(!isset($GLOBALS["autorizado"]))
 			$variable.="&opcion=mensaje";
 			$variable.="&mensaje=confirma";
 			if($valor!=""){
-				$variable.="&proceso=".$valor;
+				$variable.="&proceso=".$valor['proceso'];
+                                $variable.="&errores=".$valor['errores'];
 			}
 			break;
                        

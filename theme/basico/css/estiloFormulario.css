@@ -7,14 +7,14 @@ form {
 
 form fieldset {
 	clear: both;
-	padding: 10px;	
+	padding: 10px;
 	margin: 10px 5px 15px 5px;
 }
 
-form fieldset legend { 
-	width: 90%; 
+form fieldset legend {
+	width: 90%;
 	}
-	
+
 form fieldset:hover {
 	border-color: #AAAAAA;
 	border-width: 1px 1px 1px 1px;
@@ -26,7 +26,6 @@ form fieldset:hover {
 form div label {
 	font-size: 15px;
 	font-weight: normal;
-	font-family: Arial, sans-serif;
 	display: block;
 	float: left;
 	padding: 3px 5px;
@@ -37,18 +36,18 @@ form div label {
 }
 
 form input[type="text"]:focus{
-	
+
 	border: 1px solid #4D90FE;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset;
     outline: medium none;
-	
+	font-size: 12px;
+
 }
 
 
 .etiquetaTextoLateral {
 	font-size: 13px;
 	font-weight: normal;
-	font-family: Arial, sans-serif;
 	display: block;
 	float: left;
 	padding: 3px 5px;
@@ -218,7 +217,6 @@ div.campoBotonRadial {
 	width: 90%;
 	margin: 5px auto 5px auto;
 	font-size: 12px;
-	font-family: "Arial", Verdana, Trebuchet MS, Helvetica, sans-serif;
 	float: left;
 	border-collapse: collapse;
 	border-width: 0px;
@@ -232,7 +230,6 @@ div.campoCuadroSeleccion {
 	width: 90%;
 	margin: 0px auto 0px auto;
 	font-size: 12px;
-	font-family: "Arial", Verdana, Trebuchet MS, Helvetica, sans-serif;
 	float: left;
 	border-collapse: collapse;
 	border-width: 0px;
@@ -246,7 +243,6 @@ div.campoCuadroSeleccionCorta {
 	width: 45%;
 	margin: 0px auto 0px auto;
 	font-size: 12px;
-	font-family: "Arial", Verdana, Trebuchet MS, Helvetica, sans-serif;
 	float: left;
 	border-collapse: collapse;
 	border-width: 0px;
@@ -279,6 +275,8 @@ div.campoCuadroLista {
 	border-color: #000000;
 	border-spacing: 0px;
 	padding: 5px 5px 5px 5px;
+    font-size: 10px;
+
 }
 
 div.campoTexto {
@@ -333,7 +331,6 @@ div.campoTextoEtiqueta {
 	border-color: #000000;
 	border-spacing: 0px;
 	font-size: 13px;
-	font-family: "Arial", Verdana, Trebuchet MS, Helvetica, sans-serif;	
 }
 
 div.campoMapaEtiqueta {
@@ -347,7 +344,6 @@ div.campoMapaEtiqueta {
 	border-color: #000000;
 	border-spacing: 0px;
 	font-size: 14px;
-	font-family: "Arial", Verdana, Trebuchet MS, Helvetica, sans-serif;
 	font-weight: bold;
 }
 
@@ -362,18 +358,16 @@ div.campoTextoContenido {
 	margin: 1px 0 1px 0;
 	padding: 2px;
 	font-size: 12px;
-	font-family: "Arial", Verdana, Trebuchet MS, Helvetica, sans-serif;
 	font-style: italic;
 }
 
 div.campoTextoContenidoSolo {
-	
+
 }
 
 div.campoMarcador {
 	width: 100%;
 	font-size: 14px;
-	font-family: "Arial", Verdana, Trebuchet MS, Helvetica, sans-serif;
 	font-style: italic;
 }
 
@@ -488,7 +482,6 @@ div.general {
 	border-spacing: 0px;
 	margin: 5px auto 5px auto;
 	padding: 5px;
-	font-family: "Arial", Verdana, Trebuchet MS, Helvetica, sans-serif;
 }
 
 div.campoBoton {
@@ -534,7 +527,6 @@ div.marcoConfirmar {
 	border-color: #000000;
 	border-spacing: 0px;
 	margin: 5px auto 15px auto;
-	font-family: "Arial", Verdana, Trebuchet MS, Helvetica, sans-serif;
 }
 
 div.marcoTitulo {
@@ -548,7 +540,7 @@ div.marcoTitulo {
 	background-color: #AAAAAA;
 	margin: 5px auto 15px auto;
 	padding: 5px 5px 5px 10px;
-	font-family: "Arial", Verdana, Trebuchet MS, Helvetica, sans-serif;
+
 }
 
 div.marcoTituloSimple {
@@ -561,7 +553,7 @@ div.marcoTituloSimple {
 	border-spacing: 0px;
 	margin: 5px auto 15px auto;
 	padding: 5px 5px 5px 10px;
-	font-family: "Arial", Verdana, Trebuchet MS, Helvetica, sans-serif;
+
 }
 
 div.espacioBlanco {
@@ -577,15 +569,15 @@ div.espacioBlanco {
 
 .anchoColumna1{
 	clear: both;
-	width: 95% !important;	
+	width: 95% !important;
 }
 
 .anchoColumna2{
-	width: 46% !important;	
+	width: 46% !important;
 }
 
 .anchoColumna3{
-	width: 32% !important;	
+	width: 32% !important;
 }
 
 .botonEnlace{

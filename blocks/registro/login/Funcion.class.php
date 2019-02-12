@@ -60,13 +60,12 @@ class FuncionLogin
 	{
 		//Evitar que se ingrese codigo HTML y PHP en los campos de texto
 		//Campos que se quieren excluir de la limpieza de código. Formato: nombreCampo1|nombreCampo2|nombreCampo3
-		$excluir="";
 		$_REQUEST=$this->miInspectorHTML->limpiarPHPHTML($_REQUEST);
-                
+                //Validar las variables para evitar un tipo  insercion de SQL
+                $excluir='opcion';
+                $_REQUEST=$this->miInspectorHTML->limpiarSQL($_REQUEST,$excluir);
                 if(isset($_REQUEST['opcion']))
                     {
-                        $_REQUEST=$this->miInspectorHTML->limpiarSQL($_REQUEST);
-                        
                         switch($_REQUEST['opcion'])
                         {
                             case 'segundaIdent':
@@ -83,12 +82,7 @@ class FuncionLogin
                                     $this->miMensaje->mostrarMensaje("errorDatos");
 
                             }else{
-                                    //Validar las variables para evitar un tipo  insercion de SQL
-                                    $excluir=sha1("clave" . $_REQUEST['tiempo'])."|";
-                                    $_REQUEST=$this->miInspectorHTML->limpiarSQL($_REQUEST,$excluir);
-
                                     $this->procesarLogin();
-
                             }
                         }
 	}

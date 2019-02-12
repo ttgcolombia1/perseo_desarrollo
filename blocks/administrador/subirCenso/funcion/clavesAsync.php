@@ -30,6 +30,7 @@ if (!isset($GLOBALS["autorizado"])) {
     $totalRegistros = 0;
 
     $parametro[0]=$proceso;
+    $parametro[1]="'Presencial'";
     $cadena_sql = $this->sql->cadena_sql("consultaCensoProceso", $parametro);
     $resultadoCenso = $esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
     
@@ -41,6 +42,7 @@ if (!isset($GLOBALS["autorizado"])) {
                 $resultadoClave = $clavesDB->ejecutarAcceso($cadena_sql, "busqueda");
                  if($resultadoClave)
                     {$parametro[1]=$resultadoClave[0][1];
+                     $parametro[2]=$resultadoCenso[$key]['ideleccion'];
                     $cadena_sql = $this->sql->cadena_sql("actualizaClave", $parametro);
                     $resultado = $esteRecursoDB->ejecutarAcceso($cadena_sql, "acceso");
                     if ($resultado) { $cargo++; }

@@ -53,7 +53,7 @@ class InspectorHTML{
 		{
 			if(!in_array($clave,$variables)){
 	
-				$arreglo[$clave]= addcslashes($valor, '%_');
+				$arreglo[$clave]= addcslashes($valor, '\'"%-()?&~^/\\');
 	
 			}
 		}

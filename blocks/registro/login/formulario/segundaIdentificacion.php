@@ -44,8 +44,8 @@ echo $this->miFormulario->division ( "inicio", $atributos );
 $esteCampo = sha1('segundaIdentificacion'.$_REQUEST['tiempo']);
 $atributos ["id"] = $esteCampo;
 $atributos ["etiqueta"] = "No Identificación: ";
-$atributos ["anchoEtiqueta"] ='160'; //sobreescribe el ancho predeterminado que es de 120px
-$atributos["estiloEtiqueta"]='textoEnorme textoGris';
+$atributos ["anchoEtiqueta"] ='150'; //sobreescribe el ancho predeterminado que es de 120px
+$atributos["estiloEtiqueta"]='textoGris';
 $atributos ["titulo"] = "La segunda identificación corresponde al código o número de identificación";
 $atributos ["tabIndex"] = $tab ++;
 $atributos ["obligatorio"] = true;

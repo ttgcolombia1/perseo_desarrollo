@@ -32,15 +32,28 @@ class SqlvotoTarjeton extends sql {
             
             case "consultarProcesosVotante":
 
-                $cadena_sql = "SELECT cen.identificacion, cen.nombre as nombreCenso, cen.ideleccion, cen.idtipo, cen.fechavoto, cen.datovoto, pel.nombre as nombrePel, pel.descripcion, ele.nombre as nombreEle, ele.fechainicio as elefechainicio, ele.fechafin as elefechafin, DATE_FORMAT(ele.fechafin, '%d %M %Y %H:%i:%s')  ";
+                $cadena_sql = "SELECT  DISTINCT ";
+                $cadena_sql .= "cen.identificacion, ";
+                $cadena_sql .= "cen.nombre as nombreCenso, ";
+                $cadena_sql .= "cen.ideleccion, ";
+                $cadena_sql .= "cen.idtipo, ";
+                $cadena_sql .= "cen.fechavoto, ";
+                $cadena_sql .= "cen.datovoto, ";
+                $cadena_sql .= "pel.nombre as nombrePel, ";
+                $cadena_sql .= "pel.descripcion, ";
+                $cadena_sql .= "ele.nombre as nombreEle, ";
+                $cadena_sql .= "ele.fechainicio as elefechainicio, ";
+                $cadena_sql .= "ele.fechafin as elefechafin, ";
+                $cadena_sql .= "DATE_FORMAT(ele.fechafin, '%d %M %Y %H:%i:%s') ";
                 $cadena_sql .= "FROM ".$prefijo."censo cen  ";
-                $cadena_sql .= "JOIN ".$prefijo."eleccion ele ON ele.ideleccion = cen.ideleccion AND ele.tipoestamento = cen.idtipo OR ele.tipoestamento=0 ";
-                $cadena_sql .= "JOIN ".$prefijo."tipoestamento tes ON tes.idtipo = cen.idtipo ";
-                $cadena_sql .= "JOIN ".$prefijo."procesoelectoral pel ON pel.idprocesoelectoral = procesoelectoral_idprocesoelectoral  ";
+                $cadena_sql .= "INNER JOIN ".$prefijo."eleccion ele ON ele.ideleccion = cen.ideleccion AND (ele.tipoestamento = cen.idtipo OR ele.tipoestamento=0)  ";
+                $cadena_sql .= "INNER JOIN ".$prefijo."tipoestamento tes ON tes.idtipo = cen.idtipo  ";
+                $cadena_sql .= "INNER JOIN ".$prefijo."procesoelectoral pel ON pel.idprocesoelectoral = procesoelectoral_idprocesoelectoral  ";
                 $cadena_sql .= " WHERE cen.identificacion = ".$variable;
                 $cadena_sql .= " AND ele.fechainicio <= '".date('Y-m-d H:i:s')."' ";
                 $cadena_sql .= " AND ele.fechafin >= '".date('Y-m-d H:i:s')."' ";
-            
+                $cadena_sql .= "ORDER BY  cen.ideleccion ";
+           
             break;
         
             case "verificarVoto":
@@ -157,7 +170,7 @@ class SqlvotoTarjeton extends sql {
             break;
             
             case "datosVotante":
-                $cadena_sql = "SELECT nombre, identificacion "; 
+                $cadena_sql = "SELECT nombre, identificacion, segunda_identificacion "; 
                 $cadena_sql .= " FROM ".$prefijo."censo ";
                 $cadena_sql .= " WHERE identificacion = " . $variable;
                 break;

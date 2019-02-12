@@ -23,6 +23,10 @@ $directorio=$this->miConfigurador->getVariableConfiguracion("rutaBloque");
     $cadena_sql = $this->sql->cadena_sql("datosVotante", $usuario);
     $resultadoVotante = $esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
     
+    //Asigna si existe segunda identificación, sino asigna la primera
+    $identificacion= ($resultadoVotante[0][2]!=' ' && $resultadoVotante[0][2]>0)?$resultadoVotante[0][2]:$resultadoVotante[0][1]; 
+       
+    
     $cadena_sql = $this->sql->cadena_sql("datosEleccion", $eleccion);
     $resultadoEleccion = $esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
     
@@ -50,7 +54,7 @@ if($posun>0){$letras.=' '.$unidad[$posun-1];}
     
     
 $codigoSeguridad=$this->miConfigurador->fabricaConexiones->crypto->codificar($resultadoVotante[0][0],$resultadoVotante[0][1].$fecha);
-$contenidoPagina = "<page backtop='30mm' backbottom='10mm' backleft='20mm' backright='20mm'>";
+$contenidoPagina = "<page backtop='40mm' backbottom='10mm' backleft='20mm' backright='20mm'>";
 $contenidoPagina .= "<page_header>
         <table align='center' style='width: 100%;'>
             <tr>
@@ -97,7 +101,7 @@ $contenidoPagina .= "<page_header>
                 <p align='center'><h1>".$resultadoEleccion[0][0]."</h1></p>
                 <p align=center>El presente documento certifica que:</p>
                 <p align=center><h1>".$resultadoVotante[0][0]."</h1></p>
-                <p> Identificado con documento de identidad No ".number_format($resultadoVotante[0][1])." participó en 
+                <p> Identificado (a) con documento No ".number_format($identificacion,0,'.','.').", participó en 
                     la elección <b>".$resultadoEleccion[0][1]."</b>, en el marco del proceso:<b> ".$resultadoEleccion[0][0]."</b>
                     que se llevó a cabo entre el ".$resultadoEleccion[0][2]." y el ".$resultadoEleccion[0][3].". </p>                    
                 <p>Expedido en Bogotá, D.C, a las ".$fecha.". Cualquier inquietud o inconsistencia en la información por favor remita un correo a: </p>

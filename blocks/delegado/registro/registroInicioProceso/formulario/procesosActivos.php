@@ -29,6 +29,15 @@ $resultadoProcesos = $esteRecursoDB->ejecutarAcceso($cadena_sql, "busqueda");
 
 if($resultadoProcesos)
 {	
+    //-------------------------------Mensaje-------------------------------------
+       $esteCampo = "formatoLlaves";
+       $atributos["id"] = "mensaje"; //Cambiar este nombre y el estilo si no se desea mostrar los mensajes animados
+       $atributos["etiqueta"] = "";
+       $atributos["estilo"] = "centrar";
+       $atributos["tipo"] = "success";
+       $atributos["mensaje"] =$this->lenguaje->getCadena($esteCampo);
+       echo $this->miFormulario->cuadroMensaje($atributos);
+   
     $atributos["id"]="accordion";
     $atributos["estilo"]="marcoBotones";
     echo $this->miFormulario->division("inicio",$atributos);
@@ -107,7 +116,8 @@ if($resultadoProcesos)
             $atributos["etiquetaObligatorio"] = true;
             $atributos["tipo"]='password';
             $atributos["estilo"]="jqueryui";
-            $atributos["validar"]="required,minSize[6]"; 
+            $atributos["validar"]="required,minSize[8],maxSize[16],custom[minNumberChars],custom[minLowerAlphaChars],custom[minUpperAlphaChars]"; 
+            //$atributos["validar"].=",custom[minSpecialChars]"; 
             echo $this->miFormulario->campoCuadroTexto($atributos);
             unset($atributos);
 
@@ -124,7 +134,7 @@ if($resultadoProcesos)
             $atributos["etiquetaObligatorio"] = true;
             $atributos["tipo"]='password';
             $atributos["estilo"]="jqueryui ";
-            $atributos["validar"]="required,minSize[6],equals[fraseSeguridad".$resultadoProcesos[$i]['idprocesoelectoral']."]"; 
+            $atributos["validar"]="required,minSize[8],equals[fraseSeguridad".$resultadoProcesos[$i]['idprocesoelectoral']."]"; 
             echo $this->miFormulario->campoCuadroTexto($atributos);
             unset($atributos);
 

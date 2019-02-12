@@ -14,6 +14,18 @@ $rutaCandidatos = $this->miConfigurador->getVariableConfiguracion("host");
 $rutaCandidatos.=$this->miConfigurador->getVariableConfiguracion("site") . "/blocks";
 $rutaCandidatos.= $this->miConfigurador->getVariableConfiguracion("rutaCandidatos");
 
+$unidad=['UNO','DOS','TRES','CUATRO','CINCO','SEIS','SIETE','OCHO','NUEVE'];
+$decenas=['DIEZ','VEINTE','TREINTA','CUARENTA','CINCUENTA','SESENTA','SETENTA','OCHENTA','NOVENTA'];
+$annos=(date('Y')-1948);
+$posdec=ceil($annos/10)-1;
+$posun=($annos%10);
+$letras='';
+if($posdec>0 && $posun>0){$letras=$decenas[$posdec-1].'  Y ';}
+elseif($posdec>0 && $posun==0){$letras=$decenas[$posdec];}
+
+if($posun>0){$letras.=' '.$unidad[$posun-1];}
+
+
 $contenidoPagina = "<page backtop='30mm' backbottom='10mm' backleft='20mm' backright='20mm'>";
 $contenidoPagina .= "<page_header>
         <table align='center' style='width: 100%;'>
@@ -26,7 +38,7 @@ $contenidoPagina .= "<page_header>
                     <br>
                     <font size='18px'><b>FRANCISCO JOS&Eacute; DE CALDAS</b></font>
                     <br>
-                    <font size='9px'><b>1948 - 2013 SESENTA Y CINCO A&Ntilde;OS DE VIDA UNIVERSITARIA</b></font>
+                    <font size='9px'><b>1948 - ".date('Y')." ".$letras." SESENTA Y CINCO A&Ntilde;OS DE VIDA UNIVERSITARIA</b></font>
                 </td>
                 <td align='center' >
                     <img src='".$directorio."css/images/sabio.jpg' width='60'>

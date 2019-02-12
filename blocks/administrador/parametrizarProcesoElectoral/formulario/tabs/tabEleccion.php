@@ -60,7 +60,7 @@ $atributos["columnas"] = 1;
 $atributos["etiquetaObligatorio"] = false;
 $atributos["tipo"] = "";
 $atributos["estilo"] = "jqueryui";
-$atributos["anchoEtiqueta"] = 250;
+$atributos["anchoEtiqueta"] = 300;
 $atributos["validar"] = "required, minSize[5]";
 $atributos["categoria"] = "";
 $atributos["evento"] = " OnkeyUp=\"cambiarTitulo('" . $idEleccion . "');\" ";
@@ -69,7 +69,7 @@ if ($resultadoEleccion) {
 }
 echo $this->miFormulario->campoCuadroTexto($atributos);
 unset($atributos);
-
+/*
 //------------------Control Lista Desplegable------------------------------
 $esteCampo = "tipoestamento" . $idEleccion;
 $atributos["id"] = $esteCampo;
@@ -83,7 +83,7 @@ $atributos["ancho"] = "250px";
 $atributos["estilo"] = "jqueryui";
 $atributos["etiquetaObligatorio"] = true;
 $atributos["validar"] = "required";
-$atributos["anchoEtiqueta"] = 250;
+$atributos["anchoEtiqueta"] = 300;
 $atributos["obligatorio"] = true;
 $atributos["etiqueta"] = "Tipo de estamento: ";
 
@@ -94,8 +94,9 @@ if ($resultadoEleccion) {
 //-----De donde rescatar los datos ---------
 $atributos["cadena_sql"] = $this->sql->cadena_sql("tipoestamento");
 $atributos["baseDatos"] = "estructura";
-echo $this->miFormulario->campoCuadroLista($atributos);
-unset($atributos);
+// Se deshabilita para dejr por defecto para toda ellecion valor 0 Todos los estamentos
+//echo $this->miFormulario->campoCuadroLista($atributos);
+unset($atributos);*/
 
 //-------------Control cuadroTexto-----------------------
 $esteCampo = "descripcion" . $idEleccion;
@@ -108,7 +109,7 @@ $atributos["tamanno"] = 40;
 $atributos["etiquetaObligatorio"] = true;
 $atributos["tipo"] = "";
 $atributos["estilo"] = "jqueryui";
-$atributos["anchoEtiqueta"] = 250;
+$atributos["anchoEtiqueta"] = 300;
 $atributos["validar"] = "required, minSize[5]";
 $atributos["categoria"] = "";
 if ($resultadoEleccion) {
@@ -142,7 +143,7 @@ $atributos["etiquetaObligatorio"] = true;
 $atributos["deshabilitado"] = true;
 $atributos["tipo"] = "";
 $atributos["estilo"] = "jqueryui";
-$atributos["anchoEtiqueta"] = 250;
+$atributos["anchoEtiqueta"] = 300;
 $atributos["validar"] = "required";
 $atributos["categoria"] = "fecha";
 if ($resultadoEleccion) {
@@ -163,7 +164,7 @@ $atributos["etiquetaObligatorio"] = true;
 $atributos["deshabilitado"] = true;
 $atributos["tipo"] = "";
 $atributos["estilo"] = "jqueryui";
-$atributos["anchoEtiqueta"] = 250;
+$atributos["anchoEtiqueta"] = 300;
 $atributos["validar"] = "required";
 $atributos["categoria"] = "fecha";
 if ($resultadoEleccion) {
@@ -179,7 +180,7 @@ $atributos["id"] = $esteCampo;
 $atributos["nombre"] = $esteCampo;
 $atributos["tabIndex"] = $tab++;
 $atributos["etiquetaObligatorio"] = true;
-$atributos["anchoEtiqueta"] = 250;
+$atributos["anchoEtiqueta"] = 300;
 $atributos["validar"] = "required";
 $atributos["obligatorio"] = true;
 $atributos["estilo"] = "campoCuadroTexto";
@@ -209,12 +210,13 @@ $atributos["columnas"] = 1;
 $atributos["etiquetaObligatorio"] = false;
 $atributos["tipo"] = "";
 $atributos["estilo"] = "jqueryui";
-$atributos["anchoEtiqueta"] = 250;
+$atributos["anchoEtiqueta"] = 300;
 $atributos["validar"] = "required, minSize[1]";
 $atributos["categoria"] = "";
 if ($resultadoEleccion) {
     $atributos["valor"] = $resultadoEleccion[0]['listaTarjeton'];
 }
+else {    $atributos["valor"] = 2;}
 echo $this->miFormulario->campoCuadroTexto($atributos);
 unset($atributos);
 
@@ -230,7 +232,7 @@ $atributos["ancho"] = "250px";
 $atributos["estilo"] = "jqueryui";
 $atributos["etiquetaObligatorio"] = true;
 $atributos["validar"] = "required";
-$atributos["anchoEtiqueta"] = 250;
+$atributos["anchoEtiqueta"] = 300;
 $atributos["obligatorio"] = true;
 $atributos["etiqueta"] = "Tipo de Votación";
 if ($resultadoEleccion) {
@@ -257,7 +259,7 @@ $atributos["ancho"] = 350;
 $atributos["estilo"] = "jqueryui";
 $atributos["etiquetaObligatorio"] = true;
 $atributos["validar"] = "required";
-$atributos["anchoEtiqueta"] = 250;
+$atributos["anchoEtiqueta"] = 300;
 $atributos["ancho"] = "250px";
 $atributos["obligatorio"] = true;
 $atributos["etiqueta"] = "Tipo de resultados:";
@@ -454,264 +456,278 @@ $atributos["estilo"] = "marcoBotones";
 echo $this->miFormulario->division("inicio", $atributos);
 unset($atributos);
 
-//-----------------Inicio de Conjunto de Controles----------------------------------------
-$esteCampo = "marcoDatosCandidatos";
-$atributos["id"] = $esteCampo;
-$atributos["estilo"] = "jqueryui";
-$atributos["leyenda"] = $this->lenguaje->getCadena($esteCampo);
-echo $this->miFormulario->marcoAgrupacion("inicio", $atributos);
-unset($atributos);
-
 if ($resultadoEleccion) {
-    $arrayCandidatos = array($proceso, $resultadoEleccion[0]['ideleccion']);
-    $this->cadena_sql = $this->sql->cadena_sql("consultaCandidatos", $arrayCandidatos);
-    $resultadoListaCandidatos = $esteRecursoDB->ejecutarAcceso($this->cadena_sql, "busqueda");
-}
-
-?>
-<input type="hidden" name="candidato_url" value="<?php echo $enlaceEliminar['urlCodificada'] ?>">
-<div id="scroll" class="datagrid" style=" width: 100%">
-    <table id="tablaCandidatos<?php echo $idEleccion ?>" width="90%">
-        <!-- Cabecera de la tabla -->
-        <thead>
-        <?php
+    
+        //-----------------Inicio de Conjunto de Controles----------------------------------------
+        $esteCampo = "marcoDatosCandidatos";
+        $atributos["id"] = $esteCampo;
+        $atributos["estilo"] = "jqueryui";
+        $atributos["leyenda"] = $this->lenguaje->getCadena($esteCampo);
+        echo $this->miFormulario->marcoAgrupacion("inicio", $atributos);
+        unset($atributos);
 
         if ($resultadoEleccion) {
-            ?>
-            <tr>
-                <th>Nombre Lista</th>
-                <th>Posición Lista</th>
-                <th>Renglón</th>
-                <th>Identificación</th>
-                <th>Nombres</th>
-                <th>Apellidos</th>
-                <th>Foto</th>
-                <th>Acciones</th>
-            </tr>
-            <?php
-        } else {
-            ?>
-            <tr>
-                <th>Nombre Lista</th>
-                <th>Posición Lista</th>
-                <th>Renglón</th>
-                <th>Identificación</th>
-                <th>Nombres</th>
-                <th>Apellidos</th>
-                <th>Foto</th>
-                <th>Borrar</th>
-            </tr>
-            <?php
+            $arrayCandidatos = array($proceso, $resultadoEleccion[0]['ideleccion']);
+            $this->cadena_sql = $this->sql->cadena_sql("consultaCandidatos", $arrayCandidatos);
+            $resultadoListaCandidatos = $esteRecursoDB->ejecutarAcceso($this->cadena_sql, "busqueda");
         }
+        
         ?>
-        </thead>
+        <input type="hidden" name="candidato_url" value="<?php echo $enlaceEliminar['urlCodificada'] ?>">
+        <div id="scroll" class="datagrid" style=" width: 100%">
+            <table id="tablaCandidatos<?php echo $idEleccion ?>" width="90%">
+                <!-- Cabecera de la tabla -->
+                <thead>
+                <?php
 
-        <!-- Cuerpo de la tabla con los campos -->
-        <tbody>
-
-        <?php
-
-        if ($resultadoEleccion) {
-            if ($resultadoListaCandidatos) {
-
-                for ($can = 0; $can < count($resultadoListaCandidatos); $can++) {
-
+                if ($resultadoEleccion) {
                     ?>
-
                     <tr>
-                        <td>
-                            <?php echo $resultadoListaCandidatos[$can][0] ?>
-                        </td>
-                        <td>
-                            <?php echo $resultadoListaCandidatos[$can][1] ?>
-                        </td>
-                        <td>
-                            <?php echo $resultadoListaCandidatos[$can][7] ?>
-                        </td>
-                        <td>
-                            <?php echo $resultadoListaCandidatos[$can][2] ?>
-                        </td>
-                        <td>
-                            <?php echo $resultadoListaCandidatos[$can][3] ?>
-                        </td>
-                        <td>
-                            <?php echo $resultadoListaCandidatos[$can][4] ?>
-                        </td>
-                        <td>
-                            <img src='<?php echo $rutaCandidatos . $resultadoListaCandidatos[$can][5] ?>' width="100px">
-                        </td>
-                        <td>
-                            <img class="eliminar" src='<?php echo $rutaBloque . "/images/cancel.png" ?>'>
-                            <input type="hidden" value="<?php echo $resultadoListaCandidatos[$can]["identificacion"] ?>">
-                            <?php
-                            $variableCandidato = "pagina=parametrizarProcesoElectoral"; //pendiente la pagina para modificar parametro
-                            //$variableCandidato.= "&action=".$esteBloque["nombre"];
-                            $variableCandidato .= "&bloque=" . $esteBloque["id_bloque"];
-                            $variableCandidato .= "&bloqueGrupo=" . $esteBloque["grupo"];
-                            $variableCandidato .= "&opcion=ajustarCandidato";
-                            $variableCandidato .= "&usuario=" . $miSesion->getSesionUsuarioId();
-                            $variableCandidato .= "&proceso=" . $proceso;
-                            $variableCandidato .= "&ideleccion=" . $resultadoEleccion[0]['ideleccion'];
-                            $variableCandidato .= "&eleccion=" . $resultadoEleccion[0]['nombre'];
-                            $variableCandidato .= "&idcandidato=" . $resultadoListaCandidatos[$can][6];
-                            $variableCandidato = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variableCandidato, $directorioEnlace);
-                            echo "<a href='" . $variableCandidato . "'><img src='" . $rutaBloque . "/images/xmag.png' width='25px'></a>";
-                            ?>
-                        </td>
+                        <th>Nombre Lista</th>
+                        <th>Posición Lista</th>
+                        <th>Renglón</th>
+                        <th>Identificación</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Foto</th>
+                        <th>Acciones</th>
                     </tr>
-
+                    <?php
+                } else {
+                    ?>
+                    <tr>
+                        <th>Nombre Lista</th>
+                        <th>Posición Lista</th>
+                        <th>Renglón</th>
+                        <th>Identificación</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Foto</th>
+                        <th>Borrar</th>
+                    </tr>
                     <?php
                 }
-            }
-        }
-        ?>
-        <!-- fila base para clonar y agregar al final -->
-        <tr id="fila-base<?php echo $idEleccion ?>" class="fila-base">
-            <td>
-                <?php
-                //-------------Control cuadroTexto-----------------------
-                $esteCampo = "nombreLista" . $idEleccion . "[]";
-                $atributos["id"] = $esteCampo;
-                $atributos["tabIndex"] = $tab++;
-                $atributos["obligatorio"] = true;
-                $atributos["tamanno"] = 10;
-                $atributos["columnas"] = 1;
-                $atributos["etiquetaObligatorio"] = false;
-                $atributos["tipo"] = "";
-                $atributos["estilo"] = "jqueryui";
-                $atributos["anchoEtiqueta"] = 250;
-                $atributos["validar"] = "required, minSize[1]";
-                $atributos["categoria"] = "";
-                echo $this->miFormulario->campoCuadroTexto($atributos);
-                unset($atributos);
-
                 ?>
-                <!--<input type="text" class="identificacion" name='identificacion<?php echo $idEleccion; ?>[]' id='identificacion<?php echo $idEleccion; ?>[]'/>-->
-            </td>
-            <td>
+                </thead>
+
+                <!-- Cuerpo de la tabla con los campos -->
+                <tbody>
+
                 <?php
-                //-------------Control cuadroTexto-----------------------
-                $esteCampo = "posicionLista" . $idEleccion . "[]";
-                $atributos["id"] = $esteCampo;
-                $atributos["tabIndex"] = $tab++;
-                $atributos["obligatorio"] = true;
-                $atributos["tamanno"] = 2;
-                $atributos["columnas"] = 1;
-                $atributos["etiquetaObligatorio"] = false;
-                $atributos["tipo"] = "";
-                $atributos["estilo"] = "jqueryui";
-                $atributos["anchoEtiqueta"] = 250;
-                $atributos["validar"] = "required, custom[integer]";
-                $atributos["categoria"] = "";
-                echo $this->miFormulario->campoCuadroTexto($atributos);
-                unset($atributos);
 
+                if ($resultadoEleccion) {
+                    if ($resultadoListaCandidatos) {
+
+                        for ($can = 0; $can < count($resultadoListaCandidatos); $can++) {
+
+                            ?>
+
+                            <tr>
+                                <td>
+                                    <?php echo $resultadoListaCandidatos[$can][0] ?>
+                                </td>
+                                <td>
+                                    <?php echo $resultadoListaCandidatos[$can][1] ?>
+                                </td>
+                                <td>
+                                    <?php echo $resultadoListaCandidatos[$can][7] ?>
+                                </td>
+                                <td>
+                                    <?php echo $resultadoListaCandidatos[$can][2] ?>
+                                </td>
+                                <td>
+                                    <?php echo $resultadoListaCandidatos[$can][3] ?>
+                                </td>
+                                <td>
+                                    <?php echo $resultadoListaCandidatos[$can][4] ?>
+                                </td>
+                                <td>
+                                    <img src='<?php echo $rutaCandidatos . $resultadoListaCandidatos[$can][5] ?>' width="100px">
+                                </td>
+                                <td>
+                                    <img class="eliminar" src='<?php echo $rutaBloque . "/images/cancel.png" ?>'>
+                                    <input type="hidden" value="<?php echo $resultadoListaCandidatos[$can]["identificacion"] ?>">
+                                    <?php
+                                    $variableCandidato = "pagina=parametrizarProcesoElectoral"; //pendiente la pagina para modificar parametro
+                                    //$variableCandidato.= "&action=".$esteBloque["nombre"];
+                                    $variableCandidato .= "&bloque=" . $esteBloque["id_bloque"];
+                                    $variableCandidato .= "&bloqueGrupo=" . $esteBloque["grupo"];
+                                    $variableCandidato .= "&opcion=ajustarCandidato";
+                                    $variableCandidato .= "&usuario=" . $miSesion->getSesionUsuarioId();
+                                    $variableCandidato .= "&proceso=" . $proceso;
+                                    $variableCandidato .= "&ideleccion=" . $resultadoEleccion[0]['ideleccion'];
+                                    $variableCandidato .= "&eleccion=" . $resultadoEleccion[0]['nombre'];
+                                    $variableCandidato .= "&idcandidato=" . $resultadoListaCandidatos[$can][6];
+                                    $variableCandidato = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variableCandidato, $directorioEnlace);
+                                    echo "<a href='" . $variableCandidato . "'><img src='" . $rutaBloque . "/images/xmag.png' width='25px'></a>";
+                                    ?>
+                                </td>
+                            </tr>
+
+                            <?php
+                        }
+                    }
+                }
                 ?>
-                <!--<input type="text" class="nombres" name='nombres<?php echo $idEleccion; ?>[]' id='nombres<?php echo $idEleccion; ?>[]' />-->
-            </td>
-            <td>
-                <?php
-                //-------------Control cuadroTexto-----------------------
-                $esteCampo = "renglon" . $idEleccion . "[]";
-                $atributos["id"] = $esteCampo;
-                $atributos["tabIndex"] = $tab++;
-                $atributos["obligatorio"] = true;
-                $atributos["tamanno"] = 2;
-                $atributos["columnas"] = 1;
-                $atributos["etiquetaObligatorio"] = false;
-                $atributos["tipo"] = "";
-                $atributos["estilo"] = "jqueryui";
-                $atributos["anchoEtiqueta"] = 250;
-                $atributos["validar"] = "required, custom[integer]";
-                $atributos["categoria"] = "";
-                echo $this->miFormulario->campoCuadroTexto($atributos);
-                unset($atributos);
+                <!-- fila base para clonar y agregar al final -->
+                <tr id="fila-base<?php echo $idEleccion ?>" class="fila-base">
+                    <td>
+                        <?php
+                        //-------------Control cuadroTexto-----------------------
+                        $esteCampo = "nombreLista" . $idEleccion . "[]";
+                        $atributos["id"] = $esteCampo;
+                        $atributos["tabIndex"] = $tab++;
+                        $atributos["obligatorio"] = true;
+                        $atributos["tamanno"] = 10;
+                        $atributos["columnas"] = 1;
+                        $atributos["etiquetaObligatorio"] = false;
+                        $atributos["tipo"] = "";
+                        $atributos["estilo"] = "jqueryui";
+                        $atributos["anchoEtiqueta"] = 300;
+                        $atributos["validar"] = "required, minSize[1]";
+                        $atributos["categoria"] = "";
+                        echo $this->miFormulario->campoCuadroTexto($atributos);
+                        unset($atributos);
 
-                ?>
-                <!--<input type="text" class="nombres" name='nombres<?php echo $idEleccion; ?>[]' id='nombres<?php echo $idEleccion; ?>[]' />-->
-            </td>            
-            <td>
-                <?php
-                //-------------Control cuadroTexto-----------------------
-                $esteCampo = "identificacion" . $idEleccion . "[]";
-                $atributos["id"] = $esteCampo;
-                $atributos["tabIndex"] = $tab++;
-                $atributos["obligatorio"] = true;
-                $atributos["tamanno"] = 15;
-                $atributos["columnas"] = 1;
-                $atributos["etiquetaObligatorio"] = false;
-                $atributos["tipo"] = "";
-                $atributos["estilo"] = "jqueryui";
-                $atributos["anchoEtiqueta"] = 250;
-                $atributos["validar"] = "required, minSize[3],maxSize[12], custom[integer]";
-                $atributos["evento"] = " OnkeyUp=\"validarIdentificacion('" . $idEleccion . "');\" ";
-                $atributos["categoria"] = "";
-                echo $this->miFormulario->campoCuadroTexto($atributos);
-                unset($atributos);
+                        ?>
+                        <!--<input type="text" class="identificacion" name='identificacion<?php echo $idEleccion; ?>[]' id='identificacion<?php echo $idEleccion; ?>[]'/>-->
+                    </td>
+                    <td>
+                        <?php
+                        //-------------Control cuadroTexto-----------------------
+                        $esteCampo = "posicionLista" . $idEleccion . "[]";
+                        $atributos["id"] = $esteCampo;
+                        $atributos["tabIndex"] = $tab++;
+                        $atributos["obligatorio"] = true;
+                        $atributos["tamanno"] = 2;
+                        $atributos["columnas"] = 1;
+                        $atributos["etiquetaObligatorio"] = false;
+                        $atributos["tipo"] = "";
+                        $atributos["estilo"] = "jqueryui";
+                        $atributos["anchoEtiqueta"] = 300;
+                        $atributos["validar"] = "required, custom[integer]";
+                        $atributos["categoria"] = "";
+                        echo $this->miFormulario->campoCuadroTexto($atributos);
+                        unset($atributos);
 
-                ?>
-                <!--<input type="text" class="identificacion" name='identificacion<?php echo $idEleccion; ?>[]' id='identificacion<?php echo $idEleccion; ?>[]'/>-->
-            </td>
-            <td>
-                <?php
-                //-------------Control cuadroTexto-----------------------
-                $esteCampo = "nombres" . $idEleccion . "[]";
-                $atributos["id"] = $esteCampo;
-                $atributos["tabIndex"] = $tab++;
-                $atributos["obligatorio"] = true;
-                $atributos["tamanno"] = 15;
-                $atributos["columnas"] = 1;
-                $atributos["etiquetaObligatorio"] = false;
-                $atributos["tipo"] = "";
-                $atributos["estilo"] = "jqueryui";
-                $atributos["anchoEtiqueta"] = 250;
-                $atributos["validar"] = "required, minSize[2]";
-                $atributos["categoria"] = "";
-                echo $this->miFormulario->campoCuadroTexto($atributos);
-                unset($atributos);
+                        ?>
+                        <!--<input type="text" class="nombres" name='nombres<?php echo $idEleccion; ?>[]' id='nombres<?php echo $idEleccion; ?>[]' />-->
+                    </td>
+                    <td>
+                        <?php
+                        //-------------Control cuadroTexto-----------------------
+                        $esteCampo = "renglon" . $idEleccion . "[]";
+                        $atributos["id"] = $esteCampo;
+                        $atributos["tabIndex"] = $tab++;
+                        $atributos["obligatorio"] = true;
+                        $atributos["tamanno"] = 2;
+                        $atributos["columnas"] = 1;
+                        $atributos["etiquetaObligatorio"] = false;
+                        $atributos["tipo"] = "";
+                        $atributos["estilo"] = "jqueryui";
+                        $atributos["anchoEtiqueta"] = 300;
+                        $atributos["validar"] = "required, custom[integer]";
+                        $atributos["categoria"] = "";
+                        echo $this->miFormulario->campoCuadroTexto($atributos);
+                        unset($atributos);
 
-                ?>
-                <!--<input type="text" class="nombres" name='nombres<?php echo $idEleccion; ?>[]' id='nombres<?php echo $idEleccion; ?>[]' />-->
-            </td>
-            <td>
-                <?php
-                //-------------Control cuadroTexto-----------------------
-                $esteCampo = "apellidos" . $idEleccion . "[]";
-                $atributos["id"] = $esteCampo;
-                $atributos["tabIndex"] = $tab++;
-                $atributos["obligatorio"] = true;
-                $atributos["tamanno"] = 15;
-                $atributos["columnas"] = 1;
-                $atributos["etiquetaObligatorio"] = false;
-                $atributos["tipo"] = "";
-                $atributos["estilo"] = "jqueryui";
-                $atributos["anchoEtiqueta"] = 250;
-                $atributos["validar"] = "required, minSize[2]";
-                $atributos["categoria"] = "";
-                echo $this->miFormulario->campoCuadroTexto($atributos);
-                unset($atributos);
+                        ?>
+                        <!--<input type="text" class="nombres" name='nombres<?php echo $idEleccion; ?>[]' id='nombres<?php echo $idEleccion; ?>[]' />-->
+                    </td>            
+                    <td>
+                        <?php
+                        //-------------Control cuadroTexto-----------------------
+                        $esteCampo = "identificacion" . $idEleccion . "[]";
+                        $atributos["id"] = $esteCampo;
+                        $atributos["tabIndex"] = $tab++;
+                        $atributos["obligatorio"] = true;
+                        $atributos["tamanno"] = 15;
+                        $atributos["columnas"] = 1;
+                        $atributos["etiquetaObligatorio"] = false;
+                        $atributos["tipo"] = "";
+                        $atributos["estilo"] = "jqueryui";
+                        $atributos["anchoEtiqueta"] = 300;
+                        $atributos["validar"] = "required, minSize[3],maxSize[12], custom[integer]";
+                        $atributos["evento"] = " OnkeyUp=\"validarIdentificacion('" . $idEleccion . "');\" ";
+                        $atributos["categoria"] = "";
+                        echo $this->miFormulario->campoCuadroTexto($atributos);
+                        unset($atributos);
 
-                ?>
-                <!--<input type="text" class="apellidos" name='apellidos<?php echo $idEleccion; ?>[]' id='apellidos<?php echo $idEleccion; ?>[]' />-->
-            </td>
-            <td>
-                <input type='file' name='foto<?php echo $idEleccion; ?>[]' id='foto<?php echo $idEleccion; ?>[]'
-                       class="validate[required]">
-            </td>
-            <td class="eliminar"><img src='<?php echo $rutaBloque . "/images/cancel.png" ?>'></td>
-        </tr>
-        <!-- fin de código: fila base -->
-        </tbody>
-    </table>
-</div>
-<!-- Botón para agregar filas -->
-<button type="button" id="agregar<?php echo $idEleccion ?>" value="Agregar Candidato" onclick="agregarfila('<?php echo $idEleccion ?>')">Agregar Candidato</button>
-<br>
+                        ?>
+                        <!--<input type="text" class="identificacion" name='identificacion<?php echo $idEleccion; ?>[]' id='identificacion<?php echo $idEleccion; ?>[]'/>-->
+                    </td>
+                    <td>
+                        <?php
+                        //-------------Control cuadroTexto-----------------------
+                        $esteCampo = "nombres" . $idEleccion . "[]";
+                        $atributos["id"] = $esteCampo;
+                        $atributos["tabIndex"] = $tab++;
+                        $atributos["obligatorio"] = true;
+                        $atributos["tamanno"] = 15;
+                        $atributos["columnas"] = 1;
+                        $atributos["etiquetaObligatorio"] = false;
+                        $atributos["tipo"] = "";
+                        $atributos["estilo"] = "jqueryui";
+                        $atributos["anchoEtiqueta"] = 300;
+                        $atributos["validar"] = "required, minSize[2]";
+                        $atributos["categoria"] = "";
+                        echo $this->miFormulario->campoCuadroTexto($atributos);
+                        unset($atributos);
 
-<?php
-//Fin de Conjunto de Controles
-echo $this->miFormulario->marcoAGrupacion("fin");
+                        ?>
+                        <!--<input type="text" class="nombres" name='nombres<?php echo $idEleccion; ?>[]' id='nombres<?php echo $idEleccion; ?>[]' />-->
+                    </td>
+                    <td>
+                        <?php
+                        //-------------Control cuadroTexto-----------------------
+                        $esteCampo = "apellidos" . $idEleccion . "[]";
+                        $atributos["id"] = $esteCampo;
+                        $atributos["tabIndex"] = $tab++;
+                        $atributos["obligatorio"] = true;
+                        $atributos["tamanno"] = 15;
+                        $atributos["columnas"] = 1;
+                        $atributos["etiquetaObligatorio"] = false;
+                        $atributos["tipo"] = "";
+                        $atributos["estilo"] = "jqueryui";
+                        $atributos["anchoEtiqueta"] = 300;
+                        $atributos["validar"] = "required, minSize[2]";
+                        $atributos["categoria"] = "";
+                        echo $this->miFormulario->campoCuadroTexto($atributos);
+                        unset($atributos);
 
+                        ?>
+                        <!--<input type="text" class="apellidos" name='apellidos<?php echo $idEleccion; ?>[]' id='apellidos<?php echo $idEleccion; ?>[]' />-->
+                    </td>
+                    <td>
+                        <input type='file' name='foto<?php echo $idEleccion; ?>[]' id='foto<?php echo $idEleccion; ?>[]'
+                               class="validate[required]">
+                    </td>
+                    <td class="eliminar"><img src='<?php echo $rutaBloque . "/images/cancel.png" ?>'></td>
+                </tr>
+                <!-- fin de código: fila base -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Botón para agregar filas -->
+        <button type="button" id="agregar<?php echo $idEleccion ?>" value="Agregar Candidato" onclick="agregarfila('<?php echo $idEleccion ?>')">Agregar Candidato</button>
+        <br>
+
+        <?php
+          
+        $esteCampo = 'foto';
+        $atributos["id"] = $esteCampo; //Cambiar este nombre y el estilo si no se desea mostrar los mensajes animados
+        $atributos["etiqueta"] = "";
+        $atributos["estilo"] = "centrar";
+        $atributos["tipo"] = 'information';
+        $atributos["mensaje"] = 'Recuerde que el archivo de la fotografía debe ser en formato JPG, JPEG o PNG.';
+        echo $this->miFormulario->cuadroMensaje($atributos);
+        unset($atributos); 
+       
+        //Fin de Conjunto de Controles
+        echo $this->miFormulario->marcoAGrupacion("fin");
+
+}
 //------------------Fin Division para los botones-------------------------
 echo $this->miFormulario->division("fin");
 
@@ -747,6 +763,9 @@ $valorCodificado .= "&bloqueGrupo=" . $esteBloque["grupo"];
 if ($resultadoEleccion) {
     $valorCodificado .= "&eleccionParametrizada=" . $resultadoEleccion[0]['ideleccion'];
 }
+//Se da por defecto para la elección todos los estamentos 04092017 
+$valorCodificado .= "&tipoestamento".$idEleccion."=0";
+
 
 $valorCodificado = $cripto->codificar($valorCodificado);
 

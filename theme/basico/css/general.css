@@ -1,70 +1,231 @@
-/* ----------------Estructura de la página ----------------- */
+/* Estilo General*/
+@font-face {
+    font-family: 'Open Sans';
+    src: url("WebFont.woff") format('woff');
+}
 
-body{
-	width:100%;		
-	background-image: url("images/bd.gif");
-	margin:0;
+* {
+    font-family: 'Open Sans', Arial, sans-serif;
+}
+
+body {
+    width: 100%;
+    background-image: url("images/background.png");
+    margin: 0;
+}
+
+h1, h2 {
+
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #999;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    margin-left: 20px;
 }
 
 #marcoGeneral {
-	
-	width:95%;
-	margin: 0 auto;
-	border: 1px solid #EEEEEE;
-	background-color:#FFFFFF;
-	padding: 0px 10px;
-	display: table;
-	
+
+    width: 95%;
+    margin: 0 auto;
+    border: 1px solid #EEEEEE;
+    background-color: #FFFFFF;
+    display: table;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+
 }
 
 #seccionAmplia {
-	width: 100%;
-	float: left;	
+    width: 100%;
+    float: left;
+    
 }
 
 #seccionB {
-	width: 20%;
-	float: left;	
+
+    float: left;
+    width: 20%;
+    margin-right: 15px
 }
 
 #seccionMitad {
-	width: 45%;
-	float: left;	
+    width: 45%;
+    float: left;
 }
 
 #seccionCentral {
-	width: 70%;
-	float: left;	
+    width: 70%;
+    float: left;
+}
+
+@media only screen and (max-width: 700px) {
+    #seccionCentralAmpliada {
+        width: 70%;
+        float: left;
+        margin-right: 78px;
+    }
 }
 
 #seccionCentralAmpliada {
-	width: 80%;
-	float: left;
-		
+    width: 70%;
+    float: left;
+    margin-right: 78px;
+    margin-top: 30px;
 }
 
-
 #seccionD {
-	width: 15%;
-	float: left;	
+    width: 15%;
+    float: left;
 }
 
 /* ------Fin Estilos de Estructura de la página ------------ */
 .ocultar {
-	display: none
+    display: none
 }
 
 .reducir {
-	width: 0px;
-	height: 0px
+    width: 0px;
+    height: 0px
 }
 
 .centrar {
-	margin: 0 auto 0 auto;	
+    margin: 0 auto 0 auto;
 }
 
 .shadow {
-	-moz-box-shadow: 3px 3px 5px 6px #ccc;
-	-webkit-box-shadow: 3px 3px 5px 6px #ccc;
-	box-shadow: 3px 3px 5px 6px #ccc;
+    -moz-box-shadow: 3px 3px 5px 6px #ccc;
+    -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+    box-shadow: 3px 3px 5px 6px #ccc;
+}
+
+#clockDiv {
+    font-size: 13px;
+    float: right;
+    top: 44px;
+    right: -216px;
+    position: relative;
+    color: #777777;
+}
+
+button {
+    margin-bottom: 10px;
+}
+
+#tabs {
+    height: 570px;
+}
+
+.dcjq-vertical-mega-menu img {
+
+    width: 20px;
+    position: relative;
+    top: 3px;
+    margin-right: 4px;
+}
+
+.datagrid {
+
+    float: left;
+
+}
+
+
+.ui-widget  {
+    font-size: 12px !important;
+}
+
+input[type=text].ui-widget {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+input[type=password].ui-widget {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.nombrevotante {
+
+    padding-top: 16px;
+    float: left;
+    padding-left: 17px;
+    font-size: 20px;
+}
+
+.reloj {
+    width: 300px;
+    display: block;
+    float: left;
+    position: relative;
+    top: 10px;
+    left: -220px;
+}
+
+.titulocabeza{
+    color: black;
+    margin-left: 17px;
+    font-size: 22px;
+    padding-top: 20px;
+}
+
+#tablaProcesosActivos td {
+    padding: 15px;
+}
+
+#gestionar {
+    margin-top: 90px;
+}
+
+#proceso td {
+    padding: 20px;
+}
+
+.sabio img {
+    margin-top: 150px !important;
+}
+
+.jqplot-point-label {
+    font-size: 12px !important;
+}
+
+#Tarjeton caption{
+    margin-bottom: 20px;
+}
+
+#Tarjeton center {
+    margin-top: 10px;
+}
+
+#candidatos p {
+    text-align: center;
+}
+
+#candidatos td img {
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#sistema{
+    /* float: left; */
+    position: relative;
+    top: 50px;
+    /* left: -145px; */
+    width: 500px;
+    right: -272px;
+    font-size: 12px;
+}
+
+.resumen {
+    margin-left: 20px;
+}
+
+.ok {
+    color: #00AA00;
+}
+
+.alerta {
+    color: #cea437;
 }

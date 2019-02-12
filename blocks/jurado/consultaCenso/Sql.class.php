@@ -44,7 +44,8 @@ class SqlConsultaCenso extends sql {
             	$cadena_sql .= "elec.nombre AS eleccion, ";
             	$cadena_sql .= "elec.estado, ";
             	$cadena_sql .= "voto.fecha, ";
-            	$cadena_sql .= "voto.ip ";
+            	$cadena_sql .= "voto.ip, ";
+            	$cadena_sql .= "tvoto.descripcion tipoEleccion ";
             	$cadena_sql .= "FROM ";
                	$cadena_sql .= $prefijo . "censo usu ";
             	$cadena_sql .= "INNER JOIN ";
@@ -54,7 +55,9 @@ class SqlConsultaCenso extends sql {
                	$cadena_sql .= $prefijo . "eleccion elec  ";
             	$cadena_sql .= "   ON  elec.ideleccion=usu.ideleccion  ";
             	$cadena_sql .= "   AND estado=1 ";
-            	$cadena_sql .= "LEFT OUTER JOIN ";
+                $cadena_sql .=" INNER JOIN " . $prefijo . "tipovotacion tvoto  ";
+                $cadena_sql .=" ON tvoto.idtipo=elec.tipovotacion ";
+            	$cadena_sql .= " LEFT OUTER JOIN ";
                	$cadena_sql .= $prefijo . "datovoto voto   ";
             	$cadena_sql .= "   ON voto.idusuario=usu.identificacion  ";
             	$cadena_sql .= "   AND voto.ideleccion=usu.ideleccion ";
@@ -65,10 +68,11 @@ class SqlConsultaCenso extends sql {
                 break;
 
             case "actualizarContrasena":
-                
+                $password= sha1(md5($variable['contrasena']));
                 $cadena_sql = "UPDATE ";
                 $cadena_sql .= $prefijo."censo SET ";
-                $cadena_sql .= " clave= SHA1(MD5('".$variable['contrasena']."')), ";
+                //$cadena_sql .= " clave= SHA1(MD5('".$variable['contrasena']."')), ";
+                $cadena_sql .= " clave= '".$password."', ";
                 $cadena_sql .= " expira_clave='".$variable['expiracion']."' ";
                 $cadena_sql .= " WHERE identificacion=". $_REQUEST['idUsuario'];
                 

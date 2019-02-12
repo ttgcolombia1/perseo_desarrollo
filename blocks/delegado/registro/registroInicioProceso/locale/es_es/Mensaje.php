@@ -101,6 +101,16 @@ $this->idioma["aperturaRealizada"]="El proceso está abierto.";
 
 $this->idioma["procesoAbiertoLlaves"]="Imposible generar llaves. El proceso de votación está abierto.";
 $this->idioma["existenLlaves"]="Ya existen llaves generadas, para generar nuevas llaves es necesario que no existan registros de votos realizados";
+$this->idioma["formatoLlaves"]='Tenga en cuenta que la frase de seguridad debe contener :<br>';
+$this->idioma["formatoLlaves"].='<p style="text-align: justify;">';
+$this->idioma["formatoLlaves"].='* Mínimo 8 caracteres<br>';
+$this->idioma["formatoLlaves"].='* Máximo 16 caracteres<br>';
+$this->idioma["formatoLlaves"].='* Al menos 2 caracteres alfanuméricos<br>';
+$this->idioma["formatoLlaves"].='* Al menos 1 caracter alfanumérico en Mayúscula<br>';
+$this->idioma["formatoLlaves"].='* Al menos 2 caracteres numéricos<br>';
+//$this->idioma["formatoLlaves"].='* Al menos 1 de los siguientes caracteres especiales:  ! # $ % & @ * + - _ = ?';
+$this->idioma["formatoLlaves"].='</p>';
+
 $this->idioma["existenVotos"]="Existen datos de votos registrados, no se puede generar una nueva llave";
 
 

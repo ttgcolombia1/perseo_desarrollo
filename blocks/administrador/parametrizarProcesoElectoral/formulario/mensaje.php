@@ -40,8 +40,21 @@ echo $this->miFormulario->formulario("inicio",$atributos);
 	
 	if($_REQUEST['mensaje'] == 'confirma')
 	{
-            $tipo = 'success';
-            $mensaje = "La parametrización de la elección se ha registrado exitosamente. Presione el botón Continuar.";
+            if(isset($_REQUEST['errores']) && $_REQUEST['errores']!='')
+                {$tipo = 'information';}
+            else{$tipo = 'success';}
+            
+            if(isset($_REQUEST['errores']) && $_REQUEST['errores']!='')
+                {$tipo = 'information';
+                $mensaje = "La parametrización de la elección se ha registrado.";
+                $mensaje .= "<br><p>Sin embargo los candidatos ".$_REQUEST['errores']." no se han guardado,<br>ya que los archivos de la fotografía no corresponde con las extensiones permitidas (jpg,jpeg,png).</p>";
+                $mensaje .= "<br>Para continuar presione el botón.";
+                }
+            else{$tipo = 'success';
+                 $mensaje = "La parametrización de la elección se ha registrado exitosamente. Presione el botón Continuar.";
+            }
+            
+            
             $boton = "continuar";
             
             $valorCodificado="pagina=".$miPaginaActual;

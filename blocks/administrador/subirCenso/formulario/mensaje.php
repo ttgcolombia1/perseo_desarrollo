@@ -52,7 +52,7 @@ if (!isset($GLOBALS["autorizado"])) {
     } else if ($_REQUEST['mensaje'] == 'archivoNoValido') {
 
         $tipo = 'error';
-        $mensaje = "El archivo seleccionado tiene una extensión no valida.";
+        $mensaje = "El archivo seleccionado tiene una extensión no valida, debe ser .csv";
         $boton = "regresar";
         $valorCodificado = "pagina=" . $miPaginaActual;
         $valorCodificado .= "&opcion=elecciones";

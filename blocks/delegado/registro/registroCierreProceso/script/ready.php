@@ -20,7 +20,7 @@ tinymce.init({
     language : 'es',
     theme: "modern",
     width: 800,
-    height: 150,
+    height: 500,
     plugins: [
         "advlist autolink lists link image charmap print preview hr anchor pagebreak",
         "searchreplace wordcount visualblocks visualchars code fullscreen",

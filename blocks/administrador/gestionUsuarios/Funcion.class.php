@@ -34,19 +34,21 @@ class FuncionGestionUsuarios
 	{
 		//Evitar que se ingrese codigo HTML y PHP en los campos de texto
 		//Campos que se quieren excluir de la limpieza de código. Formato: nombreCampo1|nombreCampo2|nombreCampo3
-		$excluir="";
-		//$_REQUEST=$this->miInspectorHTML->limpiarPHPHTML($_REQUEST);
+		$_REQUEST=$this->miInspectorHTML->limpiarPHPHTML($_REQUEST);
+                //Validar las variables para evitar un tipo  insercion de SQL
+                $excluir='opcion';
+                
 		
 			if(isset($_REQUEST["procesarAjax"]))
 			{
 				$this->procesarAjax();
 
 			}else if($_REQUEST["opcion"]=="guardarDatos")
-			{
-				$this->guardarDatos(); 
+			{   $_REQUEST=$this->miInspectorHTML->limpiarSQL($_REQUEST,$excluir);
+			    $this->guardarDatos(); 
 			}else if($_REQUEST["opcion"]=="guardarDatosEditar")
-			{
-				$this->guardarDatosEditar(); 
+			{   $_REQUEST=$this->miInspectorHTML->limpiarSQL($_REQUEST,$excluir);
+			    $this->guardarDatosEditar(); 
 			}else if($_REQUEST["opcion"]=="inhabilitar")
 			{
 				$this->inhabilitar(); 

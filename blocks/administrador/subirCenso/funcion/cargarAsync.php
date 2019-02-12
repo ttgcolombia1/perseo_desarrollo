@@ -38,15 +38,16 @@ if (!isset($GLOBALS["autorizado"])) {
     }
 
     fclose($handle);
-
+    $pattern = '1234567890aeiouAEIOU#=';
     if (($handle = fopen($destino, "r")) !== FALSE) {
 
-        $numeroRegistro = 1;
+        $numeroRegistro = 2;
         while (($fila = fgetcsv($handle)) !== FALSE) {
 
             $numeroCampos = count($fila);
             $identificacion = $fila[0];
-            $clave = hash("sha1", hash("md5", $identificacion.'='));
+            $clave =  hash("sha1", hash("md5", (str_pad('X',4,($pattern{mt_rand(0,(strlen($pattern)-1))})).str_pad('Y',4,($pattern{mt_rand(0,(strlen($pattern)-1))}))) ));            
+            //$clave = hash("sha1", hash("md5", $identificacion.'='));
             $nombre = $fila[1];
             $estamento = $fila[2];
             $segundaIdentificacion = 0;
