@@ -26,14 +26,18 @@ class InspectorHTML{
 		}else{
 			$variables[0]="";
 		}
-		
+		 $aux=array();
 		foreach ($arreglo as $clave => $valor)
 		{
-			if(!in_array($clave,$variables)){
-		
-				$arreglo[$clave]= strip_tags($valor);
-		
-			}
+			if(!in_array($clave,$variables) && !is_array($valor))
+                            {	$arreglo[$clave]= strip_tags($valor); }
+                        elseif (is_array($valor)) 
+                            {   foreach ($valor as $key => $dato)
+                                    {   if(!is_array($dato))
+                                            { $aux[$key]= strip_tags($dato); }
+                                    }
+                                $arreglo[$clave]=$aux;
+                            }    
 		}		
 		
 		return $arreglo;
@@ -48,14 +52,18 @@ class InspectorHTML{
 		}else{
 			$variables[0]="";
 		}
-	
+                 $aux=array();
 		foreach ($arreglo as $clave => $valor)
 		{
-			if(!in_array($clave,$variables)){
-	
-				$arreglo[$clave]= addcslashes($valor, '\'"%-()?&~^/\\');
-	
-			}
+			if(!in_array($clave,$variables)  && !is_array($valor) )
+                            {	$arreglo[$clave]= addcslashes($valor, '\'"%-()?&~^/\\');}
+                        elseif (is_array($valor)) 
+                            {   foreach ($valor as $key => $dato)
+                                    {   if(!is_array($dato))
+                                            { $aux[$key]= addcslashes($dato, '\'"%-()?&~^/\\'); }
+                                    }
+                                $arreglo[$clave]=  $aux;
+                            } 
 		}
 	
 		return $arreglo;

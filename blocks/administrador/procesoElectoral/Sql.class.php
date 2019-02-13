@@ -128,7 +128,7 @@ class SqlProcesoElectoral extends sql
             case "insertarProceso":
 
                 $cadena_sql = "INSERT INTO " . $prefijo . "procesoelectoral VALUES ( ";
-                $cadena_sql .= "'', ";
+                $cadena_sql .= "DEFAULT, ";
                 $cadena_sql .= "'" . $variable[0] . "', ";
                 $cadena_sql .= "'" . $variable[1] . "', ";
                 $cadena_sql .= "'" . $variable[2] . "', ";

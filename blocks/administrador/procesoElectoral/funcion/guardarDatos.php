@@ -49,7 +49,7 @@ if(!isset($GLOBALS["autorizado"]))
                               $depResponsable,
                               $_REQUEST['tipovotacion']);
 	
-	$this->cadena_sql = $this->sql->cadena_sql("insertarProceso", $arregloDatos);
+	echo $this->cadena_sql = $this->sql->cadena_sql("insertarProceso", $arregloDatos);
 	$resultadoEstado = $esteRecursoDB->ejecutarAcceso($this->cadena_sql, "acceso");
 	
         if($resultadoEstado)
