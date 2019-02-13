@@ -111,9 +111,9 @@ if ($resultadoProcesos) {
                     <td>" . $resultadoProcesos[$i][3] . "</td>
                     <td>" . $resultadoProcesos[$i][5] . "</td><td>";
 
-        if ($resultadoProcesos[$i][8] < date('Y-m-d H:i:s') && $resultadoProcesos[$i][9] < date('Y-m-d H:i:s')) {
+        if ($resultadoProcesos[$i][8] < date('Y-m-d H:i:s') && (isset($resultadoProcesos[$i][9]) && $resultadoProcesos[$i][9] < date('Y-m-d H:i:s'))) {
             $mostrarHtml .= "El proceso ha finalizado, no se puede parametrizar";
-        } else if ($resultadoProcesos[$i][8] < date('Y-m-d H:i:s') && $resultadoProcesos[$i][9] > date('Y-m-d H:i:s')) {
+        } else if ($resultadoProcesos[$i][8] < date('Y-m-d H:i:s') && (isset($resultadoProcesos[$i][9]) && $resultadoProcesos[$i][9] > date('Y-m-d H:i:s'))) {
             $mostrarHtml .= "El proceso ha iniciado, no se puede parametrizar";
         } else {
             $mostrarHtml .= "<a href='" . $variableParametrizar . "'>
